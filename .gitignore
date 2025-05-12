@@ -26,12 +26,14 @@ sysinfo.txt
 # Unity Asset Store tools
 /.assetstoretools*
 
+
 # JetBrains Rider
 .idea/
 *.sln.iml
 
 # VSCode
 .vscode/
+UserSettings/
 
 # Mac OS
 .DS_Store
