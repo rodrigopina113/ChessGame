@@ -109,6 +109,9 @@ public class ChessManager : MonoBehaviour
 
     private void InitializeBoard()
     {
+            float baseDelay = 0.05f;
+            int counter = 0;
+            int counter2 = 0;
         // Clear any existing pieces
         foreach (var piece in Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None))
         {
@@ -117,56 +120,81 @@ public class ChessManager : MonoBehaviour
         }
 
         // Place white pieces
-        PlacePiece(whitePiecePrefabs[0], "a1"); // Rook
-        PlacePiece(whitePiecePrefabs[1], "b1"); // Knight
-        PlacePiece(whitePiecePrefabs[2], "c1"); // Bishop
-        PlacePiece(whitePiecePrefabs[3], "d1"); // Queen
-        PlacePiece(whitePiecePrefabs[4], "e1"); // King
-        PlacePiece(whitePiecePrefabs[2], "f1"); // Bishop
-        PlacePiece(whitePiecePrefabs[1], "g1"); // Knight
-        PlacePiece(whitePiecePrefabs[0], "h1"); // Rook
-        for (int i = 0; i < 8; i++)
+    PlacePiece(whitePiecePrefabs[0], "a1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[1], "b1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[2], "c1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[3], "d1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[4], "e1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[2], "f1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[1], "g1", baseDelay * counter++);
+    PlacePiece(whitePiecePrefabs[0], "h1", baseDelay * counter++);
+    for (int i = 0; i < 8; i++)
         {
-            PlacePiece(whitePiecePrefabs[5], $"{(char)('a' + i)}2"); // Pawns
+        PlacePiece(whitePiecePrefabs[5], $"{(char)('a' + i)}2", baseDelay * counter++);
         }
 
         // Place black pieces
-        PlacePiece(blackPiecePrefabs[0], "a8"); // Rook
-        PlacePiece(blackPiecePrefabs[1], "b8"); // Knight
-        PlacePiece(blackPiecePrefabs[2], "c8"); // Bishop
-        PlacePiece(blackPiecePrefabs[3], "d8"); // Queen
-        PlacePiece(blackPiecePrefabs[4], "e8"); // King
-        PlacePiece(blackPiecePrefabs[2], "f8"); // Bishop
-        PlacePiece(blackPiecePrefabs[1], "g8"); // Knight
-        PlacePiece(blackPiecePrefabs[0], "h8"); // Rook
-        for (int i = 0; i < 8; i++)
-        {
-            PlacePiece(blackPiecePrefabs[5], $"{(char)('a' + i)}7"); // Pawns
+    PlacePiece(blackPiecePrefabs[0], "a8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[1], "b8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[2], "c8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[3], "d8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[4], "e8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[2], "f8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[1], "g8", baseDelay * counter2++);
+    PlacePiece(blackPiecePrefabs[0], "h8", baseDelay * counter2++);
+    for (int i = 0; i < 8; i++)
+    {
+        PlacePiece(blackPiecePrefabs[5], $"{(char)('a' + i)}7", baseDelay * counter2++);
         }
 
         isWhiteTurn = true; // Reset turn
     }
 
-    private void PlacePiece(GameObject prefab, string cellName)
+private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
+{
+    Vector3 targetPosition = chessboard.GetCellPosition(cellName);
+    Vector3 startPosition = targetPosition + Vector3.up * 5f; // Float above
+
+    // Instantiate the piece at the floating start position
+    GameObject pieceObj = Instantiate(prefab, startPosition, Quaternion.identity);
+
+    ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
+    piece.transform.localScale = Vector3.one * 20f;
+    piece.CurrentCell = cellName;
+    piece.isWhite = prefab.name.Contains("white");
+    piece.chessManager = this;
+
+    if (!piece.isWhite && piece is Knight)
     {
-        Vector3 cellPosition = chessboard.GetCellPosition(cellName);
+        pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
 
-        // Instantiate the piece
-        GameObject pieceObj = Instantiate(prefab, cellPosition, Quaternion.identity);
-        ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
-        piece.transform.localScale = Vector3.one * 20f;
-        piece.CurrentCell = cellName;
-        piece.isWhite = prefab.name.Contains("white");
-        piece.chessManager = this;
+    StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
 
-        if (!piece.isWhite && piece is Knight)
-        {
-            pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
 
         // In 3D, we no longer adjust size based on row
         // piece.AdjustSizeBasedOnRow();
     }
+
+    private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
+{
+    yield return new WaitForSeconds(delay);
+
+    float duration = 0.5f;
+    float elapsed = 0f;
+
+    while (elapsed < duration)
+    {
+        //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+        float t = elapsed / duration;
+        t = Mathf.SmoothStep(0, 1, t); // Makes the motion more natural
+        pieceObj.transform.position = Vector3.Lerp(start, end, t);
+        elapsed += Time.deltaTime;
+        yield return null;
+    }
+
+    pieceObj.transform.position = end; // Snap to final position
+}
 
     private void HandleTileClick(string cellName)
     {
