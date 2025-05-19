@@ -5,6 +5,17 @@ using UnityEngine;
 
 public class ChessManager : MonoBehaviour
 {
+    // ── New: holds currently active variant rules
+    private IChessRules rules;
+
+    /// <summary>
+    /// Called by GameManager to inject the chosen rules before starting.
+    /// </summary>
+    public void SetRules(IChessRules rules)
+    {
+        this.rules = rules;
+    }
+
     public Chessboard chessboard; // Reference to the Chessboard script
     public GameObject[] whitePiecePrefabs; // Array of white piece prefabs
     public GameObject[] blackPiecePrefabs; // Array of black piece prefabs
@@ -30,7 +41,6 @@ public class ChessManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeBoard();
         if (aiPlayer == null)
         {
             aiPlayer = Object.FindFirstObjectByType<ChessAI>();
@@ -49,7 +59,23 @@ public class ChessManager : MonoBehaviour
             }
         }
 
-        // Start the first AI move after 2 seconds
+        if (rules != null)
+        {
+            StartGame();
+        }
+    }
+
+    /// <summary>
+    /// Called by GameManager after SetRules(rules).
+    /// </summary>
+    public void StartGame()
+    {
+        if (rules == null)
+        {
+            Debug.LogError("ChessManager: no IChessRules assigned!");
+            return;
+        }
+        rules.InitializeBoard(this, chessboard);
         StartCoroutine(AutoPlayAITurn(2f));
     }
 
@@ -107,110 +133,75 @@ public class ChessManager : MonoBehaviour
         }
     }
 
-    private void InitializeBoard()
+    public void PlacePiece(GameObject prefab, string cellName, float dropDelay)
     {
-            float baseDelay = 0.05f;
-            int counter = 0;
-            int counter2 = 0;
-        // Clear any existing pieces
-        foreach (var piece in Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None))
+        Vector3 targetPosition = chessboard.GetCellPosition(cellName);
+        Vector3 startPosition = targetPosition + Vector3.up * 5f; // Float above
+
+        // Instantiate the piece at the floating start position
+        GameObject pieceObj = Instantiate(prefab, startPosition, Quaternion.identity);
+
+        ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
+        piece.transform.localScale = Vector3.one * 20f;
+        piece.CurrentCell = cellName;
+        piece.isWhite = prefab.name.Contains("white");
+        piece.chessManager = this;
+
+        if (!piece.isWhite && piece is Knight)
         {
-            Destroy(piece.gameObject);
-            HighlightValidMoves(null);
+            pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
-        // Place white pieces
-    PlacePiece(whitePiecePrefabs[0], "a1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[1], "b1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[2], "c1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[3], "d1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[4], "e1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[2], "f1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[1], "g1", baseDelay * counter++);
-    PlacePiece(whitePiecePrefabs[0], "h1", baseDelay * counter++);
-    for (int i = 0; i < 8; i++)
-        {
-        PlacePiece(whitePiecePrefabs[5], $"{(char)('a' + i)}2", baseDelay * counter++);
-        }
-
-        // Place black pieces
-    PlacePiece(blackPiecePrefabs[0], "a8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[1], "b8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[2], "c8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[3], "d8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[4], "e8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[2], "f8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[1], "g8", baseDelay * counter2++);
-    PlacePiece(blackPiecePrefabs[0], "h8", baseDelay * counter2++);
-    for (int i = 0; i < 8; i++)
-    {
-        PlacePiece(blackPiecePrefabs[5], $"{(char)('a' + i)}7", baseDelay * counter2++);
-        }
-
-        isWhiteTurn = true; // Reset turn
-    }
-
-private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
-{
-    Vector3 targetPosition = chessboard.GetCellPosition(cellName);
-    Vector3 startPosition = targetPosition + Vector3.up * 5f; // Float above
-
-    // Instantiate the piece at the floating start position
-    GameObject pieceObj = Instantiate(prefab, startPosition, Quaternion.identity);
-
-    ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
-    piece.transform.localScale = Vector3.one * 20f;
-    piece.CurrentCell = cellName;
-    piece.isWhite = prefab.name.Contains("white");
-    piece.chessManager = this;
-
-    if (!piece.isWhite && piece is Knight)
-    {
-        pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
-    }
-
-    StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
-
+        StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
 
         // In 3D, we no longer adjust size based on row
         // piece.AdjustSizeBasedOnRow();
     }
 
-    private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
-{
-    yield return new WaitForSeconds(delay);
-
-    float duration = 0.5f;
-    float elapsed = 0f;
-
-    while (elapsed < duration)
+    private IEnumerator AnimatePieceDrop(
+        GameObject pieceObj,
+        Vector3 start,
+        Vector3 end,
+        float delay
+    )
     {
-        //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
-        float t = elapsed / duration;
-        t = Mathf.SmoothStep(0, 1, t); // Makes the motion more natural
-        pieceObj.transform.position = Vector3.Lerp(start, end, t);
-        elapsed += Time.deltaTime;
-        yield return null;
-    }
+        yield return new WaitForSeconds(delay);
 
-    pieceObj.transform.position = end; // Snap to final position
-}
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+            float t = elapsed / duration;
+            t = Mathf.SmoothStep(0, 1, t); // Makes the motion more natural
+            pieceObj.transform.position = Vector3.Lerp(start, end, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        pieceObj.transform.position = end; // Snap to final position
+    }
 
     private void HandleTileClick(string cellName)
     {
-        // Let AI play as White (first turn or when it's White's turn)
+        // AI plays White
         if (isWhiteTurn)
         {
-            aiPlayer.MakeMove(); // Trigger AI to make its move
-            isWhiteTurn = false; // Switch to Black's turn (player's turn)
-            return; // Skip player interaction during AI's turn
+            aiPlayer.MakeMove();
+            isWhiteTurn = false;
+            return;
         }
 
+        // If we already have a selection, try to move it
         if (selectedPiece != null)
         {
-            // Check if the clicked cell is a valid move
+            // convert "e4" → (4,3)
+            Vector2Int target = new Vector2Int(cellName[0] - 'a', cellName[1] - '1');
+
+            // use rules.IsMoveValid instead of piece.IsValidMove
             if (
-                selectedPiece.IsValidMove(cellName)
+                rules.IsMoveValid(selectedPiece, target, chessboard)
                 && (
                     !CheckIfKingInCheck()
                     || (selectedPiece is King && DoesMoveRemoveCheck((King)selectedPiece, cellName))
@@ -220,12 +211,11 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
             {
                 ChessPiece targetPiece = FindPieceAtCell(cellName);
 
+                // capture logic
                 if (targetPiece != null)
                 {
-                    // Check if the target piece belongs to the opponent
                     if (targetPiece.isWhite != selectedPiece.isWhite)
                     {
-                        // Capture the opponent's piece
                         if (targetPiece is King)
                         {
                             Debug.Log(
@@ -234,38 +224,31 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
                             ResetGame();
                             return;
                         }
-
                         Destroy(targetPiece.gameObject);
                         Debug.Log($"Captured {targetPiece.name} at {cellName}");
                     }
                     else
                     {
-                        // Clicking on your own piece deselects it
                         Debug.Log("Cannot move to a cell occupied by your own piece!");
                         selectedPiece = null;
-                        HighlightValidMoves(null); // Clear highlights
+                        HighlightValidMoves(null);
                         return;
                     }
                 }
 
-                // If the selected piece is a King and the move is a castling move (two squares horizontally), call MoveTo.
+                // castling vs normal move
                 if (selectedPiece is King king && Mathf.Abs(cellName[0] - king.CurrentCell[0]) == 2)
-                {
                     king.MoveTo(cellName);
-                }
                 else
-                {
                     MovePiece(selectedPiece, cellName);
-                }
 
-                // Check for checkmate or stalemate
+                // post-move endgame checks
                 if (CheckForCheckmate())
                 {
                     Debug.Log("Checkmate! Game resetting...");
                     ResetGame();
                     return;
                 }
-
                 if (CheckForStalemate())
                 {
                     Debug.Log("Stalemate! Game resetting...");
@@ -273,51 +256,47 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
                     return;
                 }
 
-                // Switch turns after a successful move or capture
+                // finish turn
                 isWhiteTurn = !isWhiteTurn;
-
-                // Deselect the piece after moving
                 selectedPiece = null;
-                HighlightValidMoves(null); // Clear highlights
+                HighlightValidMoves(null);
                 Debug.Log($"Moved piece to {cellName}");
             }
             else
             {
-                // Invalid move; deselect the selected piece
                 Debug.Log("Invalid move!");
                 selectedPiece = null;
-                HighlightValidMoves(null); // Clear highlights
+                HighlightValidMoves(null);
             }
         }
         else
         {
-            // Select a new piece if no piece is currently selected
+            // No selection yet: try to pick up a piece
             ChessPiece piece = FindPieceAtCell(cellName);
 
             if (piece != null)
             {
-                // Ensure it's the player's turn
                 if (piece.isWhite != isWhiteTurn)
                 {
                     Debug.Log("Not your turn!");
                     return;
                 }
 
-                // Pre-validate moves based on check state
+                // If in check, limit selection to King or moves that block/capture
                 if (CheckIfKingInCheck())
                 {
-                    King king = FindObjectsByType<King>(FindObjectsSortMode.None)
+                    King kingInCheck = FindObjectsByType<King>(FindObjectsSortMode.None)
                         .FirstOrDefault(k => k.isWhite == isWhiteTurn);
-                    if (king != null)
+                    if (kingInCheck != null)
                     {
-                        List<ChessPiece> threats = GetThreatsToKing(king);
-                        if (threats.Count == 1) // Single-check scenarios
+                        var threats = GetThreatsToKing(kingInCheck);
+                        if (threats.Count == 1)
                         {
+                            // allow King or piece that can block/capture
                             if (piece is King || IsMoveSafeForKing(piece, threats[0].CurrentCell))
                             {
                                 selectedPiece = piece;
-                                HighlightValidMoves(piece); // Highlight valid moves
-                                // Force highlight the selected cell for clarity:
+                                HighlightValidMoves(piece);
                                 chessboard.HighlightTile(selectedPiece.CurrentCell, true);
                             }
                             else
@@ -335,30 +314,27 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
                 }
                 else
                 {
-                    // Select the piece and highlight its valid moves.
+                    // normal selection: highlight via rules
                     selectedPiece = piece;
                     if (piece is King)
                     {
-                        // For the King, loop through and highlight valid moves...
+                        // for King – only show moves that also remove check if needed
                         foreach (var tile in chessboard.tiles)
                         {
-                            if (
-                                piece.IsValidMove(tile.name)
-                                && DoesMoveRemoveCheck((King)piece, tile.name)
-                            )
-                            {
-                                tile.Highlight(true);
-                            }
-                            else
-                            {
-                                tile.Highlight(false);
-                            }
+                            Vector2Int coord = new Vector2Int(
+                                tile.name[0] - 'a',
+                                tile.name[1] - '1'
+                            );
+                            bool ok =
+                                rules.IsMoveValid(piece, coord, chessboard)
+                                && DoesMoveRemoveCheck((King)piece, tile.name);
+                            tile.Highlight(ok);
                         }
-                        // Force highlight the king's current cell:
                         chessboard.HighlightTile(selectedPiece.CurrentCell, true);
                     }
                     else
                     {
+                        // for others – delegate to HighlightValidMoves (also uses rules)
                         HighlightValidMoves(piece);
                     }
 
@@ -543,14 +519,18 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
                 {
                     highlight = true;
                 }
-                else if (piece.IsValidMove(tile.name))
+                else
                 {
-                    // Check if the target cell is empty or contains an opponent piece.
-                    ChessPiece occupant = FindPieceAtCell(tile.name);
-                    if (occupant == null || occupant.isWhite != piece.isWhite)
-                    {
+                    var coord = new Vector2Int(tile.name[0] - 'a', tile.name[1] - '1');
+                    if (
+                        rules.IsMoveValid(piece, coord, chessboard)
+                        && (
+                            FindPieceAtCell(tile.name) is ChessPiece occ
+                                && occ.isWhite != piece.isWhite
+                            || FindPieceAtCell(tile.name) == null
+                        )
+                    )
                         highlight = true;
-                    }
                 }
             }
 
@@ -773,12 +753,31 @@ private void PlacePiece(GameObject prefab, string cellName, float dropDelay)
 
     public void ResetGame()
     {
-        foreach (var piece in Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None))
-        {
-            Destroy(piece.gameObject);
-        }
-        InitializeBoard();
+        ClearAllPieces();
+        if (rules != null)
+            rules.InitializeBoard(this, chessboard);
+
         isWhiteTurn = true;
+    }
+
+    /// <summary>
+    /// Destroys every ChessPiece on the board and clears highlights.
+    /// </summary>
+    public void ClearAllPieces()
+    {
+        foreach (var piece in Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None))
+            Destroy(piece.gameObject);
+        HighlightValidMoves(null);
+    }
+
+    /// <summary>
+    /// Called by a rules cartridge after setup to reset turn/promotion state.
+    /// </summary>
+    public void FinishSetup()
+    {
+        isWhiteTurn = true;
+        if (promotionPanel != null)
+            promotionPanel.SetActive(false);
     }
 
     public List<ChessPiece> GetAllPieces(bool isWhite)
