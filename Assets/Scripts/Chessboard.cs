@@ -38,6 +38,7 @@ public class Chessboard : MonoBehaviour
         tileDictionary = tiles.ToDictionary(tile => tile.name, tile => tile);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -58,12 +59,11 @@ public class Chessboard : MonoBehaviour
                 Gizmos.DrawSphere(tile.GetCenter(), 0.1f); // Visualize the center
                 Gizmos.color = Color.green;
 
-#if UNITY_EDITOR
                 UnityEditor.Handles.Label(tile.GetCenter(), tile.name);
-#endif
             }
         }
     }
+#endif
 
     public Vector3 GetCellPosition(string cellName)
     {
