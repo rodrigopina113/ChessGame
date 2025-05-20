@@ -172,15 +172,18 @@ public class ChessManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
-            float t = elapsed / duration;
-            t = Mathf.SmoothStep(0, 1, t); // Makes the motion more natural
+            if (pieceObj == null)
+                yield break;
+
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
             pieceObj.transform.position = Vector3.Lerp(start, end, t);
+
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        pieceObj.transform.position = end; // Snap to final position
+        if (pieceObj != null)
+            pieceObj.transform.position = end;
     }
 
     private void HandleTileClick(string cellName)

@@ -6,29 +6,28 @@ using UnityEngine;
 public class Chessboard : MonoBehaviour
 {
     [System.Serializable]
-public class Tile
-{
-    public string name; // Name of the tile (e.g., "a1")
-    public Vector3 topLeft;
-    public Vector3 topRight;
-    public Vector3 bottomLeft;
-    public Vector3 bottomRight;
-    public GameObject highlightImage; // Drag your UI Image here in the Inspector
-
-    public Vector3 GetCenter()
+    public class Tile
     {
-        return (topLeft + topRight + bottomLeft + bottomRight) / 4f;
-    }
+        public string name; // Name of the tile (e.g., "a1")
+        public Vector3 topLeft;
+        public Vector3 topRight;
+        public Vector3 bottomLeft;
+        public Vector3 bottomRight;
+        public GameObject highlightImage; // Drag your UI Image here in the Inspector
 
-    public void Highlight(bool isHighlighted)
-    {
-        if (highlightImage != null)
+        public Vector3 GetCenter()
         {
-            highlightImage.SetActive(isHighlighted); // Show or hide the image
+            return (topLeft + topRight + bottomLeft + bottomRight) / 4f;
+        }
+
+        public void Highlight(bool isHighlighted)
+        {
+            if (highlightImage != null)
+            {
+                highlightImage.SetActive(isHighlighted); // Show or hide the image
+            }
         }
     }
-}
-
 
     public Tile[] tiles = new Tile[64]; // Array to hold all 64 tiles
     private Dictionary<string, Tile> tileDictionary; // Dictionary for fast cell lookup

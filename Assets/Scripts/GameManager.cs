@@ -15,9 +15,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int defaultVariant = 0;
 
-    void Awake()
+    private void Awake()
     {
         chessManager = Object.FindFirstObjectByType<ChessManager>();
+        if (chessManager == null)
+            Debug.LogError("No ChessManager found in scene!");
+    }
+
+    private void Start()
+    {
+        // Cancel any leftover coroutines on the manager
+        chessManager.StopAllCoroutines();
+
+        // Now inject and start the default variant
         SelectVariant(defaultVariant);
     }
 
