@@ -109,7 +109,6 @@ public class ChessManager : MonoBehaviour
         {
             if (selectedPiece != null)
             {
-                Debug.Log("Piece deselected via right-click.");
                 selectedPiece = null;
                 HighlightValidMoves(null); // Clear any highlighted moves.
             }

@@ -73,7 +73,6 @@ public class Chessboard : MonoBehaviour
             return tile.GetCenter();
         }
 
-        Debug.LogError("Cell not found: " + cellName);
         return Vector3.zero;
     }
 
@@ -85,7 +84,6 @@ public class Chessboard : MonoBehaviour
             return tile;
         }
 
-        Debug.LogError("Tile not found: " + cellName);
         return null;
     }
 
