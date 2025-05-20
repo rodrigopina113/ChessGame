@@ -830,6 +830,15 @@ MonoBehaviour:
     - {fileID: 1068807160664226195, guid: b8fbc50cba5f64247883c6893493609c, type: 3}
     - {fileID: 7038059632605930000, guid: 634dea61a224e3144bac13d537dce7da, type: 3}
     - {fileID: 1829005024608534626, guid: f61e78edcdc2fa240a0c8d3813954af5, type: 3}
+  - name: igneos
+    previewSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    blackPiecePrefabs:
+    - {fileID: 919132149155446097, guid: ef89d5cc166423e48964b6048797a6d1, type: 3}
+    - {fileID: 3912235022087443640, guid: f49a62f764e04b6418c9b5e309dc16da, type: 3}
+    - {fileID: 3929015623210504885, guid: ff1dcdcbe239ab94c9430e2a3127d31a, type: 3}
+    - {fileID: 1068807160664226195, guid: b8fbc50cba5f64247883c6893493609c, type: 3}
+    - {fileID: 7038059632605930000, guid: 634dea61a224e3144bac13d537dce7da, type: 3}
+    - {fileID: 1829005024608534626, guid: f61e78edcdc2fa240a0c8d3813954af5, type: 3}
   chessManager: {fileID: 685766637}
 --- !u!4 &88425248
 Transform:
@@ -8955,7 +8964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 251, y: -105.72}
+  m_AnchoredPosition: {x: 300, y: -120}
   m_SizeDelta: {x: 28.8447, y: 28.8447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1603203422
