@@ -82,11 +82,6 @@ public class ChessManager : MonoBehaviour
     public void PlayerMove(string targetCell)
     {
         HandleTileClick(targetCell); // Execute the player's move
-
-        if (!isWhiteTurn) // After the player's move, if it's still Black's turn, then AI's turn
-        {
-            StartCoroutine(AutoPlayAITurn(3f));
-        }
     }
 
     private IEnumerator AutoPlayAITurn(float delay)
@@ -146,9 +141,13 @@ public class ChessManager : MonoBehaviour
         piece.isWhite = prefab.name.Contains("white");
         piece.chessManager = this;
 
-        if (!piece.isWhite && piece is Knight)
+        if (piece is Knight)
         {
-            pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
+            // black knights always face “down”
+            // white knights only face “down” in Racing Kings variant
+            bool rotateWhite = rules is RacingKingsRules && piece.isWhite;
+            if (!piece.isWhite || rotateWhite)
+                pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
@@ -601,6 +600,9 @@ public class ChessManager : MonoBehaviour
                 ShowPromotionPanel((Pawn)piece);
             }
         }
+
+        if (isWhiteTurn)               // white = AI
+            StartCoroutine(AutoPlayAITurn(3f));
 
         // Optionally, clear any highlights or trigger other post-move actions here.
         yield break;

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1d1c5934bca7647a0d92355dcf05c5, type: 3}
+  m_Name: Chess960Rules
+  m_EditorClassIdentifier: 
+  whitePiecePrefabs:
+  - {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
+  - {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
+  - {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
+  - {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
+  - {fileID: 5401506608500310490, guid: ddc9e087fb081d24dacbd756916afb8a, type: 3}
+  - {fileID: 8747406407414535925, guid: 128958fb6b805734d98c635ccba02b98, type: 3}
+  blackPiecePrefabs:
+  - {fileID: 8127999597432526705, guid: 203203151638cc244856b15235796dd8, type: 3}
+  - {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
+  - {fileID: 7740864934964142458, guid: c9e905e73c46e1942beeec547f86a2d6, type: 3}
+  - {fileID: 5706920227855998425, guid: 12bafe45e919f784b9d5309ac84a6f71, type: 3}
+  - {fileID: 7952810776616345026, guid: 5d77a6798181a1d46927b753759483b4, type: 3}
+  - {fileID: 1077840645981186514, guid: 4a3757019d688794ea27ff6aa84808ce, type: 3}
