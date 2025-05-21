@@ -82,11 +82,6 @@ public class ChessManager : MonoBehaviour
     public void PlayerMove(string targetCell)
     {
         HandleTileClick(targetCell); // Execute the player's move
-
-        if (!isWhiteTurn) // After the player's move, if it's still Black's turn, then AI's turn
-        {
-            StartCoroutine(AutoPlayAITurn(3f));
-        }
     }
 
     private IEnumerator AutoPlayAITurn(float delay)
@@ -605,6 +600,9 @@ public class ChessManager : MonoBehaviour
                 ShowPromotionPanel((Pawn)piece);
             }
         }
+
+        if (isWhiteTurn)               // white = AI
+            StartCoroutine(AutoPlayAITurn(3f));
 
         // Optionally, clear any highlights or trigger other post-move actions here.
         yield break;

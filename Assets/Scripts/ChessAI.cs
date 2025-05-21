@@ -5,6 +5,9 @@ using UnityEngine;
 public class ChessAI : MonoBehaviour
 {
     private ChessManager chessManager;
+    // Cached references for performance
+    private Chessboard board;
+    private Chessboard.Tile[] tiles;
 
     // Set search depth: a depth of 2–3 gives medium difficulty.
     public int searchDepth = 2;
@@ -14,11 +17,17 @@ public class ChessAI : MonoBehaviour
 
     private void Start()
     {
+        // 1) Find and cache the ChessManager
         chessManager = Object.FindFirstObjectByType<ChessManager>();
         if (chessManager == null)
         {
             Debug.LogError("ChessManager not found in the scene!");
+            return;
         }
+
+        // 2) Cache the board & its tiles array for fast access
+        board = chessManager.chessboard;
+        tiles = board.tiles;
     }
 
     // Struct to represent a move for simulation.
@@ -33,9 +42,6 @@ public class ChessAI : MonoBehaviour
     // Entry point: choose the best move using minimax search.
     public void MakeMove()
     {
-        if (chessManager == null)
-            return;
-
         List<Move> moves = GenerateAllMoves(true); // AI is white
         if (moves.Count == 0)
         {
@@ -59,31 +65,28 @@ public class ChessAI : MonoBehaviour
             }
         }
 
-        // Make the chosen move in the real game.
+        // Execute the chosen move
         chessManager.MovePiece(bestMove.piece, bestMove.targetCell);
         Debug.Log($"AI moved {bestMove.piece.name} to {bestMove.targetCell} (score {bestScore})");
 
-        // Record the move signature and maintain a history of the last 10 moves.
+        // Record the move signature
         string moveSignature = bestMove.fromCell + "-" + bestMove.targetCell;
         aiMoveHistory.Add(moveSignature);
         if (aiMoveHistory.Count > 10)
             aiMoveHistory.RemoveAt(0);
     }
 
-    // Minimax search with alternating maximizing (AI) and minimizing (opponent) moves.
+    // Minimax search with alternating max/min players.
     private int Minimax(int depth, bool maximizingPlayer)
     {
         if (depth == 0)
-        {
             return EvaluateBoard();
-        }
 
         if (maximizingPlayer)
         {
             int maxEval = int.MinValue;
-            List<Move> moves = GenerateAllMoves(true);
-            if (moves.Count == 0)
-                return EvaluateBoard();
+            var moves = GenerateAllMoves(true);
+            if (moves.Count == 0) return EvaluateBoard();
 
             foreach (var move in moves)
             {
@@ -97,9 +100,8 @@ public class ChessAI : MonoBehaviour
         else
         {
             int minEval = int.MaxValue;
-            List<Move> moves = GenerateAllMoves(false);
-            if (moves.Count == 0)
-                return EvaluateBoard();
+            var moves = GenerateAllMoves(false);
+            if (moves.Count == 0) return EvaluateBoard();
 
             foreach (var move in moves)
             {
@@ -115,51 +117,47 @@ public class ChessAI : MonoBehaviour
     // Generate all possible moves for pieces of the given color.
     private List<Move> GenerateAllMoves(bool forWhite)
     {
-        List<Move> moves = new List<Move>();
-        List<ChessPiece> pieces = chessManager.GetAllPieces(forWhite);
+        var moves = new List<Move>();
+        var pieces = chessManager.GetAllPieces(forWhite);
 
         foreach (var piece in pieces)
         {
-            foreach (var tile in chessManager.chessboard.tiles)
+            foreach (var tile in tiles)  // use cached tiles[]
             {
                 if (piece.IsValidMove(tile.name))
                 {
                     ChessPiece targetPiece = chessManager.FindPieceAtCell(tile.name);
-                    // Only add move if target cell is empty or holds an opponent piece.
                     if (targetPiece == null || targetPiece.isWhite != piece.isWhite)
                     {
-                        // Build a candidate move signature.
-                        string candidateSignature = piece.CurrentCell + "-" + tile.name;
-                        // If playing as white, filter out moves that would repeat three times in a row.
-                        if (forWhite && IsMoveRepetitive(candidateSignature))
+                        // Avoid threefold repetition on white side
+                        if (forWhite)
                         {
-                            continue;
+                            string sig = piece.CurrentCell + "-" + tile.name;
+                            if (IsMoveRepetitive(sig)) continue;
                         }
 
-                        Move move = new Move
-                        {
+                        moves.Add(new Move {
                             piece = piece,
                             fromCell = piece.CurrentCell,
                             targetCell = tile.name,
-                            capturedPiece = targetPiece,
-                        };
-                        moves.Add(move);
+                            capturedPiece = targetPiece
+                        });
                     }
                 }
             }
         }
+
         return moves;
     }
 
-    // Check if the candidate move signature has been repeated in the last two moves.
+    // Check for repeating the same move twice in a row.
     private bool IsMoveRepetitive(string candidateSignature)
     {
         if (aiMoveHistory.Count >= 2)
         {
-            string last = aiMoveHistory[aiMoveHistory.Count - 1];
-            string secondLast = aiMoveHistory[aiMoveHistory.Count - 2];
-            if (last == candidateSignature && secondLast == candidateSignature)
-                return true;
+            int last = aiMoveHistory.Count - 1;
+            return aiMoveHistory[last] == candidateSignature
+                && aiMoveHistory[last - 1] == candidateSignature;
         }
         return false;
     }
@@ -168,56 +166,49 @@ public class ChessAI : MonoBehaviour
     private void ApplyMove(Move move)
     {
         move.piece.CurrentCell = move.targetCell;
-        move.piece.transform.position = chessManager.chessboard.GetCellPosition(move.targetCell);
+        move.piece.transform.position = board.GetCellPosition(move.targetCell);
         if (move.capturedPiece != null)
-        {
             move.capturedPiece.gameObject.SetActive(false);
-        }
     }
 
     // Undo a previously simulated move.
     private void UndoMove(Move move)
     {
         move.piece.CurrentCell = move.fromCell;
-        move.piece.transform.position = chessManager.chessboard.GetCellPosition(move.fromCell);
+        move.piece.transform.position = board.GetCellPosition(move.fromCell);
         if (move.capturedPiece != null)
-        {
             move.capturedPiece.gameObject.SetActive(true);
-        }
     }
 
-    // Evaluate the board by summing up material values: positive values favor white.
+    // Evaluate the board by summing material: positive favors white.
     private int EvaluateBoard()
     {
         int score = 0;
-        // Get all active pieces (inactive ones are considered captured)
-        ChessPiece[] allPieces = Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None);
-        foreach (var piece in allPieces)
-        {
-            if (!piece.gameObject.activeSelf)
-                continue;
 
-            int value = GetPieceValue(piece);
-            score += piece.isWhite ? value : -value;
-        }
+        // Sum white piece values
+        var whitePieces = chessManager.GetAllPieces(true);
+        foreach (var p in whitePieces)
+            if (p.gameObject.activeSelf)
+                score += GetPieceValue(p);
+
+        // Subtract black piece values
+        var blackPieces = chessManager.GetAllPieces(false);
+        foreach (var p in blackPieces)
+            if (p.gameObject.activeSelf)
+                score -= GetPieceValue(p);
+
         return score;
     }
 
-    // Basic piece values (you can tweak these as needed)
+    // Standard piece values.
     private int GetPieceValue(ChessPiece piece)
     {
-        if (piece is Pawn)
-            return 100;
-        if (piece is Knight)
-            return 320;
-        if (piece is Bishop)
-            return 330;
-        if (piece is Rook)
-            return 500;
-        if (piece is Queen)
-            return 900;
-        if (piece is King)
-            return 20000;
+        if (piece is Pawn)   return 100;
+        if (piece is Knight) return 320;
+        if (piece is Bishop) return 330;
+        if (piece is Rook)   return 500;
+        if (piece is Queen)  return 900;
+        if (piece is King)   return 20000;
         return 0;
     }
 }
