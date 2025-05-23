@@ -38,6 +38,8 @@ public class ChessManager : MonoBehaviour
     public GameObject blackRookPrefab;
     public GameObject blackBishopPrefab;
     public GameObject blackKnightPrefab;
+    public bool IsWhiteTurn => isWhiteTurn;
+
 
     private void Start()
     {
@@ -586,6 +588,11 @@ public class ChessManager : MonoBehaviour
 
         piece.transform.position = endPos;
         piece.CurrentCell = targetCell;
+
+        // ── Fog of War: rebuild now that piece.CurrentCell is correct
+        if (rules is FogOfWarRules fow)
+            fow.UpdateFog(this, chessboard);
+
 
         // Pawn promotion
         if (piece is Pawn)
