@@ -100,7 +100,6 @@ public class King : ChessPiece
             // If the target cell is occupied by a friendly piece, the move is invalid.
             if (targetPiece != null && targetPiece.isWhite == this.isWhite)
             {
-                Debug.Log($"Invalid move: Target cell {targetCell} is occupied by your own piece.");
                 return false;
             }
 

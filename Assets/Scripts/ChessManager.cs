@@ -338,8 +338,6 @@ public class ChessManager : MonoBehaviour
                         // for others – delegate to HighlightValidMoves (also uses rules)
                         HighlightValidMoves(piece);
                     }
-
-                    Debug.Log($"Selected {piece.name} at {piece.CurrentCell}");
                 }
             }
             else
@@ -570,14 +568,13 @@ public class ChessManager : MonoBehaviour
 
         selectedPiece = null;
         HighlightValidMoves(null);
-        Debug.Log($"Moved piece to {targetCell}");
     }
 
     private IEnumerator MovePieceRoutine(ChessPiece piece, string targetCell)
     {
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
-        float duration = 0.3f; // Duration in seconds (adjust as needed)
+        float duration = 0.3f;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -587,26 +584,33 @@ public class ChessManager : MonoBehaviour
             yield return null;
         }
 
-        // Ensure the piece is exactly at the end position at the end of the animation.
         piece.transform.position = endPos;
         piece.CurrentCell = targetCell;
 
-        // Check for pawn promotion
+        // Pawn promotion
         if (piece is Pawn)
         {
-            // White pawns promote when reaching row '8'; Black pawns promote on row '1'
             if ((piece.isWhite && targetCell[1] == '8') || (!piece.isWhite && targetCell[1] == '1'))
             {
                 ShowPromotionPanel((Pawn)piece);
             }
         }
 
-        if (isWhiteTurn)               // white = AI
+        // Racing Kings: win by getting your King to rank 1
+        if (rules is RacingKingsRules && piece is King king && targetCell[1] == '1')
+        {
+            Debug.Log($"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!");
+            ResetGame();
+            yield break;
+        }
+
+        // Continue play
+        if (isWhiteTurn)
             StartCoroutine(AutoPlayAITurn(3f));
 
-        // Optionally, clear any highlights or trigger other post-move actions here.
         yield break;
     }
+
 
     // Called to show the promotion UI panel and store the pawn to promote.
     public void ShowPromotionPanel(Pawn pawn)
