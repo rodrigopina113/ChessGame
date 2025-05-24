@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff1c840c71f9114fb049a621b824b4f, type: 3}
   m_Name: FogOfWarRules
   m_EditorClassIdentifier: 
-  baseRules: {fileID: 0}
-  fogPrefab: {fileID: 0}
+  baseRules: {fileID: 11400000, guid: c40519b4d1c4ed34595dcd805e72c561, type: 2}
+  fogPrefab: {fileID: 2869599589440869667, guid: 05b1f855f68ecb948b61d36483abf068, type: 3}
