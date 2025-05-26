@@ -1800,6 +1800,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1875,7 +1876,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.8870109, z: 0.46174863, w: 0}
-  m_LocalPosition: {x: 1, y: 4.07, z: 1.4}
+  m_LocalPosition: {x: 1, y: 4.07, z: 3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1925,6 +1926,27 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f666d69400aeb0044896bf283bfdd6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: -1}
+  moveDistance: 2
+  moveDuration: 3
+  startMoving: 0
+  positionAmplitude: 0.05
+  positionFrequency: 0.5
+  rotationAmplitude: 0.2
+  rotationFrequency: 0.5
+  delayBeforePan: 0.5
 --- !u!1 &371579988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,6 +3668,7 @@ MonoBehaviour:
   blackRookPrefab: {fileID: 8127999597432526705, guid: 203203151638cc244856b15235796dd8, type: 3}
   blackBishopPrefab: {fileID: 7740864934964142458, guid: c9e905e73c46e1942beeec547f86a2d6, type: 3}
   blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
+  cameraPan: {fileID: 0}
 --- !u!4 &685766638
 Transform:
   m_ObjectHideFlags: 0
@@ -4350,7 +4373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.4310913, y: -1.6053}
+  m_AnchoredPosition: {x: 0.4310913, y: -1.6052856}
   m_SizeDelta: {x: 13.9855, y: 18.2303}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &796963472
@@ -10228,7 +10251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.4310913, y: -1.6053}
+  m_AnchoredPosition: {x: 0.4310913, y: -1.6052856}
   m_SizeDelta: {x: 13.9855, y: 18.2303}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815606411

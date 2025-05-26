@@ -40,6 +40,8 @@ public class ChessManager : MonoBehaviour
     public GameObject blackKnightPrefab;
     public bool IsWhiteTurn => isWhiteTurn;
 
+    public CameraPanDuringDrop cameraPan;
+
 
     private void Start()
     {
@@ -158,33 +160,27 @@ public class ChessManager : MonoBehaviour
         // piece.AdjustSizeBasedOnRow();
     }
 
-    private IEnumerator AnimatePieceDrop(
-        GameObject pieceObj,
-        Vector3 start,
-        Vector3 end,
-        float delay
-    )
+    private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
+{
+    float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
+    yield return new WaitForSeconds(initialGlobalDelay + delay);
+
+    float duration = 0.5f;
+    float elapsed = 0f;
+
+    while (elapsed < duration)
     {
-        yield return new WaitForSeconds(delay);
-
-        float duration = 0.5f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            if (pieceObj == null)
-                yield break;
-
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
-            pieceObj.transform.position = Vector3.Lerp(start, end, t);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        if (pieceObj != null)
-            pieceObj.transform.position = end;
+        //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+        float t = elapsed / duration;
+        t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
+        pieceObj.transform.position = Vector3.Lerp(start, end, t);
+        elapsed += Time.deltaTime;
+        yield return null;
     }
+
+    pieceObj.transform.position = end; // Snap to final position
+}
+
 
     private void HandleTileClick(string cellName)
     {
