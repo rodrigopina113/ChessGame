@@ -157,43 +157,27 @@ public class ChessManager : MonoBehaviour
         // piece.AdjustSizeBasedOnRow();
     }
 
-<<<<<<< HEAD
-    private IEnumerator AnimatePieceDrop(
-        GameObject pieceObj,
-        Vector3 start,
-        Vector3 end,
-        float delay
-    )
-=======
     private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
 {
-    float initialGlobalDelay = 1f; // tempo de espera antes de qualquer peça cair
+    float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
     yield return new WaitForSeconds(initialGlobalDelay + delay);
 
     float duration = 0.5f;
     float elapsed = 0f;
 
     while (elapsed < duration)
->>>>>>> 4410db3808e2aea48b87a298ad14e73b547d7a1e
     {
-        float initialGlobalDelay = 1.0f; // tempo de espera antes de qualquer peça cair
-        yield return new WaitForSeconds(initialGlobalDelay + delay);
-
-        float duration = 2.0f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
-            float t = elapsed / duration;
-            t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
-            pieceObj.transform.position = Vector3.Lerp(start, end, t);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        pieceObj.transform.position = end; // Snap to final position
+        //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+        float t = elapsed / duration;
+        t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
+        pieceObj.transform.position = Vector3.Lerp(start, end, t);
+        elapsed += Time.deltaTime;
+        yield return null;
     }
+
+    pieceObj.transform.position = end; // Snap to final position
+}
+
 
     private void HandleTileClick(string cellName)
     {
@@ -581,40 +565,29 @@ public class ChessManager : MonoBehaviour
         HighlightValidMoves(null);
     }
 
-    public IEnumerator MovePieceRoutine(ChessPiece piece, string targetCell)
+    private IEnumerator MovePieceRoutine(ChessPiece piece, string targetCell)
     {
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
         float duration = 0.3f;
         float elapsed = 0f;
 
-        float height = 0.5f; // altura do arco
-
         while (elapsed < duration)
         {
+            piece.transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
             elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-
-            // Posição horizontal (X,Z) via interpolação linear
-            Vector3 horizontal = Vector3.Lerp(startPos, endPos, t);
-
-            // Posição vertical (Y) faz uma curva tipo parábola
-            float arc = 4 * height * t * (1 - t); // t*(1-t) cria o pico no meio (t=0.5)
-
-            // Combina tudo
-            piece.transform.position = new Vector3(horizontal.x, horizontal.y + arc, horizontal.z);
-
             yield return null;
         }
 
         piece.transform.position = endPos;
         piece.CurrentCell = targetCell;
 
-        // Fog of War: rebuild now that piece.CurrentCell is correct
+        // ── Fog of War: rebuild now that piece.CurrentCell is correct
         if (rules is FogOfWarRules fow)
             fow.UpdateFog(this, chessboard);
 
-        // Promoção de peão
+
+        // Pawn promotion
         if (piece is Pawn)
         {
             if ((piece.isWhite && targetCell[1] == '8') || (!piece.isWhite && targetCell[1] == '1'))
@@ -623,22 +596,21 @@ public class ChessManager : MonoBehaviour
             }
         }
 
-        // Racing Kings: vitória ao chegar na primeira fileira
+        // Racing Kings: win by getting your King to rank 1
         if (rules is RacingKingsRules && piece is King king && targetCell[1] == '1')
         {
-            Debug.Log(
-                $"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!"
-            );
+            Debug.Log($"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!");
             ResetGame();
             yield break;
         }
 
-        // Turno do AI se for o caso
+        // Continue play
         if (isWhiteTurn)
             StartCoroutine(AutoPlayAITurn(3f));
 
-        // yield break;
+        yield break;
     }
+
 
     // Called to show the promotion UI panel and store the pawn to promote.
     public void ShowPromotionPanel(Pawn pawn)
