@@ -165,7 +165,7 @@ public class ChessManager : MonoBehaviour
     float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
     yield return new WaitForSeconds(initialGlobalDelay + delay);
 
-    float duration = 0.5f;
+    float duration = 0.4f;
     float elapsed = 0f;
 
     while (elapsed < duration)
