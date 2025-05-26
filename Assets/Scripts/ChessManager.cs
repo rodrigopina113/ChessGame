@@ -157,27 +157,34 @@ public class ChessManager : MonoBehaviour
         // piece.AdjustSizeBasedOnRow();
     }
 
-    private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
-{
-    float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
-    yield return new WaitForSeconds(initialGlobalDelay + delay);
-
-    float duration = 0.5f;
-    float elapsed = 0f;
-
-    while (elapsed < duration)
+    private IEnumerator AnimatePieceDrop(
+        GameObject pieceObj,
+        Vector3 start,
+        Vector3 end,
+        float delay
+    )
     {
-        //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
-        float t = elapsed / duration;
-        t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
-        pieceObj.transform.position = Vector3.Lerp(start, end, t);
-        elapsed += Time.deltaTime;
-        yield return null;
+        float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
+        yield return new WaitForSeconds(initialGlobalDelay + delay);
+
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            if (pieceObj == null)
+                yield break;
+            //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+            float t = elapsed / duration;
+            t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
+            pieceObj.transform.position = Vector3.Lerp(start, end, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (pieceObj != null)
+            pieceObj.transform.position = end; // Snap to final position
     }
-
-    pieceObj.transform.position = end; // Snap to final position
-}
-
 
     private void HandleTileClick(string cellName)
     {
@@ -586,7 +593,6 @@ public class ChessManager : MonoBehaviour
         if (rules is FogOfWarRules fow)
             fow.UpdateFog(this, chessboard);
 
-
         // Pawn promotion
         if (piece is Pawn)
         {
@@ -599,7 +605,9 @@ public class ChessManager : MonoBehaviour
         // Racing Kings: win by getting your King to rank 1
         if (rules is RacingKingsRules && piece is King king && targetCell[1] == '1')
         {
-            Debug.Log($"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!");
+            Debug.Log(
+                $"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!"
+            );
             ResetGame();
             yield break;
         }
@@ -610,7 +618,6 @@ public class ChessManager : MonoBehaviour
 
         yield break;
     }
-
 
     // Called to show the promotion UI panel and store the pawn to promote.
     public void ShowPromotionPanel(Pawn pawn)
