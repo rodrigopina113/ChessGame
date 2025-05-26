@@ -157,12 +157,24 @@ public class ChessManager : MonoBehaviour
         // piece.AdjustSizeBasedOnRow();
     }
 
+<<<<<<< HEAD
     private IEnumerator AnimatePieceDrop(
         GameObject pieceObj,
         Vector3 start,
         Vector3 end,
         float delay
     )
+=======
+    private IEnumerator AnimatePieceDrop(GameObject pieceObj, Vector3 start, Vector3 end, float delay)
+{
+    float initialGlobalDelay = 1f; // tempo de espera antes de qualquer peça cair
+    yield return new WaitForSeconds(initialGlobalDelay + delay);
+
+    float duration = 0.5f;
+    float elapsed = 0f;
+
+    while (elapsed < duration)
+>>>>>>> 4410db3808e2aea48b87a298ad14e73b547d7a1e
     {
         float initialGlobalDelay = 1.0f; // tempo de espera antes de qualquer peça cair
         yield return new WaitForSeconds(initialGlobalDelay + delay);
