@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/campanha1.unity
     guid: bfff834ffee332542a9580ef0389db20
+  - enabled: 1
+    path: Assets/Scenes/videoScene.unity
+    guid: f4ef3e491c528814d9e2d48c9284a4b3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
