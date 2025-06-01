@@ -352,7 +352,7 @@ public class ChessManager : MonoBehaviour
 
     public void ReplaceBlackPieces()
     {
-        // 1) Grab all ChessPiece instances that are black
+        // 1) Find all existing black ChessPiece instances in the scene.
         var blackPieces = Object
             .FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
             .Where(p => !p.isWhite)
@@ -362,42 +362,44 @@ public class ChessManager : MonoBehaviour
         {
             string cell = oldPiece.CurrentCell;
 
-            // 2) Figure out which prefab index to use
+            // 2) Determine which prefab index to use based on type
             int prefabIndex = -1;
-            if (oldPiece is Rook)
-                prefabIndex = 0;
-            else if (oldPiece is Knight)
-                prefabIndex = 1;
-            else if (oldPiece is Bishop)
-                prefabIndex = 2;
-            else if (oldPiece is Queen)
-                prefabIndex = 3;
-            else if (oldPiece is King)
-                prefabIndex = 4;
-            else if (oldPiece is Pawn)
-                prefabIndex = 5;
-            else
-                continue; // some unknown piece type
+            if (oldPiece is Rook) prefabIndex = 0;
+            else if (oldPiece is Knight) prefabIndex = 1;
+            else if (oldPiece is Bishop) prefabIndex = 2;
+            else if (oldPiece is Queen) prefabIndex = 3;
+            else if (oldPiece is King) prefabIndex = 4;
+            else if (oldPiece is Pawn) prefabIndex = 5;
+            else continue; // skip unknown piece types
 
-            // 3) Destroy the old piece
+            // 3) Capture the existing piece's runtime scale
+            Vector3 oldScale = oldPiece.transform.localScale;
+
+            // 4) Destroy the old piece GameObject
             Destroy(oldPiece.gameObject);
 
-            // 4) Instantiate the new prefab at the same cell
+            // 5) Instantiate the new prefab at the same board cell position
             Vector3 worldPos = chessboard.GetCellPosition(cell);
             GameObject prefab = blackPiecePrefabs[prefabIndex];
             GameObject newObj = Instantiate(prefab, worldPos, Quaternion.identity);
 
-            // 5) Re-initialize the new ChessPiece
+            // 6) Re-initialize the new ChessPiece component
             var newPiece = newObj.GetComponent<ChessPiece>();
             newPiece.CurrentCell = cell;
             newPiece.isWhite = false;
             newPiece.chessManager = this;
 
-            // 6) Rotate knights so they face the right way
+            // 7) **Apply the old piece's scale** (instead of a fixed Vector3.one * 20f)
+            newObj.transform.localScale = oldScale;
+
+            // 8) Rotate knights so they face “downward” for black side
             if (newPiece is Knight)
+            {
                 newObj.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
     }
+
 
     private List<ChessPiece> GetThreatsToKing(King king)
     {
