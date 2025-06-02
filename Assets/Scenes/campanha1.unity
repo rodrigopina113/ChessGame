@@ -214,11 +214,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1206917788}
-  fullText: Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
-    ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis
-    convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla
-    lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer
-    nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu.
+  fullText: 'For generations, the ten planets lived in fragile peace.
+
+
+    Each
+    race held its place in the galaxy, guided by ancient rules.
+
+
+    But that peace
+    is no more...'
   typingSpeed: 0.02
 --- !u!1 &39317560
 GameObject:
@@ -2885,9 +2889,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 655527040}
-  fullText: Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
-    ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis
-    convallis. Tempus leo eu aenean sed diam urna tempor.
+  fullText: "One by one, alliances fell.\nBetrayals, invasions, and broken treaties
+    have ignited war.\n\nNow, every dispute is settled not with armies\u2026\n\u2026but
+    on the chessboard."
   typingSpeed: 0.02
 --- !u!1 &1152904172
 GameObject:
@@ -2939,9 +2943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 576778746}
-  fullText: Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
-    ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis
-    convallis.
+  fullText: "You think you can stop what's coming?\nThis isn\u2019t just a game.\nThis
+    is survival.\n\nYour strategy will decide the fate of your world."
   typingSpeed: 0.02
 --- !u!1 &1162970546
 GameObject:
