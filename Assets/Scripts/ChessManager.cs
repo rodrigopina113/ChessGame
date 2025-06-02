@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro; // Se você usar TextMeshPro para o texto do painel de vitória
 
 public class ChessManager : MonoBehaviour
 {
@@ -40,8 +41,20 @@ public class ChessManager : MonoBehaviour
     public GameObject blackKnightPrefab;
     public bool IsWhiteTurn => isWhiteTurn;
 
+    // ───────────────────────────────────────────────────────────────
+    // NOVO: referências ao painel de vitória (WinPanel)
+    [Header("UI de Vitória")]
+    public GameObject winPanel;          // Arraste aqui o seu GameObject WinPanel (deve estar inicialmente inativo)
+    public TextMeshProUGUI winText;      // Opcional: para alterar o texto de vitória (por exemplo, "Brancas venceram!")
+    private bool gameEnded = false;      // Impede cliques após o fim de jogo
+    // ───────────────────────────────────────────────────────────────
+
     private void Start()
     {
+        // Certifique-se de que o WinPanel comece desativado
+        if (winPanel != null)
+            winPanel.SetActive(false);
+
         if (aiPlayer == null)
         {
             aiPlayer = Object.FindFirstObjectByType<ChessAI>();
@@ -91,7 +104,8 @@ public class ChessManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay); // Wait for the specified delay
 
-        if (isWhiteTurn && (promotionPanel == null || !promotionPanel.activeSelf)) // Ensure it's AI's turn
+        // Se o jogo já acabou, não deixe a IA jogar
+        if (!gameEnded && isWhiteTurn && (promotionPanel == null || !promotionPanel.activeSelf))
         {
             aiPlayer.MakeMove();
             isWhiteTurn = false; // Switch to player's turn
@@ -100,6 +114,10 @@ public class ChessManager : MonoBehaviour
 
     private void Update()
     {
+        // Se o jogo acabou, não processe cliques
+        if (gameEnded)
+            return;
+
         // If the player right-clicks, deselect any currently selected piece.
         if (Input.GetMouseButtonDown(1))
         {
@@ -188,6 +206,10 @@ public class ChessManager : MonoBehaviour
 
     private void HandleTileClick(string cellName)
     {
+        // Se o jogo já acabou, ignore
+        if (gameEnded)
+            return;
+
         // AI plays White
         if (isWhiteTurn)
         {
@@ -221,10 +243,14 @@ public class ChessManager : MonoBehaviour
                     {
                         if (targetPiece is King)
                         {
-                            Debug.Log(
-                                $"{(targetPiece.isWhite ? "White" : "Black")} King captured! Game resetting..."
-                            );
-                            ResetGame();
+                            // ───> Em vez de ResetGame(), exiba o painel de vitória
+                            if (gameEnded) return;
+                            gameEnded = true;
+
+                            string vencedor = targetPiece.isWhite ? "Pretas" : "Brancas";
+                            if (winText != null)
+                                winText.text = $"{vencedor} venceram!";
+                            winPanel.SetActive(true);
                             return;
                         }
                         Destroy(targetPiece.gameObject);
@@ -248,14 +274,26 @@ public class ChessManager : MonoBehaviour
                 // post-move endgame checks
                 if (CheckForCheckmate())
                 {
-                    Debug.Log("Checkmate! Game resetting...");
-                    ResetGame();
+                    // ───> Em vez de ResetGame(), exiba o painel de vitória
+                    if (gameEnded) return;
+                    gameEnded = true;
+
+                    // Quem deu o xeque-mate? Se isWhiteTurn == true, então as brancas deram mate agora.
+                    string vencedor = isWhiteTurn ? "Brancas" : "Pretas";
+                    if (winText != null)
+                        winText.text = $"{vencedor} venceram por xeque-mate!";
+                    winPanel.SetActive(true);
                     return;
                 }
                 if (CheckForStalemate())
                 {
-                    Debug.Log("Stalemate! Game resetting...");
-                    ResetGame();
+                    // ───> Em vez de ResetGame(), exiba o painel de empate (ou vitória genérica)
+                    if (gameEnded) return;
+                    gameEnded = true;
+
+                    if (winText != null)
+                        winText.text = $"Empate por stalemate!";
+                    winPanel.SetActive(true);
                     return;
                 }
 
@@ -545,13 +583,18 @@ public class ChessManager : MonoBehaviour
     {
         ChessPiece targetPiece = FindPieceAtCell(targetCell);
 
-        // Always reset the game if any King is captured.
+        // Sempre termina o jogo se um Rei for capturado.
         if (targetPiece != null && targetPiece is King)
         {
-            Debug.Log(
-                $"{(targetPiece.isWhite ? "White" : "Black")} King captured! Game resetting..."
-            );
-            ResetGame();
+            // ───> Em vez de ResetGame(), exiba o painel de vitória
+            if (gameEnded) return;
+            gameEnded = true;
+
+            // Determina vencedor: se o rei capturado era branco, as pretas vencem
+            string vencedor = targetPiece.isWhite ? "Pretas" : "Brancas";
+            if (winText != null)
+                winText.text = $"{vencedor} venceram!";
+            winPanel.SetActive(true);
             return;
         }
 
@@ -591,7 +634,7 @@ public class ChessManager : MonoBehaviour
         piece.transform.position = endPos;
         piece.CurrentCell = targetCell;
 
-        // ── Fog of War: rebuild now that piece.CurrentCell is correct
+        // ── Fog of War: rebuild now que piece.CurrentCell está correto
         if (rules is FogOfWarRules fow)
             fow.UpdateFog(this, chessboard);
 
@@ -607,15 +650,19 @@ public class ChessManager : MonoBehaviour
         // Racing Kings: win by getting your King to rank 1
         if (rules is RacingKingsRules && piece is King king && targetCell[1] == '1')
         {
-            Debug.Log(
-                $"{(king.isWhite ? "White" : "Black")} wins Racing Kings by reaching rank 1!"
-            );
-            ResetGame();
+            // ───> Em vez de ResetGame(), exiba o painel de vitória
+            if (gameEnded) yield break;
+            gameEnded = true;
+
+            string vencedor = king.isWhite ? "Brancas" : "Pretas";
+            if (winText != null)
+                winText.text = $"{vencedor} venceram em Racing Kings!";
+            winPanel.SetActive(true);
             yield break;
         }
 
         // Continue play
-        if (isWhiteTurn)
+        if (!gameEnded && isWhiteTurn)
             StartCoroutine(AutoPlayAITurn(3f));
 
         yield break;
@@ -629,7 +676,7 @@ public class ChessManager : MonoBehaviour
         // Optionally disable further input until promotion is complete.
     }
 
-    // Called by your UI buttons (OnClick events) with a string parameter: "Queen", "Rook", "Bishop", or "Knight".
+    // Called by your UI buttons (OnClick events) com uma string parameter: "Queen", "Rook", "Bishop" ou "Knight".
     public void PromotePawn(string pieceType)
     {
         if (pawnToPromote == null)
@@ -690,15 +737,15 @@ public class ChessManager : MonoBehaviour
         string originalCell = king.CurrentCell;
         ChessPiece targetPiece = FindPieceAtCell(targetCell);
 
-        // Temporarily move the King to the target cell
+        // Temporarily move the King para o targetCell
         king.CurrentCell = targetCell;
         if (targetPiece != null)
             Destroy(targetPiece.gameObject); // Temporarily remove captured piece
 
-        // Check if the King is still in check
+        // Check se o King ainda está em check
         bool isStillInCheck = king.IsKingInCheck();
 
-        // Restore the original state
+        // Restore o estado original
         king.CurrentCell = originalCell;
         if (targetPiece != null)
         {
@@ -711,7 +758,7 @@ public class ChessManager : MonoBehaviour
                 .CurrentCell = targetCell;
         }
 
-        // Return whether the move removes the check
+        // Return se o movimento removeu o check
         return !isStillInCheck;
     }
 
@@ -770,6 +817,12 @@ public class ChessManager : MonoBehaviour
 
     public void ResetGame()
     {
+        // Se o painel de vitória estiver ativo, esconda antes de resetar
+        if (winPanel != null && winPanel.activeSelf)
+            winPanel.SetActive(false);
+
+        gameEnded = false;
+
         ClearAllPieces();
         if (rules != null)
             rules.InitializeBoard(this, chessboard);
@@ -778,7 +831,7 @@ public class ChessManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Destroys every ChessPiece on the board and clears highlights.
+    /// Destroys every ChessPiece on the board e limpa destaques.
     /// </summary>
     public void ClearAllPieces()
     {
