@@ -203,6 +203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuperNova
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ca946d78ed50124e9ac6ce575a877c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 982340256541379034, guid: 1ca946d78ed50124e9ac6ce575a877c7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -481,6 +485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saturno
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 119c819833305034e8461acedde5b9a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6317578925029434746, guid: 119c819833305034e8461acedde5b9a0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -563,6 +571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 10429aef319857b4a91d6d86e5a977b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -644,6 +656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maan_Totaal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6857d700ff6d3cf45bae7db2948b7dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -1997301798861776906, guid: 6857d700ff6d3cf45bae7db2948b7dfb, type: 3}
@@ -721,6 +737,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3694aade078f9624eb413ac6d846690c, type: 3}
       propertyPath: m_Name
       value: Blue Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3694aade078f9624eb413ac6d846690c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -995,6 +1015,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 119c819833305034e8461acedde5b9a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6317578925029434746, guid: 119c819833305034e8461acedde5b9a0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1022,7 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c3ab955a971b14384dcb604c604695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Level1
+  sceneName: campanha1
   hoverScale: 1.2
   rotationSpeed: 50
 --- !u!135 &1476517403
@@ -1295,6 +1319,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6419eb2207773e84886bd0e578e86457, type: 3}
       propertyPath: m_Name
       value: PIRAMIDES
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6419eb2207773e84886bd0e578e86457, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

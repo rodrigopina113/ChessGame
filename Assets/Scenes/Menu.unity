@@ -3290,7 +3290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f51e5e8b2883648b98ecb7a58ed0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: campanha1
+  sceneName: LevelSelect
 --- !u!4 &1085484286
 Transform:
   m_ObjectHideFlags: 0
