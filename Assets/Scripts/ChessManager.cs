@@ -118,6 +118,13 @@ public class ChessManager : MonoBehaviour
         if (gameEnded)
             return;
 
+            //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
+            if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (winPanel != null)
+                winPanel.SetActive(true); // Mostra o painel ao apertar P
+        }
+
         // If the player right-clicks, deselect any currently selected piece.
         if (Input.GetMouseButtonDown(1))
         {
