@@ -3742,7 +3742,7 @@ MonoBehaviour:
   blackRookPrefab: {fileID: 8127999597432526705, guid: 203203151638cc244856b15235796dd8, type: 3}
   blackBishopPrefab: {fileID: 7740864934964142458, guid: c9e905e73c46e1942beeec547f86a2d6, type: 3}
   blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
-  winPanel: {fileID: 0}
+  winPanel: {fileID: 1567156681}
   winText: {fileID: 0}
 --- !u!4 &685766638
 Transform:
