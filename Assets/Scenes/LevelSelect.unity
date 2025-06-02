@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c3ab955a971b14384dcb604c604695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Level1
+  sceneName: campanha1
   hoverScale: 1.2
   rotationSpeed: 50
 --- !u!135 &1476517403
