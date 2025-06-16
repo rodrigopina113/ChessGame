@@ -851,15 +851,6 @@ MonoBehaviour:
     - {fileID: 11614252246972091, guid: 77b6f9700244dc24cad211690a3e41ee, type: 3}
     - {fileID: 8923586503023174678, guid: 97681f71e7089bd45b5ba25f00bee5dc, type: 3}
     - {fileID: 4659652247061038429, guid: 97ec97d37a2bbf04ea4ebd64f71a0985, type: 3}
-  - name: aracnideos
-    previewSprite: {fileID: 21300000, guid: 0a05c905851cd2446887b3dff0b6bae7, type: 3}
-    blackPiecePrefabs:
-    - {fileID: 8222603957148030935, guid: 719c4ec35bf280948972f6fe787876de, type: 3}
-    - {fileID: 778732639501647825, guid: 6f4a8c53a2039724e89841f5093cf10a, type: 3}
-    - {fileID: 6296777486685311760, guid: 05c7eb0349cc5fe4aa470d9b6fb46373, type: 3}
-    - {fileID: 7593225033321111848, guid: 9c609841dac2dbf4e8dd2af201c31c19, type: 3}
-    - {fileID: 6220763178097952383, guid: 208ce7f7a88fdee4b958aae0d664c6f3, type: 3}
-    - {fileID: 3573338241882089060, guid: bf269b81a3bbc0e4cbdf34432f61bb43, type: 3}
   - name: draconianos
     previewSprite: {fileID: 21300000, guid: e4fb6128b056e3d4d81bf5065f0f8975, type: 3}
     blackPiecePrefabs:
@@ -881,7 +872,7 @@ MonoBehaviour:
   - name: Noktari
     previewSprite: {fileID: 21300000, guid: 3d470cbf0b485c54d9fa9ba262ed4167, type: 3}
     blackPiecePrefabs:
-    - {fileID: 944091750066795711, guid: 5742d5f8e6ea1fc439da643f51ff5b77, type: 3}
+    - {fileID: 4309087357840382549, guid: 5f58363a5041085458c17faccc45aa0b, type: 3}
     - {fileID: 6469745308673036370, guid: 8c2280d7502c75041a07749a076197e7, type: 3}
     - {fileID: 7552287712677944812, guid: a3f04151fb4627248a636aba8b336cdb, type: 3}
     - {fileID: 5193358700611134053, guid: c159c7295b96dca41b6a397c195e29d0, type: 3}
@@ -895,7 +886,7 @@ MonoBehaviour:
     - {fileID: 3437485818894506060, guid: d4122798309d539429e81a1861910b7c, type: 3}
     - {fileID: 5915650506639899232, guid: db61d4de5ae3ca9498191ef59692d17c, type: 3}
     - {fileID: 6879059399277330609, guid: 42bf4cb80eaa2ca40a32bf468c05db70, type: 3}
-    - {fileID: 3064591915629529405, guid: 25200f32a536a494aa738f64063fff90, type: 3}
+    - {fileID: 6330192373318944118, guid: 25200f32a536a494aa738f64063fff90, type: 3}
   - name: Urokan
     previewSprite: {fileID: 21300000, guid: d1d40810e205cc24d85a58bf6fb39442, type: 3}
     blackPiecePrefabs:
@@ -912,7 +903,7 @@ MonoBehaviour:
     - {fileID: 4434277444590978345, guid: c11e52f596b1a3d45ad9516d1e4e25cb, type: 3}
     - {fileID: 5252580590074924703, guid: 61f54b23a7713564cae113d9a773b277, type: 3}
     - {fileID: 3793581807985070194, guid: 1dd1b338fc6251d47abf651cbe4b54dc, type: 3}
-    - {fileID: 1799647853524849302, guid: be2b77bf186549248a47e413fab5901d, type: 3}
+    - {fileID: 6220763178097952383, guid: 208ce7f7a88fdee4b958aae0d664c6f3, type: 3}
     - {fileID: 163020891997922473, guid: 1fdb580ac8eefab4987f74b32efba67d, type: 3}
   chessManager: {fileID: 685766637}
 --- !u!4 &88425248
