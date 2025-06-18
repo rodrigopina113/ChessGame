@@ -816,7 +816,7 @@ MonoBehaviour:
   applySkinButton: {fileID: 371579990}
   skins:
   - name: normal
-    previewSprite: {fileID: 21300000, guid: 9fbd59dde76b3ae4d901757728afab7a, type: 3}
+    previewSprite: {fileID: 21300000, guid: 75b4fa14ed76daa448dc444cc785083c, type: 3}
     blackPiecePrefabs:
     - {fileID: 5398257724403141956, guid: 555c19cad4dcf054c9ed4acfcbafacd4, type: 3}
     - {fileID: 5398257724403141956, guid: 555c19cad4dcf054c9ed4acfcbafacd4, type: 3}
@@ -825,7 +825,7 @@ MonoBehaviour:
     - {fileID: 6315600269931351230, guid: 4dc9700c80f91d04aac9e2c8f56218d2, type: 3}
     - {fileID: 8443123357579970159, guid: eba19d29be3be8e46a4840a53eabace8, type: 3}
   - name: orcs
-    previewSprite: {fileID: 21300000, guid: 978e1dd4d938a844c904c3f61e7fb3c0, type: 3}
+    previewSprite: {fileID: 21300000, guid: fdf2d1dffe3fc544a8cd84e8430d2515, type: 3}
     blackPiecePrefabs:
     - {fileID: 6952842819529117829, guid: 6c6329b9fa00d5345b8c6dba606b8a39, type: 3}
     - {fileID: 4742569684875147487, guid: 8ab14d64edf3f3448bbebef2489bcd96, type: 3}
@@ -834,7 +834,7 @@ MonoBehaviour:
     - {fileID: 5324678412807593698, guid: 893a05ebd54a22c4e9700e3492ebc037, type: 3}
     - {fileID: 905371834745147956, guid: 970c21983f0f6314d8549ab9220d87d5, type: 3}
   - name: igneos
-    previewSprite: {fileID: 21300000, guid: 13939d6c167685e488c05e4883b9ef07, type: 3}
+    previewSprite: {fileID: 21300000, guid: d62c703317ef5dd469740d5a0e0f93cb, type: 3}
     blackPiecePrefabs:
     - {fileID: 5260410261328287900, guid: 10a1d51905b0b1546ba0a32376530f6d, type: 3}
     - {fileID: 9049843454791464800, guid: b00a25eddc45feb48bc2506f5d7c8f97, type: 3}
@@ -843,7 +843,7 @@ MonoBehaviour:
     - {fileID: 3602876121406848667, guid: c8296868240f4c94cb51b675a7351b8a, type: 3}
     - {fileID: 227359918460713384, guid: b2c1aeba56ed2c541baf773e4c2c31e5, type: 3}
   - name: celestiais
-    previewSprite: {fileID: 21300000, guid: 1195c74de11bb794880e8a655ad2cffe, type: 3}
+    previewSprite: {fileID: 21300000, guid: fb6acbb5e9ec0994d9899bd1aec5037a, type: 3}
     blackPiecePrefabs:
     - {fileID: 4576073920217996591, guid: c68f7a2f51e8b3e4fb59b70dc88186df, type: 3}
     - {fileID: 2583554920609731156, guid: ddb950efd6b5b50419dfd1995d9b6598, type: 3}
@@ -852,7 +852,7 @@ MonoBehaviour:
     - {fileID: 8923586503023174678, guid: 97681f71e7089bd45b5ba25f00bee5dc, type: 3}
     - {fileID: 4659652247061038429, guid: 97ec97d37a2bbf04ea4ebd64f71a0985, type: 3}
   - name: draconianos
-    previewSprite: {fileID: 21300000, guid: e4fb6128b056e3d4d81bf5065f0f8975, type: 3}
+    previewSprite: {fileID: 21300000, guid: c1308b95e2e220047b8635aa7e764340, type: 3}
     blackPiecePrefabs:
     - {fileID: 2048714845017752015, guid: 785f4aeb662ec264a8cae495d5717d3c, type: 3}
     - {fileID: 4012840821428133935, guid: d7d5eb1f3e7ff184e9e67c799b4f0b09, type: 3}
@@ -861,7 +861,7 @@ MonoBehaviour:
     - {fileID: 8466519359010067899, guid: 9cab44aaad425004a822e833380f832a, type: 3}
     - {fileID: 2294608618212352411, guid: e252126b61cc39945bf0b394ec8f7329, type: 3}
   - name: mecanoide
-    previewSprite: {fileID: 21300000, guid: e6e4e810840f19345bb9786897376f7f, type: 3}
+    previewSprite: {fileID: 21300000, guid: c4c08061db91af245a6188dca781e890, type: 3}
     blackPiecePrefabs:
     - {fileID: 8823961615496576428, guid: 261f375b3ee72c74db5aa073e0cf25de, type: 3}
     - {fileID: 1785171766738371548, guid: 2235d4af709bf44429641ac0820d186f, type: 3}
@@ -870,7 +870,7 @@ MonoBehaviour:
     - {fileID: 1159836807508751538, guid: dc5eb8ae645487048b7d6edff4434151, type: 3}
     - {fileID: 1817387302487224083, guid: 85df34bfcf7b3c943a28ed009bf7f9c2, type: 3}
   - name: Noktari
-    previewSprite: {fileID: 21300000, guid: 3d470cbf0b485c54d9fa9ba262ed4167, type: 3}
+    previewSprite: {fileID: 21300000, guid: e3af5f56b89abda4e88c516ef62a19d1, type: 3}
     blackPiecePrefabs:
     - {fileID: 4309087357840382549, guid: 5f58363a5041085458c17faccc45aa0b, type: 3}
     - {fileID: 6469745308673036370, guid: 8c2280d7502c75041a07749a076197e7, type: 3}
@@ -879,7 +879,7 @@ MonoBehaviour:
     - {fileID: 8772707709830910507, guid: 7c23584f1350c9a4c8353579e752aedf, type: 3}
     - {fileID: 3881195522983161733, guid: 5234292a10fa89b4e973a41787f0bd99, type: 3}
   - name: Samurai
-    previewSprite: {fileID: 21300000, guid: 7640e960c8a1db340a743fae09aed390, type: 3}
+    previewSprite: {fileID: 21300000, guid: 13db6c2ad8865a446bbdbd66266d6d88, type: 3}
     blackPiecePrefabs:
     - {fileID: 2066676092317771340, guid: 1b7df1b29920db743a28367e7aa0ceff, type: 3}
     - {fileID: 1820059938375736365, guid: 2a533d7349bac3f4eba74b772fb8887a, type: 3}
@@ -888,7 +888,7 @@ MonoBehaviour:
     - {fileID: 6879059399277330609, guid: 42bf4cb80eaa2ca40a32bf468c05db70, type: 3}
     - {fileID: 6330192373318944118, guid: 25200f32a536a494aa738f64063fff90, type: 3}
   - name: Urokan
-    previewSprite: {fileID: 21300000, guid: d1d40810e205cc24d85a58bf6fb39442, type: 3}
+    previewSprite: {fileID: 21300000, guid: d02a15f2227fa0f4ea60020c3fc77042, type: 3}
     blackPiecePrefabs:
     - {fileID: 56696678707491708, guid: 4fc9e4674f0020c4386dc7cde3e09d58, type: 3}
     - {fileID: 6048969236497632240, guid: 47971b0372df0904784c550ac80591d5, type: 3}
@@ -897,7 +897,7 @@ MonoBehaviour:
     - {fileID: 1526402125237940256, guid: 82bb2809c03a71b40a8082d5447cc87f, type: 3}
     - {fileID: 6587638754779333002, guid: fae00ccfff6eea14980368031cfa5a16, type: 3}
   - name: Zarn
-    previewSprite: {fileID: 21300000, guid: ea5eb1d83e54d2a4db510abd64754181, type: 3}
+    previewSprite: {fileID: 21300000, guid: 1e48e49f4903a214f8938464d72a79b4, type: 3}
     blackPiecePrefabs:
     - {fileID: 1925798847049940031, guid: bbb9bbd5b9f3e2b45bcdbe4b3890cb4d, type: 3}
     - {fileID: 4434277444590978345, guid: c11e52f596b1a3d45ad9516d1e4e25cb, type: 3}
