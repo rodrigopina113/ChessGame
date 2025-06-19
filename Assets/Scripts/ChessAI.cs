@@ -15,20 +15,30 @@ public class ChessAI : MonoBehaviour
     // Track recent moves by signature ("fromCell-targetCell")
     private List<string> aiMoveHistory = new List<string>();
 
-    private void Start()
+    public bool isInitialized = false;
+    
+    public void Initialize()
     {
-        // 1) Find and cache the ChessManager
         chessManager = Object.FindFirstObjectByType<ChessManager>();
         if (chessManager == null)
         {
-            Debug.LogError("ChessManager not found in the scene!");
+            Debug.LogError("ChessManager não encontrado na cena!");
             return;
         }
 
-        // 2) Cache the board & its tiles array for fast access
         board = chessManager.chessboard;
+        if (board == null)
+        {
+            Debug.LogError("Tabuleiro não está pronto ainda!");
+            return;
+        }
+
         tiles = board.tiles;
+        isInitialized = true; // Set flag when initialization is complete
+        Debug.Log("IA pronta para fazer uma jogada...");
     }
+
+
 
     // Struct to represent a move for simulation.
     public struct Move
@@ -42,6 +52,19 @@ public class ChessAI : MonoBehaviour
     // Entry point: choose the best move using minimax search.
     public void MakeMove()
     {
+        // Add this check at the start
+        if (!isInitialized)
+        {
+            Debug.LogWarning("AI not initialized yet!");
+            return;
+        }
+        /*
+        if (chessManager == null || board == null || tiles == null)
+        {
+            Debug.LogError("AI: MakeMove chamado antes de inicializar corretamente!");
+            return;
+        }*/
+
         List<Move> moves = GenerateAllMoves(true); // AI is white
         if (moves.Count == 0)
         {
@@ -65,16 +88,15 @@ public class ChessAI : MonoBehaviour
             }
         }
 
-        // Execute the chosen move
         chessManager.MovePiece(bestMove.piece, bestMove.targetCell);
         Debug.Log($"AI moved {bestMove.piece.name} to {bestMove.targetCell} (score {bestScore})");
 
-        // Record the move signature
         string moveSignature = bestMove.fromCell + "-" + bestMove.targetCell;
         aiMoveHistory.Add(moveSignature);
         if (aiMoveHistory.Count > 10)
             aiMoveHistory.RemoveAt(0);
     }
+
 
     // Minimax search with alternating max/min players.
     private int Minimax(int depth, bool maximizingPlayer)
@@ -118,25 +140,32 @@ public class ChessAI : MonoBehaviour
     private List<Move> GenerateAllMoves(bool forWhite)
     {
         var moves = new List<Move>();
+
+        if (chessManager == null || board == null || tiles == null)
+        {
+            Debug.LogWarning("AI: ChessManager, board ou tiles não estão inicializados.");
+            return moves;
+        }
+
         var pieces = chessManager.GetAllPieces(forWhite);
 
         foreach (var piece in pieces)
         {
-            foreach (var tile in tiles)  // use cached tiles[]
+            foreach (var tile in tiles)
             {
                 if (piece.IsValidMove(tile.name))
                 {
                     ChessPiece targetPiece = chessManager.FindPieceAtCell(tile.name);
                     if (targetPiece == null || targetPiece.isWhite != piece.isWhite)
                     {
-                        // Avoid threefold repetition on white side
                         if (forWhite)
                         {
                             string sig = piece.CurrentCell + "-" + tile.name;
                             if (IsMoveRepetitive(sig)) continue;
                         }
 
-                        moves.Add(new Move {
+                        moves.Add(new Move
+                        {
                             piece = piece,
                             fromCell = piece.CurrentCell,
                             targetCell = tile.name,
@@ -149,6 +178,7 @@ public class ChessAI : MonoBehaviour
 
         return moves;
     }
+
 
     // Check for repeating the same move twice in a row.
     private bool IsMoveRepetitive(string candidateSignature)
