@@ -437,6 +437,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaef03852e98974699ab31491379a31, type: 2}
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
+  isLocalMultiplayer: 1
   defaultVariant: 2
 --- !u!4 &27457178
 Transform:
@@ -2231,51 +2232,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51, y: 0.49, z: 0.02}
   m_Center: {x: 0.1, y: 0.25, z: -0.01}
---- !u!1 &307035069
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 307035071}
-  - component: {fileID: 307035070}
-  m_Layer: 0
-  m_Name: AI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &307035070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307035069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489c93be62ad2ac4d9d7652bdd95df08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  searchDepth: 2
---- !u!4 &307035071
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307035069}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5901127, y: -1.1570358, z: -3.1071115}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,7 +4319,8 @@ MonoBehaviour:
   - {fileID: 5706920227855998425, guid: 12bafe45e919f784b9d5309ac84a6f71, type: 3}
   - {fileID: 7952810776616345026, guid: 5d77a6798181a1d46927b753759483b4, type: 3}
   - {fileID: 1077840645981186514, guid: 4a3757019d688794ea27ff6aa84808ce, type: 3}
-  aiPlayer: {fileID: 307035070}
+  aiPlayer: {fileID: 0}
+  isLocalMultiplayer: 1
   promotionPanel: {fileID: 1952784736}
   whiteQueenPrefab: {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
   whiteRookPrefab: {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
@@ -7570,6 +7527,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
+  - {fileID: 1544645285}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1253878498
@@ -9747,6 +9705,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538280037}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1544645284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544645285}
+  - component: {fileID: 1544645286}
+  m_Layer: 0
+  m_Name: CameraSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544645285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544645284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1253878497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1544645286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544645284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79b463abd6ef91429d903e731c109bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteCamera: {fileID: 330585545}
+  blackCamera: {fileID: 0}
 --- !u!1 &1548039546
 GameObject:
   m_ObjectHideFlags: 0
@@ -13438,7 +13442,6 @@ SceneRoots:
   - {fileID: 1944095558}
   - {fileID: 685766638}
   - {fileID: 88425248}
-  - {fileID: 307035071}
   - {fileID: 1481946218}
   - {fileID: 20985691}
   - {fileID: 423442067}
