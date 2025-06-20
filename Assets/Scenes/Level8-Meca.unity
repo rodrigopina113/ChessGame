@@ -437,6 +437,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaef03852e98974699ab31491379a31, type: 2}
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
+  isLocalMultiplayer: 0
   defaultVariant: 0
 --- !u!4 &27457178
 Transform:
@@ -1759,6 +1760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchDepth: 2
+  isInitialized: 0
 --- !u!4 &307035071
 Transform:
   m_ObjectHideFlags: 0
@@ -3647,6 +3649,7 @@ MonoBehaviour:
   - {fileID: 7952810776616345026, guid: 5d77a6798181a1d46927b753759483b4, type: 3}
   - {fileID: 1077840645981186514, guid: 4a3757019d688794ea27ff6aa84808ce, type: 3}
   aiPlayer: {fileID: 307035070}
+  isLocalMultiplayer: 0
   promotionPanel: {fileID: 1952784736}
   whiteQueenPrefab: {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
   whiteRookPrefab: {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
@@ -5490,6 +5493,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c03333bd63f59914497a185a73c046b1, type: 2}
     - target: {fileID: 919132149155446097, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: m_Name
       value: Chess Scene

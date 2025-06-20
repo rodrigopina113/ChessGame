@@ -6463,6 +6463,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 346c057a858e68f4fa796b1d93afb82a, type: 2}
     - target: {fileID: 919132149155446097, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: m_Name
       value: Chess Scene
