@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private IChessRules activeRules;
     private ChessManager chessManager;
 
+    public bool isLocalMultiplayer = false;
+
     [Header("Default Variant Index")]
     [SerializeField]
     private int defaultVariant = 0;
@@ -21,14 +23,34 @@ public class GameManager : MonoBehaviour
         if (chessManager == null)
             Debug.LogError("No ChessManager found in scene!");
     }
-
-    private void Start()
+   private void Start()
     {
         // Cancel any leftover coroutines on the manager
         chessManager.StopAllCoroutines();
 
         // Now inject and start the default variant
         SelectVariant(defaultVariant);
+
+        // Agora chamamos SwitchCamera com a variável isWhiteTurn para garantir que, no início, a câmera das brancas será visível
+        SwitchCameraAtStart();
+    }
+
+    /// <summary>
+    /// Configura a câmera corretamente no início do jogo para as brancas (isWhiteTurn).
+    /// </summary>
+    private void SwitchCameraAtStart()
+    {
+        if (CameraSwitcher.Instance != null)
+        {
+            // Chama imediatamente a câmera para as brancas
+            CameraSwitcher.Instance.SwitchCamera(true);
+        }
+    }
+
+    public void FinishTurn()
+    {
+        // Garantir que o turno está sendo trocado corretamente no GameManager também
+        chessManager.FinishTurn(); // Chama o método de alternância de turno no ChessManager
     }
 
     /// <summary>
@@ -44,6 +66,7 @@ public class GameManager : MonoBehaviour
         }
         activeRules = soc;
         chessManager.SetRules(activeRules);
+        chessManager.isLocalMultiplayer = isLocalMultiplayer;
         chessManager.StartGame();
     }
 

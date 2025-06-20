@@ -23,6 +23,8 @@ public class ChessManager : MonoBehaviour
     private ChessPiece selectedPiece; // Currently selected piece
     private bool isWhiteTurn = true; // Tracks whose turn it is
     public ChessAI aiPlayer;
+    public bool isLocalMultiplayer = false;
+
 
     // Promotion UI and Prefabs (assign these in the Inspector)
     public GameObject promotionPanel; // A UI panel with 4 buttons (initially inactive)
@@ -48,36 +50,68 @@ public class ChessManager : MonoBehaviour
     public TextMeshProUGUI winText;      // Opcional: para alterar o texto de vitória (por exemplo, "Brancas venceram!")
     private bool gameEnded = false;      // Impede cliques após o fim de jogo
     // ───────────────────────────────────────────────────────────────
+    private int piecesToDrop = 0;  // Total de peças em animação
+    private bool boardReady = false;
 
-    private void Start()
+   private void Start()
     {
-        // Certifique-se de que o WinPanel comece desativado
-        if (winPanel != null)
-            winPanel.SetActive(false);
-
-        if (aiPlayer == null)
-        {
-            aiPlayer = Object.FindFirstObjectByType<ChessAI>();
-            if (aiPlayer == null)
-            {
-                Debug.LogError("AI Player script not found! Assign it in the Inspector.");
-            }
-        }
-
+        // First ensure chessboard exists
         if (chessboard == null)
         {
             chessboard = Object.FindFirstObjectByType<Chessboard>();
             if (chessboard == null)
             {
-                Debug.LogError("Chessboard script not found! Assign it in the Inspector.");
+                Debug.LogError("Chessboard script not found!");
+                return;
             }
         }
 
+        // Then initialize AI if needed
+        if (!isLocalMultiplayer)
+        {
+            if (aiPlayer == null)
+            {
+                aiPlayer = Object.FindFirstObjectByType<ChessAI>();
+                if (aiPlayer == null)
+                {
+                    Debug.LogError("AI Player script not found!");
+                    return;
+                }
+            }
+            aiPlayer.Initialize();
+        }
+
+        // Then handle UI
+        if (winPanel != null)
+            winPanel.SetActive(false);
+
+        // Finally start the game if rules exist
         if (rules != null)
         {
             StartGame();
         }
+
+        // Initialize camera
+        if (CameraSwitcher.Instance != null)
+        {
+            CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
+        }
     }
+
+    public void FinishTurn()
+    {
+        // Finaliza o turno atual e alterna para o próximo turno.
+        
+
+        // Troca a câmera após a jogada
+        if (CameraSwitcher.Instance != null)
+        {
+            CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
+        }
+
+        isWhiteTurn = !isWhiteTurn;
+    }
+
 
     /// <summary>
     /// Called by GameManager after SetRules(rules).
@@ -90,8 +124,10 @@ public class ChessManager : MonoBehaviour
             return;
         }
         rules.InitializeBoard(this, chessboard);
-        StartCoroutine(AutoPlayAITurn(2f));
+        if (!isLocalMultiplayer && aiPlayer != null)
+            StartCoroutine(AutoPlayAITurn(2f));
     }
+
 
     public void PlayerMove(string targetCell)
     {
@@ -100,17 +136,23 @@ public class ChessManager : MonoBehaviour
 
     private IEnumerator AutoPlayAITurn(float delay)
     {
-        yield return new WaitUntil(() => promotionPanel == null || !promotionPanel.activeSelf);
+        if (isLocalMultiplayer || aiPlayer == null)
+            yield break;
 
-        yield return new WaitForSeconds(delay); // Wait for the specified delay
+        // Wait for promotion panel to be inactive AND AI to be initialized
+        yield return new WaitUntil(() => boardReady && (promotionPanel == null || !promotionPanel.activeSelf) && aiPlayer != null && aiPlayer.isInitialized);
 
-        // Se o jogo já acabou, não deixe a IA jogar
-        if (!gameEnded && isWhiteTurn && (promotionPanel == null || !promotionPanel.activeSelf))
+        yield return new WaitForSeconds(delay);
+        
+        if (!gameEnded && isWhiteTurn && aiPlayer != null && (promotionPanel == null || !promotionPanel.activeSelf))
         {
             aiPlayer.MakeMove();
-            isWhiteTurn = false; // Switch to player's turn
+            isWhiteTurn = false;
         }
     }
+
+
+
 
     private void Update()
     {
@@ -175,7 +217,7 @@ public class ChessManager : MonoBehaviour
             if (!piece.isWhite || rotateWhite)
                 pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-
+        piecesToDrop++;
         StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
 
         // In 3D, we no longer adjust size based on row
@@ -209,6 +251,15 @@ public class ChessManager : MonoBehaviour
 
         if (pieceObj != null)
             pieceObj.transform.position = end; // Snap to final position
+        
+        if (pieceObj != null)
+        pieceObj.transform.position = end;
+
+        piecesToDrop--;
+        if (piecesToDrop <= 0)
+            boardReady = true;
+            
+
     }
 
     private void HandleTileClick(string cellName)
@@ -218,7 +269,7 @@ public class ChessManager : MonoBehaviour
             return;
 
         // AI plays White
-        if (isWhiteTurn)
+        if (isWhiteTurn && !isLocalMultiplayer && aiPlayer != null)
         {
             aiPlayer.MakeMove();
             isWhiteTurn = false;
@@ -588,7 +639,15 @@ public class ChessManager : MonoBehaviour
 
     public void MovePiece(ChessPiece piece, string targetCell)
     {
+
+        if (piece == null || chessboard == null)
+        {
+            Debug.LogError("MovePiece called with null piece or chessboard");
+            return;
+        }
+
         ChessPiece targetPiece = FindPieceAtCell(targetCell);
+
 
         // Sempre termina o jogo se um Rei for capturado.
         if (targetPiece != null && targetPiece is King)
@@ -621,6 +680,10 @@ public class ChessManager : MonoBehaviour
         StartCoroutine(MovePieceRoutine(piece, targetCell));
 
         selectedPiece = null;
+
+        if(isLocalMultiplayer)
+            CameraSwitcher.Instance.SwitchCamera(!isWhiteTurn);
+            
         HighlightValidMoves(null);
     }
 
@@ -630,6 +693,8 @@ public class ChessManager : MonoBehaviour
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
         float duration = 0.3f;
         float elapsed = 0f;
+
+
 
         while (elapsed < duration)
         {
@@ -669,8 +734,9 @@ public class ChessManager : MonoBehaviour
         }
 
         // Continue play
-        if (!gameEnded && isWhiteTurn)
+        if (!gameEnded && isWhiteTurn && !isLocalMultiplayer && aiPlayer != null)
             StartCoroutine(AutoPlayAITurn(3f));
+
 
         yield break;
     }
@@ -852,10 +918,14 @@ public class ChessManager : MonoBehaviour
     /// </summary>
     public void FinishSetup()
     {
-        isWhiteTurn = true;
         if (promotionPanel != null)
             promotionPanel.SetActive(false);
+
+        // Ajustar a câmara para as brancas no início
+        if (CameraSwitcher.Instance != null)
+            CameraSwitcher.Instance.SwitchCamera(true); // Começa com as brancas
     }
+
 
     public List<ChessPiece> GetAllPieces(bool isWhite)
     {
