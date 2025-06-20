@@ -831,7 +831,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1085484285}
+      - m_Target: {fileID: 911992846}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: ChangeSceneAction
         m_Mode: 1
@@ -840,7 +840,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: LocalMultiplayerMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &262125059
@@ -2564,6 +2564,51 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &911992845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911992847}
+  - component: {fileID: 911992846}
+  m_Layer: 0
+  m_Name: SceneCoop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &911992846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911992845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f51e5e8b2883648b98ecb7a58ed0a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: LocalMultiplayerMenu
+--- !u!4 &911992847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911992845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1052.6361, y: 591.18713, z: 3.8346558}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925906707
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,7 +6922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Local CO-OP
+  m_text: Local CO-OP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7635,4 +7680,5 @@ SceneRoots:
   - {fileID: 609394193}
   - {fileID: 1594253816}
   - {fileID: 1085484286}
+  - {fileID: 911992847}
   - {fileID: 2008721693}
