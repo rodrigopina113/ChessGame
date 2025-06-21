@@ -53,8 +53,12 @@ public class ChessManager : MonoBehaviour
     private int piecesToDrop = 0;  // Total de peças em animação
     private bool boardReady = false;
 
+    public int currentIndex = 0;
+    private int nextIndex;
+
    private void Start()
     {
+        nextIndex = currentIndex + 1;
         // First ensure chessboard exists
         if (chessboard == null)
         {
@@ -163,6 +167,7 @@ public class ChessManager : MonoBehaviour
             //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
             if (Input.GetKeyDown(KeyCode.P))
         {
+            LevelProgressManager.Instance.UnlockLevel(nextIndex);
             if (winPanel != null)
                 winPanel.SetActive(true); // Mostra o painel ao apertar P
         }
@@ -309,6 +314,7 @@ public class ChessManager : MonoBehaviour
                             if (winText != null)
                                 winText.text = $"{vencedor} venceram!";
                             winPanel.SetActive(true);
+                            LevelProgressManager.Instance.UnlockLevel(nextIndex);
                             return;
                         }
                         Destroy(targetPiece.gameObject);
@@ -341,6 +347,7 @@ public class ChessManager : MonoBehaviour
                     if (winText != null)
                         winText.text = $"{vencedor} venceram por xeque-mate!";
                     winPanel.SetActive(true);
+                    LevelProgressManager.Instance.UnlockLevel(nextIndex);
                     return;
                 }
                 if (CheckForStalemate())
@@ -352,6 +359,7 @@ public class ChessManager : MonoBehaviour
                     if (winText != null)
                         winText.text = $"Empate por stalemate!";
                     winPanel.SetActive(true);
+                    LevelProgressManager.Instance.UnlockLevel(nextIndex);
                     return;
                 }
 
@@ -661,6 +669,7 @@ public class ChessManager : MonoBehaviour
             if (winText != null)
                 winText.text = $"{vencedor} venceram!";
             winPanel.SetActive(true);
+            LevelProgressManager.Instance.UnlockLevel(nextIndex);
             return;
         }
 
@@ -730,6 +739,7 @@ public class ChessManager : MonoBehaviour
             if (winText != null)
                 winText.text = $"{vencedor} venceram em Racing Kings!";
             winPanel.SetActive(true);
+            LevelProgressManager.Instance.UnlockLevel(nextIndex);
             yield break;
         }
 

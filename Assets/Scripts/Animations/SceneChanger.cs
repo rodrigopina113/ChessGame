@@ -3,20 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    //SceneChanger do Level 1
-
-    public void LoadScene1()
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene("Level2"); // NEXT vai ao Level 2
-    }
-
-    public void LoadScene2()
-    {
-        SceneManager.LoadScene("LevelSelect"); //vai para o Level Select
-    }
-
-    public void LoadScene3()
-    {
-        SceneManager.LoadScene("Menu"); //vai para o Main Menu
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError($"SceneChanger: no sceneName provided on GameObject '{gameObject.name}'");
+            return;
+        }
+        SceneManager.LoadScene(sceneName);
     }
 }
