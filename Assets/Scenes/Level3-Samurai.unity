@@ -7904,11 +7904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6349575691739004700, guid: d25c1377bdd1d0b4cad611d3ba3fa1ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.02
+      value: -33.4
       objectReference: {fileID: 0}
     - target: {fileID: 6349575691739004700, guid: d25c1377bdd1d0b4cad611d3ba3fa1ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.28
+      value: 2.23
       objectReference: {fileID: 0}
     - target: {fileID: 6349575691739004700, guid: d25c1377bdd1d0b4cad611d3ba3fa1ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9367,7 +9367,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 6d1846430562b6d49ae4d041b3a19cbc, type: 3}
   m_Resource: {fileID: 8300000, guid: 6d1846430562b6d49ae4d041b3a19cbc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
