@@ -3692,6 +3692,7 @@ MonoBehaviour:
   blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
   winPanel: {fileID: 1567156681}
   winText: {fileID: 0}
+  currentIndex: 0
 --- !u!4 &685766638
 Transform:
   m_ObjectHideFlags: 0
@@ -7251,7 +7252,7 @@ MonoBehaviour:
   rotationSpeed: 5
   zoomSpeed: 10
   minZoom: -2
-  maxZoom: 50
+  maxZoom: 10
   minYAngle: 0
   maxYAngle: 80
 --- !u!4 &1253878497

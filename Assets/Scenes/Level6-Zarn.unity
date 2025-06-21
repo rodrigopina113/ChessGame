@@ -7141,7 +7141,7 @@ MonoBehaviour:
   rotationSpeed: 5
   zoomSpeed: 10
   minZoom: -2
-  maxZoom: 50
+  maxZoom: 10
   minYAngle: 0
   maxYAngle: 80
 --- !u!4 &1253878497
