@@ -67,6 +67,7 @@ public class LevelSelectorController : MonoBehaviour
     }
     public void ChangeIndex(int delta)
     {
+        if (isTransitioning) return;
         int target = Mathf.Clamp(currentIndex + delta, 0, maxUnlocked);
         if (target != currentIndex)
             StartCoroutine(AnimatePlanetTransition(target, delta));

@@ -3661,7 +3661,7 @@ MonoBehaviour:
   blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
   winPanel: {fileID: 1567156681}
   winText: {fileID: 0}
-  currentIndex: 0
+  currentIndex: 2
 --- !u!4 &685766638
 Transform:
   m_ObjectHideFlags: 0
@@ -4416,14 +4416,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453862840}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadScene1
-        m_Mode: 1
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level4-Orc
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &764827995
@@ -5059,14 +5059,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453862840}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadScene2
-        m_Mode: 1
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: LevelSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &849710992
@@ -8401,14 +8401,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453862840}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadScene3
-        m_Mode: 1
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1424709379
