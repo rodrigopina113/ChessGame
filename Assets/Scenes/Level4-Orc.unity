@@ -438,7 +438,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
   isLocalMultiplayer: 0
-  defaultVariant: 0
+  defaultVariant: 2
 --- !u!4 &27457178
 Transform:
   m_ObjectHideFlags: 0
@@ -3727,6 +3727,7 @@ MonoBehaviour:
   blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
   winPanel: {fileID: 1567156681}
   winText: {fileID: 0}
+  currentIndex: 0
 --- !u!4 &685766638
 Transform:
   m_ObjectHideFlags: 0
