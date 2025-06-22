@@ -1986,7 +1986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6688623049588458034, guid: 1f3ac393d4698484a8e39d4938f5ee8c, type: 3}
       propertyPath: m_Name
-      value: untitled (1) 1
+      value: Nave2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4652,7 +4652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6540204334300729554, guid: d140d8ca24a4d1e428826cecba9282a8, type: 3}
       propertyPath: m_Name
-      value: untitled (1)
+      value: Nave1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10717,7 +10717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c04f22c1741c317459f7bcea284fb3bc, type: 3}
       propertyPath: m_Name
-      value: untitled
+      value: Arena
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

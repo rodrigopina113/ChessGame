@@ -988,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 637f8fd01ffe31b42a75563f30aa8d22, type: 3}
       propertyPath: m_Name
-      value: untitled
+      value: Arena
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8534,7 +8534,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7475336993355677713, guid: f88c24dc206822b41a25288a90ed16b7, type: 3}
       propertyPath: m_Name
-      value: untitled 1
+      value: Nave
       objectReference: {fileID: 0}
     - target: {fileID: 7851581537907448491, guid: f88c24dc206822b41a25288a90ed16b7, type: 3}
       propertyPath: m_LocalScale.x
@@ -9464,7 +9464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6873326950994940687, guid: f68b755f78aa2fb40ab8d91bdc747d3f, type: 3}
       propertyPath: m_Name
-      value: untitled
+      value: Drone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

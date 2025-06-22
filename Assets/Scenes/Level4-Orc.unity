@@ -3750,7 +3750,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7088330050819844289, guid: 43d1da51032dd0c4dbfeef1447b521bf, type: 3}
       propertyPath: m_Name
-      value: untitled
+      value: Ballon
       objectReference: {fileID: 0}
     - target: {fileID: 7372562162704853758, guid: 43d1da51032dd0c4dbfeef1447b521bf, type: 3}
       propertyPath: m_Controller
@@ -8384,7 +8384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d890f4713b8029f47aef00c85960b392, type: 3}
       propertyPath: m_Name
-      value: untitled
+      value: Arena
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10896,7 +10896,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 58e9472c94cee434cb6bf61861ec238d, type: 2}
     - target: {fileID: 6950294952919116499, guid: 7fb364251aca36a40856c61e4a7da1c7, type: 3}
       propertyPath: m_Name
-      value: untitled (1) 1
+      value: Ship
       objectReference: {fileID: 0}
     - target: {fileID: 7728098637047099497, guid: 7fb364251aca36a40856c61e4a7da1c7, type: 3}
       propertyPath: m_LocalPosition.x
