@@ -1955,20 +1955,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025545053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9c3ab955a971b14384dcb604c604695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
-  previousLevelKey: 35353
-  hoverScale: 1.2
-  rotationSpeed: 50
-  glowMinAlpha: 0.1
-  glowMaxAlpha: 1
-  glowPulseSpeed: 5
-  glowEffect: {fileID: 0}
-  lockIcon: {fileID: 0}
+  levels: []
+  progressBar: {fileID: 0}
+  levelNameText: {fileID: 0}
+  previewRenderer: {fileID: 0}
+  planetHolder: {fileID: 0}
+  planetOffset: 10
+  transitionTime: 0.5
+  tickMarks: {fileID: 0}
 --- !u!135 &1025545056
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2648,20 +2647,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612909407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9c3ab955a971b14384dcb604c604695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
-  previousLevelKey: 46546
-  hoverScale: 1.2
-  rotationSpeed: 50
-  glowMinAlpha: 0.1
-  glowMaxAlpha: 1
-  glowPulseSpeed: 5
-  glowEffect: {fileID: 0}
-  lockIcon: {fileID: 0}
+  levels: []
+  progressBar: {fileID: 0}
+  levelNameText: {fileID: 0}
+  previewRenderer: {fileID: 0}
+  planetHolder: {fileID: 0}
+  planetOffset: 10
+  transitionTime: 0.5
+  tickMarks: {fileID: 0}
 --- !u!135 &1612909409
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2926,6 +2924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1700797124}
   - component: {fileID: 1700797123}
+  - component: {fileID: 1700797125}
   m_Layer: 0
   m_Name: LevelSelector
   m_TagString: Untagged
@@ -2945,23 +2944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60e9e7bbdfdc924c9738570589edea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftArrowButton: {fileID: 943563187}
-  rightArrowButton: {fileID: 1500621991}
-  startButton: {fileID: 521888255}
-  tituloText: {fileID: 1633711144}
-  descricaoText: {fileID: 1423096102}
-  niveis:
-  - sceneName: Level1_1v1
-    titulo: "Xadrez Cl\xE1ssico"
-    descricao: "Captura o Rei enimigo primeiro que o teu advers\xE1rio para ganhar
-      o jogo. Segue as regras do Xadrez cl\xE1ssico inventado no planeta \"Terra\"
-      em 500 d.C"
-    model3D: {fileID: 1612909407}
-  - sceneName: Level2_1v1
-    titulo: Corrida de Reis
-    descricao: "Chega ao lado oposto primeiro que o teu adversario para ganhar e
-      restabelecer o equilibrio do universo. Quem ser\xE1 o mais r\xE1pido?"
-    model3D: {fileID: 1025545053}
 --- !u!4 &1700797124
 Transform:
   m_ObjectHideFlags: 0
@@ -2977,6 +2959,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700797125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700797122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42987d9d958629a4283f91663d867247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftArrowButton: {fileID: 943563187}
+  rightArrowButton: {fileID: 1500621991}
+  startButton: {fileID: 521888255}
+  tituloText: {fileID: 1633711144}
+  descricaoText: {fileID: 1423096102}
+  niveis:
+  - sceneName: Level1_1v1
+    titulo: "Xadrez Cl\xE1ssico"
+    descricao: a
+    model3D: {fileID: 1612909407}
+  - sceneName: Level2_1v1
+    titulo: Corrida de Reis
+    descricao: asdas
+    model3D: {fileID: 1025545053}
 --- !u!1 &1707957971
 GameObject:
   m_ObjectHideFlags: 0
