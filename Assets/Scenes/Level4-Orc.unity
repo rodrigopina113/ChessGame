@@ -8270,8 +8270,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453862840}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: PlayNextLevelCutscene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8425,6 +8425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextCutsceneClip: {fileID: 32900000, guid: 293d8d2769c3c4b4ea1624d5870a0ad2, type: 3}
+  nextLevelSceneName: Level5-Noktari
 --- !u!4 &1453862841
 Transform:
   m_ObjectHideFlags: 0
