@@ -12,14 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: 0efc6eb294b802f44b80e20bbcbeb039
   - enabled: 1
-    path: Assets/Scenes/videoSceneIntro.unity
-    guid: 0d9d26fd524129f448a5000b024bdd65
+    path: Assets/Scenes/CutScene.unity
+    guid: 29f6da8155e38e9439df0f3da388f0a1
   - enabled: 1
     path: Assets/Scenes/campanha1.unity
     guid: bfff834ffee332542a9580ef0389db20
-  - enabled: 1
-    path: Assets/Scenes/videoScene.unity
-    guid: f4ef3e491c528814d9e2d48c9284a4b3
   - enabled: 1
     path: Assets/Scenes/Level1-Urokan.unity
     guid: 99c9720ab356a0642a771bea13969a05
