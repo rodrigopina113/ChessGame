@@ -41,6 +41,8 @@ public class LevelSelectorController : MonoBehaviour
         // 1) Load unlocked
         maxUnlocked = LevelProgressManager.Instance.GetHighestUnlocked();
 
+        maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count - 1);
+
         // 2) Prevent selection beyond unlocked
         currentIndex = Mathf.Clamp(currentIndex, 0, maxUnlocked);
 
@@ -57,7 +59,7 @@ public class LevelSelectorController : MonoBehaviour
     /// </summary>
     void OnUnlocked(int newMax)
     {
-        maxUnlocked = newMax;
+        maxUnlocked = Mathf.Clamp(newMax, 0, levels.Count - 1);
         UpdateProgressUI();
         tickMarks.RefreshTicks(currentIndex, maxUnlocked);
     }
