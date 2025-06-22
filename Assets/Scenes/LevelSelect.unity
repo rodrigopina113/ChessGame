@@ -629,42 +629,52 @@ MonoBehaviour:
     sceneName: Level1-Urokan
     previewSprite: {fileID: 21300000, guid: c547f10a262ce9d44be5ffd2bb6d2fd5, type: 3}
     planetPrefab: {fileID: 4035592638775500110, guid: 55abaa2f8753ee545a4dfbf9b35362d1, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 642d2968f375dfa4ead71e5b0590c91b, type: 3}
   - levelName: Stonedge
     sceneName: Level2-Stone
     previewSprite: {fileID: 21300000, guid: 6ef76b31c6600c14c8f5e0cfa35b6326, type: 3}
     planetPrefab: {fileID: 5068491000733038663, guid: a7c3f796216257f40963be28753356fe, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 599a0ab8c4f20f64c93699a907b57c2d, type: 3}
   - levelName: Musashi
     sceneName: Level3-Samurai
     previewSprite: {fileID: 21300000, guid: 7f975c2e7d09e1d45921a30153209c5d, type: 3}
     planetPrefab: {fileID: 5818313842852453878, guid: 51aabeac89c5d474aa6e726e9b986ec1, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 85a9f21d07aa0314b86e6f47409b8d63, type: 3}
   - levelName: Guhurg
     sceneName: Level4-Orc
     previewSprite: {fileID: 21300000, guid: a333c1216392c8d41a32af755431a3dd, type: 3}
     planetPrefab: {fileID: 3683776974072313648, guid: 88f7f09a679c7f8449340d720b64b430, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: bb4525edf89ac4948aaf2d74f852ef45, type: 3}
   - levelName: '"-error-"'
     sceneName: Level5-Noktari
     previewSprite: {fileID: 21300000, guid: b31b9eb94cd10354c9bd66ef90cc2604, type: 3}
     planetPrefab: {fileID: 6586930204510854426, guid: a32dabe9a6696a24f9ffd12394d2b89d, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 293d8d2769c3c4b4ea1624d5870a0ad2, type: 3}
   - levelName: Shiv'sjk
     sceneName: Level6-Zarn
     previewSprite: {fileID: 21300000, guid: 6a36aaec1cd8a1148bec79865918ef98, type: 3}
     planetPrefab: {fileID: 5921998806337126911, guid: 209d80961f4c5eb4690734ebd8f183b6, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 44e74236890e5bc4f9e55959ca172c57, type: 3}
   - levelName: Warmsu
     sceneName: Level7-Igneos
     previewSprite: {fileID: 21300000, guid: a4a759617e3e42f4bb33be9fe84af827, type: 3}
     planetPrefab: {fileID: 7179633818924366986, guid: 80f460a5e6ad01f40a44178aceb1ca8d, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: f63b7494f370edd49a0a3bda3a3ab0d4, type: 3}
   - levelName: 01010010 01110101 01101110
     sceneName: Level8-Meca
     previewSprite: {fileID: 21300000, guid: fd6d78760167ae14587af9d6d1caf8b2, type: 3}
     planetPrefab: {fileID: 2233320071716138649, guid: 0c3a2e9de82ff26468e7afa6fbd61f22, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 8c9e554e3db1001429725efe7141c7b6, type: 3}
   - levelName: "Dracoh\xCFm"
     sceneName: Level9-Dragons
     previewSprite: {fileID: 21300000, guid: 6c3e44d5ae788d24db2cc84bf9855bba, type: 3}
     planetPrefab: {fileID: 6651456719176839400, guid: 07de4f571bff95e4091d9c1a2630a579, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 80d363bbea542ba4ca93a61ccff4815e, type: 3}
   - levelName: Celestials
     sceneName: Level10-Celestiais
     previewSprite: {fileID: 21300000, guid: bb761b62139f2c14c9c3f3a90e19cbf1, type: 3}
     planetPrefab: {fileID: 269116146448697141, guid: 402493c18b4ab064a90104d47e1cd918, type: 3}
+    cutsceneClip: {fileID: 32900000, guid: 9a290394cd69f444e97a07fa717cb1d0, type: 3}
   progressBar: {fileID: 32892839}
   levelNameText: {fileID: 2106338680}
   previewRenderer: {fileID: 406095497}

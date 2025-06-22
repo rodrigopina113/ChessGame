@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Video;
+
 
 public class LevelSelectorController : MonoBehaviour
 {
@@ -162,7 +164,13 @@ public class LevelSelectorController : MonoBehaviour
     public void ConfirmSelection()
     {
         var data = levels[currentIndex];
-        SceneManager.LoadScene(data.sceneName);
+
+        // 1) Guarda qual cena de jogo vamos carregar depois da cutscene
+        NextLevelLoader.sceneName    = data.sceneName;
+        // 2) Guarda o VideoClip que vamos tocar
+        NextLevelLoader.cutsceneClip = data.cutsceneClip;
+        // 3) Carrega a única cena de cutscene
+        SceneManager.LoadScene("CutScene");
     }
 
     void Update()
