@@ -58,10 +58,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2e755993c9520d40bd62ce5784a76c0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3292594656335779885}
+      addedObject: {fileID: 33898026222045543}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2e755993c9520d40bd62ce5784a76c0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 33898026222045543}
+      addedObject: {fileID: 3292594656335779885}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2e755993c9520d40bd62ce5784a76c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4710954091313929424}
@@ -71,6 +71,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a2e755993c9520d40bd62ce5784a76c0, type: 3}
   m_PrefabInstance: {fileID: 374100317169664655}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &33898026222045543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716208200353808350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda73db91488f3c4db066babf8fdaf82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 1
+  chessManager: {fileID: 0}
 --- !u!65 &3292594656335779885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,20 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.009268917, y: 0.043220233, z: 0.00969349}
   m_Center: {x: 0.00007578917, y: 0.021979718, z: -0.00014584605}
---- !u!114 &33898026222045543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716208200353808350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda73db91488f3c4db066babf8fdaf82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWhite: 1
-  chessManager: {fileID: 0}
 --- !u!65 &4710954091313929424
 BoxCollider:
   m_ObjectHideFlags: 0

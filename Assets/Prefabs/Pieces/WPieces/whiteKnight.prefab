@@ -58,10 +58,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12ff8d111327f8b47b79019ec21a44e2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5859669128583044275}
+      addedObject: {fileID: 4563269618813599141}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12ff8d111327f8b47b79019ec21a44e2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4563269618813599141}
+      addedObject: {fileID: 5859669128583044275}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12ff8d111327f8b47b79019ec21a44e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 138738606805287614}
@@ -74,6 +74,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12ff8d111327f8b47b79019ec21a44e2, type: 3}
   m_PrefabInstance: {fileID: 1876317438229449632}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4563269618813599141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642526426932754161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752c5d8a52128e44a8b6b259e2d21f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 1
+  chessManager: {fileID: 0}
 --- !u!65 &5859669128583044275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95,20 +109,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005940214, y: 0.02086619, z: 0.010407804}
   m_Center: {x: 0.00021829642, y: 0.010605466, z: 0.0003034426}
---- !u!114 &4563269618813599141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1642526426932754161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 752c5d8a52128e44a8b6b259e2d21f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWhite: 1
-  chessManager: {fileID: 0}
 --- !u!65 &138738606805287614
 BoxCollider:
   m_ObjectHideFlags: 0

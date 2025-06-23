@@ -41,10 +41,10 @@ public class LevelSelectorController : MonoBehaviour
         // 1) Load unlocked
         maxUnlocked = LevelProgressManager.Instance.GetHighestUnlocked();
 
-        maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count - 1);
+        maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count);
 
         // 2) Prevent selection beyond unlocked
-        currentIndex = Mathf.Clamp(currentIndex, 0, maxUnlocked);
+        currentIndex = Mathf.Clamp(currentIndex, 0, Mathf.Min(maxUnlocked, levels.Count - 1));
 
         tickMarks.RefreshTicks(currentIndex, maxUnlocked);
 
@@ -59,7 +59,7 @@ public class LevelSelectorController : MonoBehaviour
     /// </summary>
     void OnUnlocked(int newMax)
     {
-        maxUnlocked = Mathf.Clamp(newMax, 0, levels.Count - 1);
+        maxUnlocked = Mathf.Clamp(newMax, 0, levels.Count);
         UpdateProgressUI();
         tickMarks.RefreshTicks(currentIndex, maxUnlocked);
     }
@@ -72,7 +72,8 @@ public class LevelSelectorController : MonoBehaviour
     public void ChangeIndex(int delta)
     {
         if (isTransitioning) return;
-        int target = Mathf.Clamp(currentIndex + delta, 0, maxUnlocked);
+        int maxSelectable = Mathf.Min(maxUnlocked, levels.Count - 1);
+        int target = Mathf.Clamp(currentIndex + delta, 0, maxSelectable);
         if (target != currentIndex)
             StartCoroutine(AnimatePlanetTransition(target, delta));
     }
@@ -168,7 +169,7 @@ public class LevelSelectorController : MonoBehaviour
         var data = levels[currentIndex];
 
         // 1) Guarda qual cena de jogo vamos carregar depois da cutscene
-        NextLevelLoader.sceneName    = data.sceneName;
+        NextLevelLoader.sceneName = data.sceneName;
         // 2) Guarda o VideoClip que vamos tocar
         NextLevelLoader.cutsceneClip = data.cutsceneClip;
         // 3) Carrega a única cena de cutscene

@@ -58,10 +58,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd10d205fe867724fa32066117b1107a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2832409144451381097}
+      addedObject: {fileID: 1056577116930880775}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd10d205fe867724fa32066117b1107a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1056577116930880775}
+      addedObject: {fileID: 2832409144451381097}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd10d205fe867724fa32066117b1107a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5832656759512837140}
@@ -74,6 +74,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cd10d205fe867724fa32066117b1107a, type: 3}
   m_PrefabInstance: {fileID: 3037149661586803145}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1056577116930880775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2803339410984760472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f3b4e3f806214ebd44e736976cf0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 1
+  chessManager: {fileID: 0}
+  hasMoved: 0
 --- !u!65 &2832409144451381097
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95,21 +110,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.008635841, y: 0.033863768, z: 0.008543953}
   m_Center: {x: -0.00020449609, y: 0.01736148, z: 0.00009177532}
---- !u!114 &1056577116930880775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2803339410984760472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15f3b4e3f806214ebd44e736976cf0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWhite: 1
-  chessManager: {fileID: 0}
-  hasMoved: 0
 --- !u!65 &5832656759512837140
 BoxCollider:
   m_ObjectHideFlags: 0
