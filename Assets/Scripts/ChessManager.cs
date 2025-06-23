@@ -61,6 +61,8 @@ public class ChessManager : MonoBehaviour
 
    private void Start()
     {
+
+        Debug.Log("👁️ isLocalMultiplayer: " + isLocalMultiplayer);
         nextIndex = currentIndex + 1;
         // First ensure chessboard exists
         if (chessboard == null)
@@ -117,9 +119,31 @@ public class ChessManager : MonoBehaviour
         }
 
         isWhiteTurn = !isWhiteTurn;
+
         if (chessWatch != null)
             chessWatch.SwitchTurn();
     }
+
+    private bool aiScheduled = false;
+
+    private IEnumerator TriggerAIMoveAfterDelay(float delay)
+    {
+        aiScheduled = true;
+
+        yield return new WaitForSeconds(delay);
+        yield return new WaitUntil(() => promotionPanel == null || !promotionPanel.activeSelf);
+
+        if (!gameEnded && isWhiteTurn && aiPlayer != null)
+        {
+            Debug.Log("🤖 IA vai jogar automaticamente!");
+            aiPlayer.MakeMove();
+            FinishTurn();
+        }
+
+        aiScheduled = false;
+    }
+
+
 
 
     /// <summary>
@@ -133,8 +157,6 @@ public class ChessManager : MonoBehaviour
             return;
         }
         rules.InitializeBoard(this, chessboard);
-        if (!isLocalMultiplayer && aiPlayer != null)
-            StartCoroutine(AutoPlayAITurn(2f));
     }
 
 
@@ -165,12 +187,18 @@ public class ChessManager : MonoBehaviour
 
     private void Update()
     {
-        // Se o jogo acabou, não processe cliques
         if (gameEnded)
-            return;
+        return;
+
+        // ⏳ IA joga sozinha com delay após o turno mudar
+        if (!aiScheduled && !isLocalMultiplayer && isWhiteTurn && aiPlayer != null && boardReady)
+        {
+            Debug.Log("⏳ AI programada para jogar em 2.5s");
+            StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
+        }
 
             //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
-            if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             LevelProgressManager.Instance.UnlockLevel(nextIndex);
             if (winPanel != null)
@@ -266,28 +294,26 @@ public class ChessManager : MonoBehaviour
             pieceObj.transform.position = end;
 
         piecesToDrop--;
-        if (piecesToDrop <= 0)
+        //Debug.Log("🧩 Piece caiu! Falta: " + piecesToDrop);
+
+        if (piecesToDrop <= 32)
         {
             boardReady = true;
-            if (chessWatch != null)
-                chessWatch.StartTimers();
+            Debug.Log("✅ boardReady TRUE após queda de peças.");
+            FinishSetup();
         }    
 
     }
 
     private void HandleTileClick(string cellName)
     {
+        
         // Se o jogo já acabou, ignore
         if (gameEnded)
             return;
 
-        // AI plays White
-        if (isWhiteTurn && !isLocalMultiplayer && aiPlayer != null)
-        {
-            aiPlayer.MakeMove();
-            isWhiteTurn = false;
+        if (!isLocalMultiplayer && isWhiteTurn && aiPlayer != null)
             return;
-        }
 
         // If we already have a selection, try to move it
         if (selectedPiece != null)
@@ -732,6 +758,7 @@ public class ChessManager : MonoBehaviour
 
         piece.transform.position = endPos;
         piece.CurrentCell = targetCell;
+        boardReady = true;
 
         // ── Fog of War: rebuild now que piece.CurrentCell está correto
         if (rules is FogOfWarRules fow)
@@ -762,11 +789,6 @@ public class ChessManager : MonoBehaviour
             LevelProgressManager.Instance.UnlockLevel(nextIndex);
             yield break;
         }
-
-        // Continue play
-        if (!gameEnded && isWhiteTurn && !isLocalMultiplayer && aiPlayer != null)
-            StartCoroutine(AutoPlayAITurn(3f));
-
 
         yield break;
     }
