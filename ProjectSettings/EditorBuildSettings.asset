@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/campanha1.unity
     guid: bfff834ffee332542a9580ef0389db20
   - enabled: 1
-    path: Assets/Scenes/Level1-Urokan.unity
+    path: Assets/Scenes/Level1-Urokan_pvp.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Level2-Stone.unity
@@ -50,12 +50,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LocalMultiplayerMenu.unity
     guid: f203eda0a2477024187b9b9ba7fa3bbb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1_1v1.unity
     guid: 69ba63ffa48af724e93c047d58ad445f
   - enabled: 1
     path: Assets/Scenes/Level2_1v1.unity
     guid: 8dfdd94ae8236ec4d863d2afcde9f158
+  - enabled: 1
+    path: Assets/Scenes/Level1-Urokan.unity
+    guid: 024acac8e7560594fa8414865e628188
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

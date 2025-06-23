@@ -2977,9 +2977,11 @@ MonoBehaviour:
   tituloText: {fileID: 1633711144}
   descricaoText: {fileID: 1423096102}
   niveis:
-  - sceneName: Level1_1v1
+  - sceneName: Level1-Urokan_pvp
     titulo: "Xadrez Cl\xE1ssico"
-    descricao: a
+    descricao: "Captura o Rei enimigo primeiro que o teu advers\xE1rio para ganhar
+      o jogo. Segue as regras do Xadrez cl\xE1ssico inventado no planeta \"Terra\"
+      em 500 d.C"
     model3D: {fileID: 1612909407}
   - sceneName: Level2_1v1
     titulo: Corrida de Reis

@@ -10,6 +10,7 @@ public class ChessWatch : MonoBehaviour
     [Header("Referências de UI")]
     public TextMeshProUGUI whiteTimerText;
     public TextMeshProUGUI blackTimerText;
+    public TextMeshProUGUI currentPlayerText;
     public GameObject winPanel;
     public bool showWhiteWinsOnTimeout = false;
 
@@ -19,15 +20,21 @@ public class ChessWatch : MonoBehaviour
     private bool isWhiteTurn = true;
     private bool isCounting = false;
 
+
+
     void Start()
     {
         whiteTimeRemaining = blackTimeRemaining = totalMinutes * 60f;
+        UpdateTurnText();
         UpdateTimerUI();
     }
 
     void Update()
     {
         if (!isCounting) return;
+
+        if (whiteTimeRemaining > 0 || blackTimeRemaining > 0)
+            Debug.Log("⏱️ Atualizando relógio. Turno branco: " + isWhiteTurn);
 
         if (isWhiteTurn)
         {
@@ -51,6 +58,7 @@ public class ChessWatch : MonoBehaviour
         UpdateTimerUI();
     }
 
+
     private void UpdateTimerUI()
     {
         if (whiteTimerText != null)
@@ -72,6 +80,7 @@ public class ChessWatch : MonoBehaviour
     public void StartTimers()
     {
         isCounting = true;
+        Debug.Log("✔️ StartTimers chamado: isCounting = " + isCounting);
     }
 
     /// <summary>
@@ -80,6 +89,13 @@ public class ChessWatch : MonoBehaviour
     public void SwitchTurn()
     {
         isWhiteTurn = !isWhiteTurn;
+        UpdateTurnText();
+    }
+
+    private void UpdateTurnText()
+    {
+        if (currentPlayerText != null)
+            currentPlayerText.text = isWhiteTurn ? "Brancas a jogar" : "Pretas a jogar";
     }
 
     /// <summary>

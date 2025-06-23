@@ -56,6 +56,9 @@ public class ChessManager : MonoBehaviour
     public int currentIndex = 0;
     private int nextIndex;
 
+    [Header("Relógio de Xadrez")]
+    [SerializeField] private ChessWatch chessWatch;
+
    private void Start()
     {
         nextIndex = currentIndex + 1;
@@ -105,7 +108,7 @@ public class ChessManager : MonoBehaviour
     public void FinishTurn()
     {
         // Finaliza o turno atual e alterna para o próximo turno.
-        
+
 
         // Troca a câmera após a jogada
         if (CameraSwitcher.Instance != null)
@@ -114,6 +117,8 @@ public class ChessManager : MonoBehaviour
         }
 
         isWhiteTurn = !isWhiteTurn;
+        if (chessWatch != null)
+            chessWatch.SwitchTurn();
     }
 
 
@@ -256,14 +261,17 @@ public class ChessManager : MonoBehaviour
 
         if (pieceObj != null)
             pieceObj.transform.position = end; // Snap to final position
-        
+
         if (pieceObj != null)
-        pieceObj.transform.position = end;
+            pieceObj.transform.position = end;
 
         piecesToDrop--;
         if (piecesToDrop <= 0)
+        {
             boardReady = true;
-            
+            if (chessWatch != null)
+                chessWatch.StartTimers();
+        }    
 
     }
 
@@ -309,6 +317,8 @@ public class ChessManager : MonoBehaviour
                             // ───> Em vez de ResetGame(), exiba o painel de vitória
                             if (gameEnded) return;
                             gameEnded = true;
+                            if (chessWatch != null)
+                                chessWatch.PauseTimers();
 
                             string vencedor = targetPiece.isWhite ? "Pretas" : "Brancas";
                             if (winText != null)
@@ -341,6 +351,8 @@ public class ChessManager : MonoBehaviour
                     // ───> Em vez de ResetGame(), exiba o painel de vitória
                     if (gameEnded) return;
                     gameEnded = true;
+                    if (chessWatch != null)
+                        chessWatch.PauseTimers();
 
                     // Quem deu o xeque-mate? Se isWhiteTurn == true, então as brancas deram mate agora.
                     string vencedor = isWhiteTurn ? "Brancas" : "Pretas";
@@ -355,6 +367,8 @@ public class ChessManager : MonoBehaviour
                     // ───> Em vez de ResetGame(), exiba o painel de empate (ou vitória genérica)
                     if (gameEnded) return;
                     gameEnded = true;
+                    if (chessWatch != null)
+                        chessWatch.PauseTimers();
 
                     if (winText != null)
                         winText.text = $"Empate por stalemate!";
@@ -365,6 +379,8 @@ public class ChessManager : MonoBehaviour
 
                 // finish turn
                 isWhiteTurn = !isWhiteTurn;
+                if (chessWatch != null)
+                    chessWatch.SwitchTurn();
                 selectedPiece = null;
                 HighlightValidMoves(null);
                 Debug.Log($"Moved piece to {cellName}");
@@ -663,6 +679,8 @@ public class ChessManager : MonoBehaviour
             // ───> Em vez de ResetGame(), exiba o painel de vitória
             if (gameEnded) return;
             gameEnded = true;
+            if (chessWatch != null)
+                chessWatch.PauseTimers();
 
             // Determina vencedor: se o rei capturado era branco, as pretas vencem
             string vencedor = targetPiece.isWhite ? "Pretas" : "Brancas";
@@ -734,6 +752,8 @@ public class ChessManager : MonoBehaviour
             // ───> Em vez de ResetGame(), exiba o painel de vitória
             if (gameEnded) yield break;
             gameEnded = true;
+            if (chessWatch != null)
+             chessWatch.PauseTimers();
 
             string vencedor = king.isWhite ? "Brancas" : "Pretas";
             if (winText != null)
@@ -934,6 +954,9 @@ public class ChessManager : MonoBehaviour
         // Ajustar a câmara para as brancas no início
         if (CameraSwitcher.Instance != null)
             CameraSwitcher.Instance.SwitchCamera(true); // Começa com as brancas
+        
+        if (chessWatch != null)
+            chessWatch.StartTimers();
     }
 
 
