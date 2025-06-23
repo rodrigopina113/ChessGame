@@ -1,92 +1,104 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI References")]
     public Slider volumeSlider;
     public TMP_Dropdown qualityDropdown;
+    public TMP_Text qualityLabel;    // opcional, para mostrar “Low” ou “High” na UI
     public GameObject settingsPanel;
-    
-    [Header("Erase Progress")]
-    public Button eraseProgressButton;    // assign no Inspector
+    public GameObject menuPanel;
 
-private void Start()
-{
-    // Carrega valor salvo
-    float saved = PlayerPrefs.GetFloat("volume", 1f);
+    [Header("Buttons")]
+    public Button applyButton;
+    public Button cancelButton;
+    public Button eraseProgressButton;
 
-    // 1) Associa callback antes de definir o valor
-    volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+    // Índices internos para presets
+    private const int PRESET_LOW = 0;
+    private const int PRESET_HIGH = 1;
 
-    // 2) Define o valor (vai mover o handle e chamar OnVolumeChanged)
-    volumeSlider.value = saved;
-
-    // 3) Garante que o áudio já fique com o nível correto
-    ApplyAudio(saved);
-
-    // Qualidade e erase, se ainda não tiveres feito
-    qualityDropdown.onValueChanged.AddListener(OnQualityChanged);
-    eraseProgressButton.onClick.AddListener(OnEraseProgressClicked);
-
-    // Carregar valor de qualidade
-    qualityDropdown.value = PlayerPrefs.GetInt("quality", QualitySettings.GetQualityLevel());
-    ApplyQuality(qualityDropdown.value);
-}
-
-
-
-    #region Callbacks
-
-    public void OnVolumeChanged(float value)
+    private void Start()
     {
-        ApplyAudio(value);
+        // 1) Carregar preset salvo (0 = Low, 1 = High)
+        int savedPreset = PlayerPrefs.GetInt("quality", PRESET_HIGH);
+
+        // 2) Configurar opções do dropdown
+        qualityDropdown.ClearOptions();
+        qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Low", "High" });
+
+        // 3) Ligação de callbacks
+        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        qualityDropdown.onValueChanged.AddListener(OnQualityPresetChanged);
+        eraseProgressButton.onClick.AddListener(OnEraseProgressClicked);
+        applyButton.onClick.AddListener(OnApplyClicked);
+        cancelButton.onClick.AddListener(OnCancelClicked);
+
+        // 4) Aplicar valores iniciais
+        volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
+        OnVolumeChanged(volumeSlider.value);
+
+        qualityDropdown.value = savedPreset;
+        ApplyQualityPreset(savedPreset);
     }
 
-    public void OnEraseProgressClicked()
+    private void OnVolumeChanged(float value)
     {
-        // Opcional: aqui você pode exibir um diálogo de confirmação
+        AudioListener.volume = value;
+    }
+
+    private void OnQualityPresetChanged(int presetIndex)
+    {
+        ApplyQualityPreset(presetIndex);
+    }
+
+    private void OnEraseProgressClicked()
+    {
         LevelProgressManager.Instance.ResetProgress();
         Debug.Log("Progresso zerado!");
     }
 
-    public void OnQualityChanged(int index)
+    private void OnApplyClicked()
     {
-        ApplyQuality(index);
-    }
-
-
-
-    #endregion
-
-    public void ApplySettings()
-    {
-        // Salva no PlayerPrefs
+        // Salva volume e preset
         PlayerPrefs.SetFloat("volume", volumeSlider.value);
         PlayerPrefs.SetInt("quality", qualityDropdown.value);
         PlayerPrefs.Save();
-        ClosePanel();
+
+        ShowMenuPanel();
     }
 
-    public void ClosePanel()
+    private void OnCancelClicked()
+    {
+        // Sem salvar, volta ao menu
+        ShowMenuPanel();
+    }
+
+    private void ApplyQualityPreset(int presetIndex)
+    {
+        int lowest = 0;
+        int highest = QualitySettings.names.Length - 1;
+
+        if (presetIndex == PRESET_LOW)
+            QualitySettings.SetQualityLevel(lowest);
+        else
+            QualitySettings.SetQualityLevel(highest);
+
+        // Atualiza label opcional
+        if (qualityLabel != null)
+            qualityLabel.text = presetIndex == PRESET_LOW ? "Low" : "High";
+
+        Debug.Log($"Quality preset applied: {(presetIndex == PRESET_LOW ? "Low" : "High")} " +
+                  $"(Level { (presetIndex == PRESET_LOW ? lowest : highest) })");
+    }
+
+    private void ShowMenuPanel()
     {
         settingsPanel.SetActive(false);
+        menuPanel.SetActive(true);
     }
-
-    private void ApplyAudio(float volume)
-    {
-        // Exemplo usando AudioListener
-        AudioListener.volume = volume;
-    }
-
-    private void ApplyQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
-    }
-
-
-
-
 }
+
 

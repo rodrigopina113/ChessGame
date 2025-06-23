@@ -1,42 +1,68 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 using System.Collections;
+using System;
 
-public class VideoFadeOut : MonoBehaviour
+[RequireComponent(typeof(VideoPlayer))]
+public class VideoFaderGUI : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
-    public Image fadeImage;
-    public float fadeDuration = 2f;
+    [Header("Configurações de Fade")]
+    public float fadeDuration = 1f;
 
-    private void Start()
+    private VideoPlayer vp;
+    private float alpha = 1f;
+    private bool isFading = false;
+
+    void Awake()
     {
-        videoPlayer.loopPointReached += OnVideoEnd;
+        vp = GetComponent<VideoPlayer>();
     }
 
-    void OnVideoEnd(VideoPlayer vp)
+    void Start()
     {
-        StartCoroutine(FadeToBlack());
+        // Garante vídeo parado e tela preta no início
+        vp.Stop();
+        alpha = 1f;
+        // Quando o vídeo terminar, faz fade out
+        vp.loopPointReached += OnVideoEnd;
+        // Inicia o fade in e, ao fim, dispara o play
+        StartCoroutine(Fade(1f, 0f, fadeDuration, () => vp.Play()));
     }
 
-    IEnumerator FadeToBlack()
+    private void OnVideoEnd(VideoPlayer source)
     {
-        float time = 0f;
-        Color color = fadeImage.color;
+        // Quando acabar, faz fade out
+        StartCoroutine(Fade(0f, 1f, fadeDuration, () => vp.Stop()));
+    }
 
-        while (time < fadeDuration)
+    IEnumerator Fade(float from, float to, float duration, Action onComplete)
+    {
+        if (isFading) yield break;
+        isFading = true;
+        float elapsed = 0f;
+        while (elapsed < duration)
         {
-            float t = time / fadeDuration;
-            // Ease-out usando curva quadrática
-            float easedT = 1f - Mathf.Pow(1f - t, 2f);
-            color.a = easedT;
-            fadeImage.color = color;
-            time += Time.deltaTime;
+            elapsed += Time.deltaTime;
+            alpha = Mathf.Lerp(from, to, elapsed / duration);
             yield return null;
         }
+        alpha = to;
+        onComplete?.Invoke();
+        isFading = false;
+    }
 
-        // Garante 100% opaco no final
-        color.a = 1f;
-        fadeImage.color = color;
+    void OnGUI()
+    {
+        if (alpha <= 0f) return;
+        // Salva cor anterior
+        var old = GUI.color;
+        // Define preto com alpha
+        GUI.color = new Color(0f, 0f, 0f, alpha);
+        // Desenha retângulo full-screen usando a textura branca padrão
+        GUI.DrawTexture(
+            new Rect(0, 0, Screen.width, Screen.height),
+            Texture2D.whiteTexture);
+        // Restaura cor
+        GUI.color = old;
     }
 }
