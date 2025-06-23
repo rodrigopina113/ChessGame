@@ -893,10 +893,10 @@ MonoBehaviour:
     blackPiecePrefabs:
     - {fileID: 2066676092317771340, guid: 1b7df1b29920db743a28367e7aa0ceff, type: 3}
     - {fileID: 1820059938375736365, guid: 2a533d7349bac3f4eba74b772fb8887a, type: 3}
-    - {fileID: 3437485818894506060, guid: d4122798309d539429e81a1861910b7c, type: 3}
+    - {fileID: 993877142843829276, guid: 869c09cbaa2b11d4884f8a62808abb88, type: 3}
     - {fileID: 5915650506639899232, guid: db61d4de5ae3ca9498191ef59692d17c, type: 3}
     - {fileID: 6879059399277330609, guid: 42bf4cb80eaa2ca40a32bf468c05db70, type: 3}
-    - {fileID: 6330192373318944118, guid: 25200f32a536a494aa738f64063fff90, type: 3}
+    - {fileID: 944385520603652797, guid: b5c6c6abbf17cb44591ee855636b33d1, type: 3}
   - name: Urokan
     previewSprite: {fileID: 21300000, guid: d02a15f2227fa0f4ea60020c3fc77042, type: 3}
     blackPiecePrefabs:
@@ -3079,6 +3079,8 @@ MonoBehaviour:
   winPanel: {fileID: 0}
   winText: {fileID: 0}
   currentIndex: 0
+  chessWatch: {fileID: 0}
+  moveSounds: []
 --- !u!4 &685766638
 Transform:
   m_ObjectHideFlags: 0
@@ -4882,8 +4884,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 93d3c5d596a6dd84fba46ec08a73dec3, type: 3}
   m_Resource: {fileID: 8300000, guid: 93d3c5d596a6dd84fba46ec08a73dec3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.4
+  m_Pitch: 0.6
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -4956,7 +4958,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7115,6 +7117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextCutsceneClip: {fileID: 0}
+  nextLevelSceneName: 
 --- !u!4 &1453862841
 Transform:
   m_ObjectHideFlags: 0

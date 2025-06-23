@@ -26,6 +26,7 @@ public class ChessManager : MonoBehaviour
     public bool isLocalMultiplayer = false;
 
 
+
     // Promotion UI and Prefabs (assign these in the Inspector)
     public GameObject promotionPanel; // A UI panel with 4 buttons (initially inactive)
     private Pawn pawnToPromote; // The pawn that reached the promotion rank
@@ -59,7 +60,12 @@ public class ChessManager : MonoBehaviour
     [Header("Relógio de Xadrez")]
     [SerializeField] private ChessWatch chessWatch;
 
-   private void Start()
+    [Header("Som de Movimento")]
+    public AudioClip[] moveSounds;
+    private AudioSource audioSource;
+
+
+    private void Start()
     {
 
         Debug.Log("👁️ isLocalMultiplayer: " + isLocalMultiplayer);
@@ -105,7 +111,14 @@ public class ChessManager : MonoBehaviour
         {
             CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
         }
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
     }
+
 
     public void FinishTurn()
     {
@@ -174,7 +187,7 @@ public class ChessManager : MonoBehaviour
         yield return new WaitUntil(() => boardReady && (promotionPanel == null || !promotionPanel.activeSelf) && aiPlayer != null && aiPlayer.isInitialized);
 
         yield return new WaitForSeconds(delay);
-        
+
         if (!gameEnded && isWhiteTurn && aiPlayer != null && (promotionPanel == null || !promotionPanel.activeSelf))
         {
             aiPlayer.MakeMove();
@@ -188,7 +201,7 @@ public class ChessManager : MonoBehaviour
     private void Update()
     {
         if (gameEnded)
-        return;
+            return;
 
         // ⏳ IA joga sozinha com delay após o turno mudar
         if (!aiScheduled && !isLocalMultiplayer && isWhiteTurn && aiPlayer != null && boardReady)
@@ -197,7 +210,7 @@ public class ChessManager : MonoBehaviour
             StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
         }
 
-            //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
+        //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
         if (Input.GetKeyDown(KeyCode.P))
         {
             LevelProgressManager.Instance.UnlockLevel(nextIndex);
@@ -301,13 +314,13 @@ public class ChessManager : MonoBehaviour
             boardReady = true;
             Debug.Log("✅ boardReady TRUE após queda de peças.");
             FinishSetup();
-        }    
+        }
 
     }
 
     private void HandleTileClick(string cellName)
     {
-        
+
         // Se o jogo já acabou, ignore
         if (gameEnded)
             return;
@@ -734,9 +747,9 @@ public class ChessManager : MonoBehaviour
 
         selectedPiece = null;
 
-        if(isLocalMultiplayer)
+        if (isLocalMultiplayer)
             CameraSwitcher.Instance.SwitchCamera(!isWhiteTurn);
-            
+
         HighlightValidMoves(null);
     }
 
@@ -744,6 +757,14 @@ public class ChessManager : MonoBehaviour
     {
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
+
+        // TOCA O SOM
+        if (moveSounds != null && moveSounds.Length > 0 && audioSource != null)
+        {
+            int randomIndex = Random.Range(0, moveSounds.Length);
+            audioSource.PlayOneShot(moveSounds[randomIndex]);
+        }
+
         float duration = 0.3f;
         float elapsed = 0f;
 
@@ -780,7 +801,7 @@ public class ChessManager : MonoBehaviour
             if (gameEnded) yield break;
             gameEnded = true;
             if (chessWatch != null)
-             chessWatch.PauseTimers();
+                chessWatch.PauseTimers();
 
             string vencedor = king.isWhite ? "Brancas" : "Pretas";
             if (winText != null)
@@ -976,7 +997,7 @@ public class ChessManager : MonoBehaviour
         // Ajustar a câmara para as brancas no início
         if (CameraSwitcher.Instance != null)
             CameraSwitcher.Instance.SwitchCamera(true); // Começa com as brancas
-        
+
         if (chessWatch != null)
             chessWatch.StartTimers();
     }
