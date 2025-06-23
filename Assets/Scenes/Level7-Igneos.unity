@@ -2453,6 +2453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 487777471}
+  buttonsToDisable: []
 --- !u!114 &261399749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3620,6 +3621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 487777471}
+  buttonsToDisable: []
 --- !u!114 &379042917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,6 +4783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  buttonsToDisable: []
 --- !u!114 &478689556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11807,6 +11810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  buttonsToDisable: []
 --- !u!114 &1038802698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15618,6 +15622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 65058461}
+  buttonsToDisable: []
 --- !u!114 &1273498846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17807,7 +17812,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: bfce3f5ec44085c4cb879414284c585f, type: 3}
   m_Resource: {fileID: 8300000, guid: bfce3f5ec44085c4cb879414284c585f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18581,6 +18586,9 @@ MonoBehaviour:
   applyButton: {fileID: 743578932}
   cancelButton: {fileID: 1273308154}
   eraseProgressButton: {fileID: 557824543}
+  confirmPanel: {fileID: 0}
+  confirmYesButton: {fileID: 0}
+  confirmNoButton: {fileID: 0}
 --- !u!1 &1575977524
 GameObject:
   m_ObjectHideFlags: 0
@@ -21762,6 +21770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 170871864}
+  buttonsToDisable: []
 --- !u!114 &1850472502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23362,6 +23371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  buttonsToDisable: []
 --- !u!114 &1946736297
 MonoBehaviour:
   m_ObjectHideFlags: 0
