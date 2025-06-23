@@ -1,29 +1,54 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI References")]
     public Slider volumeSlider;
-    public Dropdown qualityDropdown;
+    public TMP_Dropdown qualityDropdown;
     public GameObject settingsPanel;
+    
+    [Header("Erase Progress")]
+    public Button eraseProgressButton;    // assign no Inspector
 
-    private void Start()
-    {
-        // Carrega valores salvos
-        volumeSlider.value      = PlayerPrefs.GetFloat("volume", 1f);
-        qualityDropdown.value   = PlayerPrefs.GetInt("quality", QualitySettings.GetQualityLevel());
+private void Start()
+{
+    // Carrega valor salvo
+    float saved = PlayerPrefs.GetFloat("volume", 1f);
 
-        // Aplica imediatamente
-        ApplyAudio(volumeSlider.value);
-        ApplyQuality(qualityDropdown.value);
-    }
+    // 1) Associa callback antes de definir o valor
+    volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+
+    // 2) Define o valor (vai mover o handle e chamar OnVolumeChanged)
+    volumeSlider.value = saved;
+
+    // 3) Garante que o áudio já fique com o nível correto
+    ApplyAudio(saved);
+
+    // Qualidade e erase, se ainda não tiveres feito
+    qualityDropdown.onValueChanged.AddListener(OnQualityChanged);
+    eraseProgressButton.onClick.AddListener(OnEraseProgressClicked);
+
+    // Carregar valor de qualidade
+    qualityDropdown.value = PlayerPrefs.GetInt("quality", QualitySettings.GetQualityLevel());
+    ApplyQuality(qualityDropdown.value);
+}
+
+
 
     #region Callbacks
 
     public void OnVolumeChanged(float value)
     {
         ApplyAudio(value);
+    }
+
+    public void OnEraseProgressClicked()
+    {
+        // Opcional: aqui você pode exibir um diálogo de confirmação
+        LevelProgressManager.Instance.ResetProgress();
+        Debug.Log("Progresso zerado!");
     }
 
     public void OnQualityChanged(int index)

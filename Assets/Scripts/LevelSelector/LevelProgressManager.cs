@@ -36,4 +36,12 @@ public class LevelProgressManager : MonoBehaviour
             OnProgressUnlocked?.Invoke(highestUnlocked);
         }
     }
+
+    public void ResetProgress()
+    {
+        highestUnlocked = 0;
+        PlayerPrefs.DeleteKey(SaveKey);
+        PlayerPrefs.Save();
+        OnProgressUnlocked?.Invoke(highestUnlocked);
+    }
 }
