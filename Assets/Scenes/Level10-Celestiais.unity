@@ -538,8 +538,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaef03852e98974699ab31491379a31, type: 2}
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
-  isLocalMultiplayer: 0
   defaultVariant: 3
+  defaultWhiteSkinIndex: 0
+  isLocalMultiplayer: 0
 --- !u!4 &27457178
 Transform:
   m_ObjectHideFlags: 0
@@ -3236,6 +3237,61 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51, y: 0.49, z: 0.02}
   m_Center: {x: 0.1, y: 0.25, z: -0.01}
+--- !u!1 &306241922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 306241924}
+  - component: {fileID: 306241923}
+  m_Layer: 0
+  m_Name: SkinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &306241923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306241922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41989f9bd57b72e488e60a28a68c89cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - name: Celestes
+    whitePiecePrefabs:
+    - {fileID: 2831477924760813676, guid: a7e8bb74c925a3f4fbdd6b998e31189b, type: 3}
+    - {fileID: 4865924815873850831, guid: 07d19ed0cacc57e4b96fe0888e85e5ec, type: 3}
+    - {fileID: 4209447999178031115, guid: 0a97148bb48effd4ab190bdbcdc89a4f, type: 3}
+    - {fileID: 8191329891869634287, guid: e1213881dd7b79b4bb4d6df688bdf4e8, type: 3}
+    - {fileID: 3457975093508579981, guid: df02cf9549ec80540876e869f7e59046, type: 3}
+    - {fileID: 3475807075683316933, guid: 69408a0ec0c404247b5b6e4235bd3d47, type: 3}
+  currentSkinIndex: 0
+  chessManager: {fileID: 0}
+--- !u!4 &306241924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306241922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.565212, y: -33.14074, z: 30.730095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307035069
 GameObject:
   m_ObjectHideFlags: 0
@@ -26331,3 +26387,4 @@ SceneRoots:
   - {fileID: 27457178}
   - {fileID: 1855912418}
   - {fileID: 1453862841}
+  - {fileID: 306241924}

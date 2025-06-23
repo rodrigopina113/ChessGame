@@ -652,8 +652,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaef03852e98974699ab31491379a31, type: 2}
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
-  isLocalMultiplayer: 0
   defaultVariant: 2
+  defaultWhiteSkinIndex: 0
+  isLocalMultiplayer: 0
 --- !u!4 &27457178
 Transform:
   m_ObjectHideFlags: 0
@@ -12447,6 +12448,61 @@ Transform:
   - {fileID: 1575977525}
   - {fileID: 2066853563}
   m_Father: {fileID: 20985691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1247149998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247150000}
+  - component: {fileID: 1247149999}
+  m_Layer: 0
+  m_Name: SkinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1247149999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247149998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41989f9bd57b72e488e60a28a68c89cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - name: Orc
+    whitePiecePrefabs:
+    - {fileID: 3748609434014530868, guid: a55b0ee7b7f75c4478d669fec79ddb9c, type: 3}
+    - {fileID: 5670639979013936898, guid: a98ebfb434c068f4ab7dd260502662a1, type: 3}
+    - {fileID: 6326677017621189632, guid: e6dd18c8a94e86945b2814aa4dbe3e2e, type: 3}
+    - {fileID: 8981799298265193373, guid: 8e23cda9e20e8804586c083077ce4296, type: 3}
+    - {fileID: 3081408122298321167, guid: 1eeb2a3c778acca4fb3b6500165e2229, type: 3}
+    - {fileID: 5788424408602154518, guid: d38c310b629937e43b6cce5e8cb05852, type: 3}
+  currentSkinIndex: 0
+  chessManager: {fileID: 0}
+--- !u!4 &1247150000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247149998}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.565212, y: -33.14074, z: 30.730095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247909133
 GameObject:
@@ -24354,3 +24410,4 @@ SceneRoots:
   - {fileID: 27457178}
   - {fileID: 1067430250}
   - {fileID: 1453862841}
+  - {fileID: 1247150000}

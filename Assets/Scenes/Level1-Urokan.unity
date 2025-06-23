@@ -622,8 +622,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9aaef03852e98974699ab31491379a31, type: 2}
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
-  isLocalMultiplayer: 0
   defaultVariant: 0
+  defaultWhiteSkinIndex: 0
+  isLocalMultiplayer: 0
 --- !u!4 &27457178
 Transform:
   m_ObjectHideFlags: 0
@@ -2576,6 +2577,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231149790}
   m_CullTransparentMesh: 1
+--- !u!1 &244177843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244177845}
+  - component: {fileID: 244177844}
+  m_Layer: 0
+  m_Name: SkinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &244177844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244177843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41989f9bd57b72e488e60a28a68c89cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - name: Urokan
+    whitePiecePrefabs:
+    - {fileID: 9186367298364077605, guid: 37e1930895951f44080301de0b90a554, type: 3}
+    - {fileID: 6992756913645959978, guid: ccecd191f86c96e468fc7fb05393bf4e, type: 3}
+    - {fileID: 5324322115033472030, guid: b3b2f400d11059e49baec06d3f6d2f33, type: 3}
+    - {fileID: 6556322214899377179, guid: 3a71d30aa39ba5643aafad4cc2a397a3, type: 3}
+    - {fileID: 3339666319903321144, guid: 576a81abdc71b5d46a7caf4d0b6edc23, type: 3}
+    - {fileID: 5572191972008680029, guid: 4a5cf246adaec1e4f8c9c114aec454d1, type: 3}
+  currentSkinIndex: 0
+  chessManager: {fileID: 0}
+--- !u!4 &244177845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244177843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.565212, y: -33.14074, z: 30.730095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247804329
 GameObject:
   m_ObjectHideFlags: 0
@@ -25205,3 +25261,4 @@ SceneRoots:
   - {fileID: 1453862841}
   - {fileID: 404001184}
   - {fileID: 504101098}
+  - {fileID: 244177845}

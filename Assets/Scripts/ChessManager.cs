@@ -246,6 +246,47 @@ public class ChessManager : MonoBehaviour
         }
     }
 
+    public void ReplaceWhitePieces()
+    {
+        // Encontra todas as peças brancas na cena
+        var whitePieces = Object
+            .FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
+            .Where(p => p.isWhite)
+            .ToList();
+
+        foreach (var oldPiece in whitePieces)
+        {
+            string cell = oldPiece.CurrentCell;
+            int prefabIndex = -1;
+
+            // Determina índice por tipo de peça
+            if (oldPiece is Rook) prefabIndex = 0;
+            else if (oldPiece is Knight) prefabIndex = 1;
+            else if (oldPiece is Bishop) prefabIndex = 2;
+            else if (oldPiece is Queen) prefabIndex = 3;
+            else if (oldPiece is King) prefabIndex = 4;
+            else if (oldPiece is Pawn) prefabIndex = 5;
+            else continue;
+
+            // Mantém escala antiga
+            Vector3 oldScale = oldPiece.transform.localScale;
+            Destroy(oldPiece.gameObject);
+
+            // Instancia novo prefab na mesma célula
+            Vector3 worldPos = chessboard.GetCellPosition(cell);
+            GameObject prefab = whitePiecePrefabs[prefabIndex];
+            GameObject newObj = Instantiate(prefab, worldPos, Quaternion.identity);
+
+            // Configura o componente ChessPiece
+            var newPiece = newObj.GetComponent<ChessPiece>();
+            newPiece.CurrentCell = cell;
+            newPiece.isWhite = true;
+            newPiece.chessManager = this;
+            newObj.transform.localScale = oldScale;
+        }
+    }
+
+
     public void PlacePiece(GameObject prefab, string cellName, float dropDelay)
     {
         Vector3 targetPosition = chessboard.GetCellPosition(cellName);
@@ -260,7 +301,7 @@ public class ChessManager : MonoBehaviour
         piece.isWhite = prefab.name.Contains("white");
         piece.chessManager = this;
 
-        if (piece is Knight)
+        if (piece is not Pawn && rules is RacingKingsRules)
         {
             // black knights always face “down”
             // white knights only face “down” in Racing Kings variant

@@ -1,4 +1,5 @@
-// GameManager.cs
+// **** Integração completa no GameManager para seleção de variante e skin branca ****
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,76 +9,116 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<ScriptableObject> variantAssets;
 
-    private IChessRules activeRules;
-    private ChessManager chessManager;
-
-    public bool isLocalMultiplayer = false;
-
-    [Header("Default Variant Index")]
+    [Header("Default Settings")]
+    [Tooltip("Índice da variante padrão (ex: Standard, 960, etc.)")]
     [SerializeField]
     private int defaultVariant = 0;
 
+    [Tooltip("Índice da skin branca padrão (configurada no SkinManager)")]
+    [SerializeField]
+    private int defaultWhiteSkinIndex = 0;
+
+    [Header("Multiplayer Settings")]
+    public bool isLocalMultiplayer = false;
+
+    // Referências internas
+    private IChessRules activeRules;
+    private ChessManager chessManager;
+    private SkinManager skinManager;
+
     private void Awake()
     {
+        // Busca referências de manager
         chessManager = Object.FindFirstObjectByType<ChessManager>();
         if (chessManager == null)
             Debug.LogError("No ChessManager found in scene!");
+
+        skinManager = Object.FindFirstObjectByType<SkinManager>();
+        if (skinManager == null)
+            Debug.LogError("No SkinManager found in scene!");
     }
-   private void Start()
+
+    private void Start()
     {
-        // Cancel any leftover coroutines on the manager
+        // Cancela coroutines pendentes
         chessManager.StopAllCoroutines();
 
-        // Now inject and start the default variant
-        SelectVariant(defaultVariant);
+        // Seleciona variante + skin branca padrão
+        SelectVariant(defaultVariant, defaultWhiteSkinIndex);
 
-        // Agora chamamos SwitchCamera com a variável isWhiteTurn para garantir que, no início, a câmera das brancas será visível
+        // Ajusta câmera inicial para as brancas
         SwitchCameraAtStart();
     }
 
     /// <summary>
-    /// Configura a câmera corretamente no início do jogo para as brancas (isWhiteTurn).
+    /// Garante que a câmera comece focada nas peças brancas.
     /// </summary>
     private void SwitchCameraAtStart()
     {
         if (CameraSwitcher.Instance != null)
-        {
-            // Chama imediatamente a câmera para as brancas
             CameraSwitcher.Instance.SwitchCamera(true);
-        }
-    }
-
-    public void FinishTurn()
-    {
-        // Garantir que o turno está sendo trocado corretamente no GameManager também
-        chessManager.FinishTurn(); // Chama o método de alternância de turno no ChessManager
     }
 
     /// <summary>
-    /// Injects and starts the chosen variant.
+    /// Chama FinishTurn no ChessManager.
     /// </summary>
-    public void SelectVariant(int index)
+    public void FinishTurn()
     {
-        var soc = variantAssets[index] as IChessRules;
+        chessManager.FinishTurn();
+    }
+
+    /// <summary>
+    /// Seleciona variante de jogo e aplica skin branca antes de iniciar a partida.
+    /// </summary>
+    /// <param name="variantIndex">Índice da variante (Standard, 960, etc.)</param>
+    /// <param name="skinIndex">Índice da skin branca configurada no SkinManager</param>
+    public void SelectVariant(int variantIndex, int skinIndex)
+    {
+        // 1) Recupera e valida regras da variante
+        var soc = variantAssets[variantIndex] as IChessRules;
         if (soc == null)
         {
-            Debug.LogError($"Variant at {index} does not implement IChessRules");
+            Debug.LogError($"Variant at {variantIndex} does not implement IChessRules");
             return;
         }
         activeRules = soc;
+
+        // 2) Configura ChessManager
         chessManager.SetRules(activeRules);
         chessManager.isLocalMultiplayer = isLocalMultiplayer;
+
+        // 3) Aplica skin branca via SkinManager
+        skinManager.currentRules     = activeRules;
+        skinManager.chessManager     = chessManager;
+        skinManager.ApplyWhiteSkin(skinIndex);
+
+        // 4) Inicia o jogo
         chessManager.StartGame();
     }
 
     /// <summary>
-    /// Example: switch mid-game to another variant.
+    /// Exemplo de trocar variante em tempo de jogo, mantendo skin atual.
     /// </summary>
-    public void SwitchVariant(int newIndex)
+    public void SwitchVariant(int newVariantIndex)
     {
-        SelectVariant(newIndex);
+        SelectVariant(newVariantIndex, skinManager.currentSkinIndex);
     }
 
-    // Hook this up to a UI dropdown:
-    public void OnVariantDropdownChanged(int idx) => SwitchVariant(idx);
+    // Métodos hook para UI Dropdowns
+
+    /// <summary>
+    /// Chamado pelo dropdown de variante: troca variante e mantém skin atual.
+    /// </summary>
+    public void OnVariantDropdownChanged(int variantIndex)
+    {
+        SwitchVariant(variantIndex);
+    }
+
+    /// <summary>
+    /// Chamado pelo dropdown de skin: troca apenas a skin branca na mesma variante.
+    /// </summary>
+    public void OnSkinDropdownChanged(int skinIndex)
+    {
+        SelectVariant(defaultVariant, skinIndex);
+    }
 }
