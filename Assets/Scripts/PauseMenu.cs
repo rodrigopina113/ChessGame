@@ -14,17 +14,23 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
-        // Ensure timescale is normal at start
         Time.timeScale = 1f;
         pauseMenuPanel.SetActive(false);
 
-        // Fallbacks using the new API:
         if (chessManager == null)
             chessManager = Object.FindFirstObjectByType<ChessManager>();
         if (pauseButton == null)
             pauseButton = Object.FindFirstObjectByType<Button>();
 
-        pauseButton.onClick.AddListener(Pause);
+        pauseButton.onClick.AddListener(TogglePause);
+    }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+            Resume();
+        else
+            Pause();
     }
 
     void Update()
