@@ -362,7 +362,7 @@ RectTransform:
   m_Father: {fileID: 1009977357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2519,11 +2519,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6d58395f89aa7fd489c54cb97aeb431f, type: 3}
-  m_Resource: {fileID: 8300000, guid: 6d58395f89aa7fd489c54cb97aeb431f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4406db5ef8a17da48a01a1c58019ed2f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4406db5ef8a17da48a01a1c58019ed2f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.2
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2654,7 +2654,7 @@ RectTransform:
   m_Father: {fileID: 348352010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3911,7 +3911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &684002158
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4169,10 +4169,14 @@ MonoBehaviour:
   qualityDropdown: {fileID: 473881939}
   qualityLabel: {fileID: 1614757135}
   settingsPanel: {fileID: 684002157}
+<<<<<<< Updated upstream
+  eraseProgressButton: {fileID: 0}
+=======
   menuPanel: {fileID: 886019403}
   applyButton: {fileID: 87772539}
   cancelButton: {fileID: 764819033}
   eraseProgressButton: {fileID: 619799471}
+>>>>>>> Stashed changes
 --- !u!1 &738751733
 GameObject:
   m_ObjectHideFlags: 0
@@ -4455,9 +4459,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< Updated upstream
+      - m_Target: {fileID: 544495340}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+=======
       - m_Target: {fileID: 725862095}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: OnCancelClicked
+>>>>>>> Stashed changes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4953,7 +4963,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ecaf713c1d441e543a3eec4512fbfc98, type: 3}
   m_Resource: {fileID: 8300000, guid: ecaf713c1d441e543a3eec4512fbfc98, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5027,7 +5037,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5333,6 +5343,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880072171}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
+--- !u!114 &880072176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880072171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f52f376d96bbc64ca0e72721c511a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &886019403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5766,8 +5792,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 61ee9dd84669849478f74d7567b721bd, type: 3}
   m_Resource: {fileID: 8300000, guid: 61ee9dd84669849478f74d7567b721bd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.2
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -9208,8 +9234,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 3d30e50e93b0bf34ea589b63d0d9ab5b, type: 3}
   m_Resource: {fileID: 8300000, guid: 3d30e50e93b0bf34ea589b63d0d9ab5b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.1
+  m_Pitch: 0.74
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -10706,8 +10732,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 5d9a71424be84f04393c7102a9162a66, type: 3}
   m_Resource: {fileID: 8300000, guid: 5d9a71424be84f04393c7102a9162a66, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.2
+  m_Pitch: 0.45
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -10979,8 +11005,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 6196fabcfce382c429f878381c681c67, type: 3}
   m_Resource: {fileID: 8300000, guid: 6196fabcfce382c429f878381c681c67, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.2
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -11392,8 +11418,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 68088bc9178240b4fac1f3de30813609, type: 3}
   m_Resource: {fileID: 8300000, guid: 68088bc9178240b4fac1f3de30813609, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.2
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
