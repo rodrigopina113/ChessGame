@@ -445,6 +445,18 @@ public class ChessManager : MonoBehaviour
                 pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
+        // Only flip non-white Knights if the black skin isn’t index 2
+        if (piece is Knight && !piece.isWhite)
+        {
+            int blackSkin = SkinManager.Instance.currentBlackSkinIndex;
+            if (blackSkin != 2)
+            {
+                pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            // else: leave at default rotation for skinIndex == 2
+        }
+
+
         piecesToDrop++;
         StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
     }
@@ -1138,7 +1150,7 @@ public class ChessManager : MonoBehaviour
                 .CurrentCell = targetCell;
         }
 
- 
+
         return !isStillInCheck;
     }
 
@@ -1197,7 +1209,7 @@ public class ChessManager : MonoBehaviour
 
     public void ResetGame()
     {
-  
+
         if (winPanel != null && winPanel.activeSelf)
             winPanel.SetActive(false);
 
@@ -1218,7 +1230,7 @@ public class ChessManager : MonoBehaviour
         HighlightValidMoves(null);
     }
 
- 
+
     public void FinishSetup()
     {
         if (promotionPanel != null)
