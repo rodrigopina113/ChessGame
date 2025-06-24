@@ -6336,7 +6336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: 
 --- !u!1 &914866804
 GameObject:
@@ -13166,13 +13166,13 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 3
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: 
+  m_Url: "file://C:/Users/pddaa/OneDrive/\xC1rea de Trabalho/CI/f6/ChessGame/Assets/StreamingAssets/WebGLVideos/spacetravel.webm"
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0

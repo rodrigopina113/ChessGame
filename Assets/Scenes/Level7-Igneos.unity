@@ -4523,7 +4523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: Menu
 --- !u!114 &408059396
 MonoBehaviour:
@@ -12484,7 +12484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: 
 --- !u!114 &1097593171
 MonoBehaviour:
@@ -16995,7 +16995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 32900000, guid: 8c9e554e3db1001429725efe7141c7b6, type: 3}
+  nextCutsceneFileName: Magundefined.webm
   nextLevelSceneName: Level8-Meca
 --- !u!4 &1453862841
 Transform:

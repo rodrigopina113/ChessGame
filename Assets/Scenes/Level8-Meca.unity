@@ -8776,7 +8776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: Menu
 --- !u!114 &884612365
 MonoBehaviour:
@@ -10315,7 +10315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: 
 --- !u!114 &1027481789
 MonoBehaviour:
@@ -14528,7 +14528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 32900000, guid: 80d363bbea542ba4ca93a61ccff4815e, type: 3}
+  nextCutsceneFileName: aiundefined.webm
   nextLevelSceneName: Level9-Dragons
 --- !u!4 &1453862841
 Transform:

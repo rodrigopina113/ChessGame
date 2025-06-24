@@ -7939,7 +7939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: 
 --- !u!114 &616905168
 MonoBehaviour:
@@ -15881,7 +15881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 32900000, guid: 599a0ab8c4f20f64c93699a907b57c2d, type: 3}
+  nextCutsceneFileName: Vikudefined.webm
   nextLevelSceneName: Level2-Stone
 --- !u!4 &1453862841
 Transform:
@@ -20189,7 +20189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: Menu
 --- !u!114 &1710343853
 MonoBehaviour:
