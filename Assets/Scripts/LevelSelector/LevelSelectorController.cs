@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.Video;
-
 
 public class LevelSelectorController : MonoBehaviour
 {
@@ -15,9 +13,9 @@ public class LevelSelectorController : MonoBehaviour
     [Header("UI Elements")]
     public Slider progressBar;
     public TMP_Text levelNameText;
+
     [Header("Preview Display")]
     public SpriteRenderer previewRenderer;
-
 
     [Header("Planet Display")]
     public Transform planetHolder;
@@ -35,25 +33,18 @@ public class LevelSelectorController : MonoBehaviour
 
     public SliderTickMarks tickMarks;
 
-
     void Start()
     {
-
         maxUnlocked = LevelProgressManager.Instance.GetHighestUnlocked();
-
         maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count);
-
-
         currentIndex = Mathf.Clamp(currentIndex, 0, Mathf.Min(maxUnlocked, levels.Count - 1));
 
         tickMarks.RefreshTicks(currentIndex, maxUnlocked);
-
 
         UpdateProgressUI();
         UpdateUIInstant();
         LevelProgressManager.Instance.OnProgressUnlocked += OnUnlocked;
     }
-
 
     void OnUnlocked(int newMax)
     {
@@ -64,9 +55,9 @@ public class LevelSelectorController : MonoBehaviour
 
     void UpdateProgressUI()
     {
-
         progressBar.value = (float)maxUnlocked / (levels.Count - 1);
     }
+
     public void ChangeIndex(int delta)
     {
         if (isTransitioning) return;
@@ -76,9 +67,18 @@ public class LevelSelectorController : MonoBehaviour
             StartCoroutine(AnimatePlanetTransition(target, delta));
     }
 
+    // ✅ NOVO MÉTODO: ir diretamente para índice
+    public void JumpToIndex(int index)
+    {
+        if (isTransitioning) return;
+        int maxSelectable = Mathf.Min(maxUnlocked, levels.Count - 1);
+        int target = Mathf.Clamp(index, 0, maxSelectable);
+        if (target != currentIndex)
+            StartCoroutine(AnimatePlanetTransition(target, target > currentIndex ? +1 : -1));
+    }
+
     public void OnLevelComplete()
     {
-
         LevelProgressManager.Instance.UnlockLevel(currentIndex + 1);
     }
 
@@ -86,9 +86,7 @@ public class LevelSelectorController : MonoBehaviour
     {
         isTransitioning = true;
 
-
         GameObject oldPlanet = currentPlanet;
-
 
         var newData = levels[newIndex];
         GameObject newPlanet = Instantiate(newData.planetPrefab, planetHolder);
@@ -96,7 +94,6 @@ public class LevelSelectorController : MonoBehaviour
         newPlanet.transform.localPosition = Vector3.right * planetOffset * direction;
         newPlanet.transform.localRotation = Quaternion.identity;
         newPlanet.transform.localScale = newData.planetPrefab.transform.localScale;
-
 
         currentIndex = newIndex;
         progressBar.value = (float)newIndex / (levels.Count - 1);
@@ -106,13 +103,11 @@ public class LevelSelectorController : MonoBehaviour
         if (tickMarks != null)
             tickMarks.RefreshTicks(currentIndex, maxUnlocked);
 
-
         float elapsed = 0f;
         while (elapsed < transitionTime)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / transitionTime);
-
 
             if (oldPlanet != null)
                 oldPlanet.transform.localPosition = Vector3.Lerp(
@@ -120,7 +115,6 @@ public class LevelSelectorController : MonoBehaviour
                     Vector3.right * -planetOffset * direction,
                     t
                 );
-
 
             newPlanet.transform.localPosition = Vector3.Lerp(
                 Vector3.right * planetOffset * direction,
@@ -131,7 +125,6 @@ public class LevelSelectorController : MonoBehaviour
             yield return null;
         }
 
-
         if (oldPlanet != null) Destroy(oldPlanet);
         newPlanet.transform.localPosition = Vector3.zero;
         currentPlanet = newPlanet;
@@ -139,16 +132,12 @@ public class LevelSelectorController : MonoBehaviour
         isTransitioning = false;
     }
 
-
     private void UpdateUIInstant()
     {
         var data = levels[currentIndex];
-
-
         progressBar.value = (float)currentIndex / (levels.Count - 1);
         levelNameText.text = data.levelName;
         previewRenderer.sprite = data.previewSprite;
-
 
         if (currentPlanet != null)
             Destroy(currentPlanet);
@@ -156,16 +145,11 @@ public class LevelSelectorController : MonoBehaviour
         currentPlanet.transform.localPosition = Vector3.zero;
     }
 
-   
     public void ConfirmSelection()
     {
         var data = levels[currentIndex];
-
- 
         NextLevelLoader.sceneName = data.sceneName;
-
         NextLevelLoader.cutsceneClip = data.cutsceneClip;
-
         SceneManager.LoadScene("CutScene");
     }
 
@@ -178,7 +162,6 @@ public class LevelSelectorController : MonoBehaviour
 
     private IEnumerator FlipAndChangePreview(Sprite newSprite)
     {
-
         Vector3 originalEuler = previewRenderer.transform.localEulerAngles;
 
         float elapsed = 0f;
@@ -191,13 +174,11 @@ public class LevelSelectorController : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / duration);
             float spinAngle = Mathf.Lerp(0f, 360f, t);
 
-
             if (!hasSwapped && spinAngle >= 180f)
             {
                 previewRenderer.sprite = newSprite;
                 hasSwapped = true;
             }
-
 
             float y = originalEuler.y + spinAngle;
             previewRenderer.transform.localEulerAngles = new Vector3(
@@ -209,14 +190,10 @@ public class LevelSelectorController : MonoBehaviour
             yield return null;
         }
 
-
         previewRenderer.transform.localEulerAngles = new Vector3(
             originalEuler.x,
             originalEuler.y + 360f,
             originalEuler.z
         );
     }
-
-
-
 }
