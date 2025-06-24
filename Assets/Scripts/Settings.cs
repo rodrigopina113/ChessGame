@@ -163,30 +163,7 @@ public class SettingsManager : MonoBehaviour
 
     #endregion
 
-    private void ApplyQualityPreset(int presetIndex)
-    {
-        string[] names = QualitySettings.names;
-        int targetLevel;
-        switch (presetIndex)
-        {
-            case PRESET_LOW:
-                targetLevel = 0;
-                break;
-            case PRESET_MEDIUM:
-                int midIndex = Array.IndexOf(names, "PC");
-                targetLevel = midIndex >= 0 ? midIndex : names.Length / 2;
-                break;
-            case PRESET_HIGH:
-            default:
-                targetLevel = names.Length - 1;
-                break;
-        }
 
-        QualitySettings.SetQualityLevel(targetLevel);
-
-        if (qualityLabel != null)
-            qualityLabel.text = qualityDropdown.options[presetIndex].text;
-    }
 
     private void ShowMenuPanel()
     {
