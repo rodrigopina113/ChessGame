@@ -1200,6 +1200,7 @@ MonoBehaviour:
   skinPanel: {fileID: 1815606409}
   previewImage: {fileID: 1757532689}
   nextSkinButton: {fileID: 1603203422}
+  prevSkinButton: {fileID: 0}
   applySkinButton: {fileID: 371579990}
   skins:
   - name: normal
@@ -5794,7 +5795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 553, y: 182}
+  m_AnchoredPosition: {x: 553, y: 14.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448287909
@@ -11051,7 +11052,7 @@ GameObject:
   - component: {fileID: 931953940}
   - component: {fileID: 931953941}
   - component: {fileID: 931953942}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11555,7 +11556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 965.1, y: 592.5}
+  m_AnchoredPosition: {x: 1006.7, y: 719.7}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977240312
@@ -11613,7 +11614,7 @@ Canvas:
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
+  m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
@@ -12126,7 +12127,7 @@ GameObject:
   - component: {fileID: 1008983562}
   - component: {fileID: 1008983564}
   - component: {fileID: 1008983563}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17911,7 +17912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1598775290}
   - component: {fileID: 1598775289}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17969,9 +17970,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 320050278}
+      - m_Target: {fileID: 320050277}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: OnVolumeChanged
+        m_MethodName: 
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18001,8 +18002,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598775288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -855}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalPosition: {x: 0, y: 0, z: 734}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1709231481}
@@ -18012,7 +18013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 93.8, y: 31.3}
+  m_AnchoredPosition: {x: 89.92, y: 31.3}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1598911034
@@ -20214,7 +20215,7 @@ GameObject:
   - component: {fileID: 1709231481}
   - component: {fileID: 1709231483}
   - component: {fileID: 1709231482}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21836,7 +21837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867063574}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21872,7 +21873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1898922363}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
