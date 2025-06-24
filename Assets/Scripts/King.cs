@@ -175,6 +175,7 @@ public class King : ChessPiece
         // Now move the king.
         chessManager.MovePiece(this, targetCell);
         hasMoved = true;
+        chessManager.EndTurn();
     }
 
     public bool IsKingInCheck()

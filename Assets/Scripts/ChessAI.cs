@@ -1,24 +1,23 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Object = UnityEngine.Object;
+
 
 public class ChessAI : MonoBehaviour
 {
+    private StockfishInterface stockfish;
     private ChessManager chessManager;
-    // Cached references for performance
-    private Chessboard board;
-    private Chessboard.Tile[] tiles;
-
-    // Set search depth: a depth of 2–3 gives medium difficulty.
-    public int searchDepth = 2;
-
-    // Track recent moves by signature ("fromCell-targetCell")
-    private List<string> aiMoveHistory = new List<string>();
 
     public bool isInitialized = false;
-    
+    [SerializeField] private int stockfishDepth = 3;
+
     public void Initialize()
     {
+        stockfish = new StockfishInterface();
+        stockfish.StartEngine();
+
         chessManager = Object.FindFirstObjectByType<ChessManager>();
         if (chessManager == null)
         {
@@ -26,219 +25,56 @@ public class ChessAI : MonoBehaviour
             return;
         }
 
-        board = chessManager.chessboard;
-        if (board == null)
-        {
-            Debug.LogError("Tabuleiro não está pronto ainda!");
-            return;
-        }
-
-        tiles = board.tiles;
-        isInitialized = true; // Set flag when initialization is complete
-        Debug.Log("IA pronta para fazer uma jogada...");
+        isInitialized = true;
+        Debug.Log("IA Stockfish pronta.");
     }
 
-
-
-    // Struct to represent a move for simulation.
-    public struct Move
+    public void MakeMove(Action onMoveCompleted = null)
     {
-        public ChessPiece piece;
-        public string fromCell;
-        public string targetCell;
-        public ChessPiece capturedPiece; // null if none
+    if (!isInitialized || chessManager == null)
+        return;
+
+    string fen = FenUtility.GenerateFEN(chessManager);
+    string move = stockfish.GetBestMove(fen, stockfishDepth);
+
+    if (string.IsNullOrEmpty(move))
+    {
+        Debug.Log("❌ Stockfish não retornou movimento.");
+        return;
     }
 
-    // Entry point: choose the best move using minimax search.
-    public void MakeMove()
-    {
-        // Add this check at the start
-        if (!isInitialized)
+    string from = move.Substring(0, 2);
+    string to = move.Substring(2, 2);
+
+    ChessPiece piece = chessManager.FindPieceAtCell(from);
+        if (piece != null)
         {
-            Debug.LogWarning("AI not initialized yet!");
-            return;
-        }
-        /*
-        if (chessManager == null || board == null || tiles == null)
-        {
-            Debug.LogError("AI: MakeMove chamado antes de inicializar corretamente!");
-            return;
-        }*/
+            chessManager.MovePiece(piece, to);
+            Debug.Log($"🤖 Stockfish moveu {piece.name} de {from} para {to}");
 
-        List<Move> moves = GenerateAllMoves(true); // AI is white
-        if (moves.Count == 0)
-        {
-            Debug.Log("AI has no valid moves!");
-            return;
-        }
-
-        Move bestMove = moves[0];
-        int bestScore = int.MinValue;
-
-        foreach (var move in moves)
-        {
-            ApplyMove(move);
-            int score = Minimax(searchDepth - 1, false);
-            UndoMove(move);
-
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestMove = move;
-            }
-        }
-
-        chessManager.MovePiece(bestMove.piece, bestMove.targetCell);
-        Debug.Log($"AI moved {bestMove.piece.name} to {bestMove.targetCell} (score {bestScore})");
-
-        string moveSignature = bestMove.fromCell + "-" + bestMove.targetCell;
-        aiMoveHistory.Add(moveSignature);
-        if (aiMoveHistory.Count > 10)
-            aiMoveHistory.RemoveAt(0);
-    }
-
-
-    // Minimax search with alternating max/min players.
-    private int Minimax(int depth, bool maximizingPlayer)
-    {
-        if (depth == 0)
-            return EvaluateBoard();
-
-        if (maximizingPlayer)
-        {
-            int maxEval = int.MinValue;
-            var moves = GenerateAllMoves(true);
-            if (moves.Count == 0) return EvaluateBoard();
-
-            foreach (var move in moves)
-            {
-                ApplyMove(move);
-                int eval = Minimax(depth - 1, false);
-                UndoMove(move);
-                maxEval = Mathf.Max(maxEval, eval);
-            }
-            return maxEval;
+            // Aguarda até o movimento terminar visualmente
+            chessManager.StartCoroutine(MakeMoveAndWait(piece, to, onMoveCompleted));
         }
         else
         {
-            int minEval = int.MaxValue;
-            var moves = GenerateAllMoves(false);
-            if (moves.Count == 0) return EvaluateBoard();
-
-            foreach (var move in moves)
-            {
-                ApplyMove(move);
-                int eval = Minimax(depth - 1, true);
-                UndoMove(move);
-                minEval = Mathf.Min(minEval, eval);
-            }
-            return minEval;
+            Debug.LogError("Peça não encontrada para o movimento sugerido.");
         }
     }
-
-    // Generate all possible moves for pieces of the given color.
-    private List<Move> GenerateAllMoves(bool forWhite)
+    private IEnumerator MakeMoveAndWait(ChessPiece piece, string to, Action callback)
     {
-        var moves = new List<Move>();
+        chessManager.MovePiece(piece, to);
 
-        if (chessManager == null || board == null || tiles == null)
-        {
-            Debug.LogWarning("AI: ChessManager, board ou tiles não estão inicializados.");
-            return moves;
-        }
+        // Espera até que o movimento gráfico tenha tempo de se completar
+        yield return new WaitForSeconds(0.5f);
 
-        var pieces = chessManager.GetAllPieces(forWhite);
-
-        foreach (var piece in pieces)
-        {
-            foreach (var tile in tiles)
-            {
-                if (piece.IsValidMove(tile.name))
-                {
-                    ChessPiece targetPiece = chessManager.FindPieceAtCell(tile.name);
-                    if (targetPiece == null || targetPiece.isWhite != piece.isWhite)
-                    {
-                        if (forWhite)
-                        {
-                            string sig = piece.CurrentCell + "-" + tile.name;
-                            if (IsMoveRepetitive(sig)) continue;
-                        }
-
-                        moves.Add(new Move
-                        {
-                            piece = piece,
-                            fromCell = piece.CurrentCell,
-                            targetCell = tile.name,
-                            capturedPiece = targetPiece
-                        });
-                    }
-                }
-            }
-        }
-
-        return moves;
+        // Só então chama o callback (que por sua vez invoca CheckOpponentStatus + EndTurn)
+        callback?.Invoke();
     }
 
-
-    // Check for repeating the same move twice in a row.
-    private bool IsMoveRepetitive(string candidateSignature)
+    private IEnumerator WaitAndInvoke(Action callback)
     {
-        if (aiMoveHistory.Count >= 2)
-        {
-            int last = aiMoveHistory.Count - 1;
-            return aiMoveHistory[last] == candidateSignature
-                && aiMoveHistory[last - 1] == candidateSignature;
-        }
-        return false;
+        yield return new WaitForSeconds(0.4f); // espera o MovePieceRoutine (300ms)
+        callback?.Invoke();
     }
 
-    // Apply a move on the board (simulate it).
-    private void ApplyMove(Move move)
-    {
-        move.piece.CurrentCell = move.targetCell;
-        move.piece.transform.position = board.GetCellPosition(move.targetCell);
-        if (move.capturedPiece != null)
-            move.capturedPiece.gameObject.SetActive(false);
-    }
-
-    // Undo a previously simulated move.
-    private void UndoMove(Move move)
-    {
-        move.piece.CurrentCell = move.fromCell;
-        move.piece.transform.position = board.GetCellPosition(move.fromCell);
-        if (move.capturedPiece != null)
-            move.capturedPiece.gameObject.SetActive(true);
-    }
-
-    // Evaluate the board by summing material: positive favors white.
-    private int EvaluateBoard()
-    {
-        int score = 0;
-
-        // Sum white piece values
-        var whitePieces = chessManager.GetAllPieces(true);
-        foreach (var p in whitePieces)
-            if (p.gameObject.activeSelf)
-                score += GetPieceValue(p);
-
-        // Subtract black piece values
-        var blackPieces = chessManager.GetAllPieces(false);
-        foreach (var p in blackPieces)
-            if (p.gameObject.activeSelf)
-                score -= GetPieceValue(p);
-
-        return score;
-    }
-
-    // Standard piece values.
-    private int GetPieceValue(ChessPiece piece)
-    {
-        if (piece is Pawn)   return 100;
-        if (piece is Knight) return 320;
-        if (piece is Bishop) return 330;
-        if (piece is Rook)   return 500;
-        if (piece is Queen)  return 900;
-        if (piece is King)   return 20000;
-        return 0;
-    }
 }

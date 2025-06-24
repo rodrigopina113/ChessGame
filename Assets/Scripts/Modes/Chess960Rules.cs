@@ -63,6 +63,19 @@ public class Chess960Rules : ScriptableObject, IChessRules
         }
         return moves;
     }
+    public bool IsKingInCheck(bool isWhiteTurn)
+    {
+        var kings = UnityEngine.Object.FindObjectsByType<King>(FindObjectsSortMode.None);
+        var king = kings.FirstOrDefault(k => k.isWhite == isWhiteTurn);
+        return king != null && king.IsKingInCheck();
+    }
+
+    public bool IsCheckmate(bool isWhiteTurn)
+    {
+        var kings = UnityEngine.Object.FindObjectsByType<King>(FindObjectsSortMode.None);
+        var king = kings.FirstOrDefault(k => k.isWhite == isWhiteTurn);
+        return king != null && king.IsKingInCheck() && !king.GetValidMoves().Any();
+    }
 
     public bool IsMoveValid(ChessPiece piece, Vector2Int target, Chessboard board) =>
         GetValidMoves(piece, board).Contains(target);
@@ -104,4 +117,7 @@ public class Chess960Rules : ScriptableObject, IChessRules
 
         return slots;
     }
+
+   
+
 }

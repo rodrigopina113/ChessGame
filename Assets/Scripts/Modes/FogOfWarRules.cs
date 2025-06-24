@@ -20,6 +20,16 @@ public class FogOfWarRules : ScriptableObject, IChessRules
         manager.FinishSetup();
     }
 
+    public bool IsKingInCheck(bool isWhiteTurn)
+    {
+        return baseRules.IsKingInCheck(isWhiteTurn);
+    }
+
+    public bool IsCheckmate(bool isWhiteTurn)
+    {
+        return baseRules.IsCheckmate(isWhiteTurn);
+    }
+
     public IEnumerable<Vector2Int> GetValidMoves(ChessPiece piece, Chessboard board)
         => baseRules.GetValidMoves(piece, board);
 
@@ -30,7 +40,7 @@ public class FogOfWarRules : ScriptableObject, IChessRules
     /// Incrementally add/remove fog: 
     /// - Destroy fog on newly visible tiles 
     /// - Instantiate fog on newly hidden tiles
-    /// </summary>
+        /// </summary>
     public void UpdateFog(ChessManager manager, Chessboard board)
     {
         // 1) Compute set of currently visible tile-names for the human (black) side

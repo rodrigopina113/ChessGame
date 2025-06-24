@@ -57,6 +57,16 @@ public class GameManager : MonoBehaviour
     {
         if (CameraSwitcher.Instance != null)
             CameraSwitcher.Instance.SwitchCamera(true);
+<<<<<<< Updated upstream
+=======
+        }
+    }
+
+    public void FinishTurn()
+    {
+        // Garantir que o turno está sendo trocado corretamente no GameManager também
+        chessManager.EndTurn(); // Chama o método de alternância de turno no ChessManager
+>>>>>>> Stashed changes
     }
 
     /// <summary>

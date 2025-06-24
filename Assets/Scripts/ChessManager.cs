@@ -17,6 +17,16 @@ public class ChessManager : MonoBehaviour
         this.rules = rules;
     }
 
+    public bool CanWhiteCastleKingSide;
+    public bool CanWhiteCastleQueenSide;
+    public bool CanBlackCastleKingSide;
+    public bool CanBlackCastleQueenSide;
+
+    public string LastDoubleStepTargetCell; // Ex: "e6" ou null
+    public bool IsWhiteTurn => isWhiteTurn;
+
+
+
     public Chessboard chessboard; // Reference to the Chessboard script
     public GameObject[] whitePiecePrefabs; // Array of white piece prefabs
     public GameObject[] blackPiecePrefabs; // Array of black piece prefabs
@@ -42,15 +52,19 @@ public class ChessManager : MonoBehaviour
     public GameObject blackRookPrefab;
     public GameObject blackBishopPrefab;
     public GameObject blackKnightPrefab;
-    public bool IsWhiteTurn => isWhiteTurn;
+    
 
     // ───────────────────────────────────────────────────────────────
     // NOVO: referências ao painel de vitória (WinPanel)
     [Header("UI de Vitória")]
     public GameObject winPanel;          // Arraste aqui o seu GameObject WinPanel (deve estar inicialmente inativo)
     public TextMeshProUGUI winText;      // Opcional: para alterar o texto de vitória (por exemplo, "Brancas venceram!")
+    public GameObject statusObject;
+    public TMPro.TextMeshProUGUI statusText;
     private bool gameEnded = false;      // Impede cliques após o fim de jogo
-    // ───────────────────────────────────────────────────────────────
+                                         // ───────────────────────────────────────────────────────────────
+    private bool isInCheck = false;
+
     private int piecesToDrop = 0;  // Total de peças em animação
     private bool boardReady = false;
 
@@ -120,23 +134,94 @@ public class ChessManager : MonoBehaviour
     }
 
 
-    public void FinishTurn()
+    // Chamar no fim da jogada
+    public void EndTurn()
     {
-        // Finaliza o turno atual e alterna para o próximo turno.
+        bool currentIsWhite = isWhiteTurn;
+        CheckOpponentStatusFor(currentIsWhite);
 
-
-        // Troca a câmera após a jogada
-        if (CameraSwitcher.Instance != null)
-        {
-            CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
-        }
-
+        // Agora sim troca o turno
         isWhiteTurn = !isWhiteTurn;
 
+        // Atualiza câmera
+        if (CameraSwitcher.Instance != null)
+            CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
+
+        // Atualiza relógio
         if (chessWatch != null)
             chessWatch.SwitchTurn();
+
+        // PvE: ativa IA se necessário
+        if (!isLocalMultiplayer && isWhiteTurn && aiPlayer != null)
+        {
+            StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
+        }
     }
 
+    public void CheckOpponentStatusFor(bool isWhite)
+    {
+        bool isCheck = rules.IsKingInCheck(!isWhite);
+        bool isMate = rules.IsCheckmate(!isWhite);
+
+        string color = !isWhite ? "Rei Branco" : "Rei Preto";
+
+        if (isMate)
+        {
+            isInCheck = false;
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque-mate!";
+            winPanel.SetActive(true);
+            return;
+        }
+
+        if (isCheck)
+        {
+            isInCheck = true;
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque!";
+        }
+        else
+        {
+            isInCheck = false;
+            statusObject.SetActive(false);
+        }
+    }
+
+
+    
+
+
+    private void ShowCheckStatus()
+    {
+        bool currentPlayer = isWhiteTurn;
+        bool isCheck = rules.IsKingInCheck(currentPlayer);
+        bool isMate = rules.IsCheckmate(currentPlayer);
+
+        string color = currentPlayer ? "Rei Branco" : "Rei Preto";
+
+        if (isMate)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque-mate!";
+            winPanel.SetActive(true);
+        }
+        else if (isCheck)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque!";
+        }
+        else
+        {
+            statusObject.SetActive(false);
+        }
+        if (!statusObject.activeSelf && (isCheck || isMate))
+            statusObject.SetActive(true);
+
+    }
+
+
+
+    
     private bool aiScheduled = false;
 
     private IEnumerator TriggerAIMoveAfterDelay(float delay)
@@ -149,8 +234,11 @@ public class ChessManager : MonoBehaviour
         if (!gameEnded && isWhiteTurn && aiPlayer != null)
         {
             Debug.Log("🤖 IA vai jogar automaticamente!");
-            aiPlayer.MakeMove();
-            FinishTurn();
+            aiPlayer.MakeMove(() =>
+            {
+                EndTurn();
+            });
+            
         }
 
         aiScheduled = false;
@@ -195,8 +283,61 @@ public class ChessManager : MonoBehaviour
         }
     }
 
+    public void CheckOpponentStatus()
+    {
+        bool enemyIsWhite = isWhiteTurn; // ← oponente é quem acabou de jogar
+        bool isCheck = rules.IsKingInCheck(enemyIsWhite);
+        bool isMate = rules.IsCheckmate(enemyIsWhite);
 
+        string color = enemyIsWhite ? "Rei Branco" : "Rei Preto";
 
+        if (isMate)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque-mate!";
+            winPanel.SetActive(true);
+            return;
+        }
+
+        if (isCheck)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque!";
+        }
+        else
+        {
+            statusObject.SetActive(false);
+        }
+    }
+
+    public void CheckForCheckStatus()
+    {
+        if (rules == null) return;
+
+        // Verifica o estado do jogador que vai jogar agora (adversário de quem jogou)
+        bool isCheck = rules.IsKingInCheck(!isWhiteTurn);
+        bool isMate = rules.IsCheckmate(!isWhiteTurn);
+
+        string color = !isWhiteTurn ? "Rei Branco" : "Rei Preto";
+
+        if (isMate)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque-mate!";
+            winPanel.SetActive(true);
+            return;
+        }
+
+        if (isCheck)
+        {
+            statusObject.SetActive(true);
+            statusText.text = $"{color} em Xeque!";
+        }
+        else
+        {
+            statusObject.SetActive(false);
+        }
+    }
 
     private void Update()
     {
@@ -206,9 +347,11 @@ public class ChessManager : MonoBehaviour
         // ⏳ IA joga sozinha com delay após o turno mudar
         if (!aiScheduled && !isLocalMultiplayer && isWhiteTurn && aiPlayer != null && boardReady)
         {
+            aiScheduled = true; // 🔐 bloqueia IMEDIATAMENTE
             Debug.Log("⏳ AI programada para jogar em 2.5s");
             StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
         }
+
 
         //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
         if (Input.GetKeyDown(KeyCode.P))
@@ -361,7 +504,7 @@ public class ChessManager : MonoBehaviour
 
     private void HandleTileClick(string cellName)
     {
-
+        
         // Se o jogo já acabou, ignore
         if (gameEnded)
             return;
@@ -378,6 +521,7 @@ public class ChessManager : MonoBehaviour
             // use rules.IsMoveValid instead of piece.IsValidMove
             if (
                 rules.IsMoveValid(selectedPiece, target, chessboard)
+                && !WouldMoveCauseSelfCheck(selectedPiece, cellName)
                 && (
                     !CheckIfKingInCheck()
                     || (selectedPiece is King && DoesMoveRemoveCheck((King)selectedPiece, cellName))
@@ -425,7 +569,10 @@ public class ChessManager : MonoBehaviour
                 else
                     MovePiece(selectedPiece, cellName);
 
+                EndTurn();
+
                 // post-move endgame checks
+                 
                 if (CheckForCheckmate())
                 {
                     // ───> Em vez de ResetGame(), exiba o painel de vitória
@@ -456,13 +603,10 @@ public class ChessManager : MonoBehaviour
                     LevelProgressManager.Instance.UnlockLevel(nextIndex);
                     return;
                 }
-
-                // finish turn
-                isWhiteTurn = !isWhiteTurn;
-                if (chessWatch != null)
-                    chessWatch.SwitchTurn();
-                selectedPiece = null;
-                HighlightValidMoves(null);
+                CheckOpponentStatus();
+                // finish turn isWhiteTurn = !isWhiteTurn;
+                
+            
                 Debug.Log($"Moved piece to {cellName}");
             }
             else
@@ -740,6 +884,30 @@ public class ChessManager : MonoBehaviour
             tile.Highlight(highlight);
         }
     }
+    
+
+    private bool WouldMoveCauseSelfCheck(ChessPiece piece, string targetCell)
+    {
+        // Guarda o estado atual
+        string originalCell = piece.CurrentCell;
+        ChessPiece capturedPiece = FindPieceAtCell(targetCell);
+
+        // Simula a jogada
+        piece.CurrentCell = targetCell;
+        if (capturedPiece != null)
+            capturedPiece.gameObject.SetActive(false); // Oculta temporariamente
+
+        // Verifica se o rei está em xeque
+        bool kingInCheck = CheckIfKingInCheck();
+
+        // Reverte o estado
+        piece.CurrentCell = originalCell;
+        if (capturedPiece != null)
+            capturedPiece.gameObject.SetActive(true);
+
+        return kingInCheck;
+    }
+
 
     public void MovePiece(ChessPiece piece, string targetCell)
     {
@@ -786,10 +954,7 @@ public class ChessManager : MonoBehaviour
         // Animate the move.
         StartCoroutine(MovePieceRoutine(piece, targetCell));
 
-        selectedPiece = null;
 
-        if (isLocalMultiplayer)
-            CameraSwitcher.Instance.SwitchCamera(!isWhiteTurn);
 
         HighlightValidMoves(null);
     }
@@ -798,6 +963,30 @@ public class ChessManager : MonoBehaviour
     {
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
+
+        // Desativar castling quando Rei se move
+        if (piece is King)
+        {
+            if (piece.isWhite)
+            {
+                CanWhiteCastleKingSide = false;
+                CanWhiteCastleQueenSide = false;
+            }
+            else
+            {
+                CanBlackCastleKingSide = false;
+                CanBlackCastleQueenSide = false;
+            }
+        }
+
+        // Desativar castling se uma Torre se move
+        if (piece is Rook)
+        {
+            if (piece.isWhite && piece.CurrentCell == "h1") CanWhiteCastleKingSide = false;
+            if (piece.isWhite && piece.CurrentCell == "a1") CanWhiteCastleQueenSide = false;
+            if (!piece.isWhite && piece.CurrentCell == "h8") CanBlackCastleKingSide = false;
+            if (!piece.isWhite && piece.CurrentCell == "a8") CanBlackCastleQueenSide = false;
+        }
 
         // TOCA O SOM
         if (moveSounds != null && moveSounds.Length > 0 && audioSource != null)
@@ -809,7 +998,16 @@ public class ChessManager : MonoBehaviour
         float duration = 0.3f;
         float elapsed = 0f;
 
-
+        if (piece is Pawn && Mathf.Abs(targetCell[1] - piece.CurrentCell[1]) == 2)
+        {
+            char col = targetCell[0];
+            char midRow = (char)((piece.CurrentCell[1] + targetCell[1]) / 2);
+            LastDoubleStepTargetCell = $"{col}{midRow}";
+        }
+        else
+        {
+            LastDoubleStepTargetCell = null;
+        }
 
         while (elapsed < duration)
         {
@@ -851,6 +1049,15 @@ public class ChessManager : MonoBehaviour
             LevelProgressManager.Instance.UnlockLevel(nextIndex);
             yield break;
         }
+
+        selectedPiece = null;
+        
+
+
+
+        HighlightValidMoves(null);
+
+
 
         yield break;
     }
@@ -916,6 +1123,7 @@ public class ChessManager : MonoBehaviour
 
         promotionPanel.SetActive(false);
         pawnToPromote = null;
+        EndTurn();
     }
 
     private bool DoesMoveRemoveCheck(King king, string targetCell)
@@ -1046,8 +1254,9 @@ public class ChessManager : MonoBehaviour
 
     public List<ChessPiece> GetAllPieces(bool isWhite)
     {
-        return FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
-            .Where(p => p.isWhite == isWhite)
+        return Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
+            .Where(p => p != null && p.gameObject != null && p.isWhite == isWhite)
             .ToList();
     }
+
 }
