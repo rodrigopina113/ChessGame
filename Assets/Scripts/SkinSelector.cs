@@ -50,6 +50,7 @@ public class SkinSelector : MonoBehaviour
     {
         currentIndex = appliedIndex;
         UpdatePreview();
+        PreviewBlackPieces(currentIndex);
         skinPanel.SetActive(true);
     }
 
@@ -57,6 +58,13 @@ public class SkinSelector : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % skins.Length;
         UpdatePreview();
+        PreviewBlackPieces(currentIndex);
+    }
+
+    private void PreviewBlackPieces(int index)
+    {
+        chessManager.blackPiecePrefabs = skins[index].blackPiecePrefabs;
+        chessManager.ReplaceBlackPieces();
     }
 
     void UpdatePreview()
