@@ -4,11 +4,11 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [Header("UI References")]
-    public GameObject pauseMenuPanel; // Assign PauseMenuPanel here
-    public Button pauseButton; // Assign PauseButton here
+    public GameObject pauseMenuPanel;
+    public Button pauseButton;
 
     [Header("Game Manager")]
-    public ChessManager chessManager; // Assign your ChessManager here
+    public ChessManager chessManager;
 
     private bool isPaused = false;
 
@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        // Optional: toggle pause with Escape key
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        // Unpause so that ResetGame logic (and any coroutines) run normally
+   
         Resume();
         chessManager.ResetGame();
     }
@@ -69,6 +69,5 @@ public class PauseMenu : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        // e.g. UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

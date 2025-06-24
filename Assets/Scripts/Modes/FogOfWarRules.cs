@@ -10,7 +10,7 @@ public class FogOfWarRules : ScriptableObject, IChessRules
     [Header("Fog settings")]
     public GameObject fogPrefab;
 
-    // Change from List to Dictionary so we can track per‐tile
+
     private readonly Dictionary<string, GameObject> fogByTile = new Dictionary<string, GameObject>();
 
     public void InitializeBoard(ChessManager manager, Chessboard board)
@@ -36,23 +36,19 @@ public class FogOfWarRules : ScriptableObject, IChessRules
     public bool IsMoveValid(ChessPiece piece, Vector2Int target, Chessboard board)
         => baseRules.IsMoveValid(piece, target, board);
 
-    /// <summary>
-    /// Incrementally add/remove fog: 
-    /// - Destroy fog on newly visible tiles 
-    /// - Instantiate fog on newly hidden tiles
-        /// </summary>
+
     public void UpdateFog(ChessManager manager, Chessboard board)
     {
-        // 1) Compute set of currently visible tile-names for the human (black) side
+
         var visible = new HashSet<string>();
-        foreach (var p in manager.GetAllPieces(false))  // always black side
+        foreach (var p in manager.GetAllPieces(false))
         {
             visible.Add(p.CurrentCell);
             foreach (var mv in GetValidMoves(p, board))
                 visible.Add($"{(char)('a' + mv.x)}{mv.y + 1}");
         }
 
-        // 2) Remove fog from tiles that have become visible
+
         var toRemove = new List<string>();
         foreach (var kv in fogByTile)
         {
@@ -65,7 +61,7 @@ public class FogOfWarRules : ScriptableObject, IChessRules
             fogByTile.Remove(cell);
         }
 
-        // 3) Add fog to tiles that are unseen and not yet fogged
+
         foreach (var tile in board.tiles)
         {
             if (!visible.Contains(tile.name) && !fogByTile.ContainsKey(tile.name))
@@ -80,14 +76,14 @@ public class FogOfWarRules : ScriptableObject, IChessRules
             }
         }
 
-        // ── Scale white pieces based on fog coverage
-        const float baseScale = 20f;                // same as in PlacePiece:contentReference[oaicite:1]{index=1}
+
+        const float baseScale = 20f;
         const float hiddenFactor = 0.2f;
         foreach (var wp in manager.GetAllPieces(true))
         {
             float scale = fogByTile.ContainsKey(wp.CurrentCell)
-                ? baseScale * hiddenFactor  // hidden
-                : baseScale;               // visible
+                ? baseScale * hiddenFactor
+                : baseScale;
             wp.transform.localScale = Vector3.one * scale;
         }
     }

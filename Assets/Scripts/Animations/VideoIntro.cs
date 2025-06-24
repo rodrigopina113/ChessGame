@@ -19,7 +19,7 @@ public class VideoIntro : MonoBehaviour
     {
         SetFadeAlpha(1f);
 
-        // Nada muda no botão: ele está sempre visível e clicável
+
 
         videoPlayer.Play();
 
@@ -33,8 +33,8 @@ public class VideoIntro : MonoBehaviour
 
         isTransitioning = true;
 
-        // Impede múltiplos cliques
-        //continueButton.interactable = false;
+
+
 
         StartCoroutine(FadeOutAndLoadScene());
     }

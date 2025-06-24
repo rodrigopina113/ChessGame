@@ -10,7 +10,6 @@ public class StandardChessRules : ScriptableObject, IChessRules
     public GameObject[] whitePiecePrefabs;
     public GameObject[] blackPiecePrefabs;
 
-    // Map algebraic "a1" → Vector2Int(0,0)
     private Vector2Int CellNameToCoord(string cell) => new Vector2Int(cell[0] - 'a', cell[1] - '1');
 
     public void InitializeBoard(ChessManager manager, Chessboard board)
@@ -18,9 +17,9 @@ public class StandardChessRules : ScriptableObject, IChessRules
     float baseDelay = 0.05f;
     int counter = 0;
     int counter2 = 0;
-    manager.ClearAllPieces(); // New helper to destroy existing
+    manager.ClearAllPieces();
 
-    // White backrank
+
     for (int i = 0; i < 8; i++)
     {
         string file = ((char)('a' + i)).ToString();
@@ -34,7 +33,7 @@ public class StandardChessRules : ScriptableObject, IChessRules
         manager.PlacePiece(whitePiecePrefabs[5], $"{file}2", baseDelay * counter++, true); // Pawns
     }
 
-    // Black backrank
+
     for (int i = 0; i < 8; i++)
     {
         string file = ((char)('a' + i)).ToString();
@@ -48,7 +47,7 @@ public class StandardChessRules : ScriptableObject, IChessRules
         manager.PlacePiece(blackPiecePrefabs[5], $"{file}7", baseDelay * counter2++, false); // Pawns
     }
 
-    manager.FinishSetup(); // e.g. reset turn, camera, etc.
+    manager.FinishSetup();
 }
 
    public bool IsKingInCheck(bool isWhiteTurn)

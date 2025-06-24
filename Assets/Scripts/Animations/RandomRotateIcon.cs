@@ -23,7 +23,7 @@ public class RandomRotateIcon : MonoBehaviour
     {
         while (true)
         {
-            // Get next target rotation and duration
+
             float randomZ = Random.Range(minRotation, maxRotation);
             float duration = Random.Range(minDuration, maxDuration);
             Quaternion startRot = rectTransform.localRotation;
@@ -37,10 +37,7 @@ public class RandomRotateIcon : MonoBehaviour
                 yield return null;
             }
 
-            // Finalize rotation
             rectTransform.localRotation = endRot;
-
-            // Wait 0 frames before continuing — loop continues immediately
             yield return null;
         }
     }

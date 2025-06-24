@@ -10,17 +10,17 @@ public class UIHoverFade : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void Start()
     {
-        labelCanvasGroup.alpha = 0f; // Start invisible
+        labelCanvasGroup.alpha = 0f;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        StartFade(1f); // Fade in
+        StartFade(1f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        StartFade(0f); // Fade out
+        StartFade(0f);
     }
 
     void StartFade(float targetAlpha)

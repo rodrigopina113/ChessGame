@@ -12,9 +12,6 @@ public class SettingsManager : MonoBehaviour
     public Slider volumeSlider;
     public TMP_Dropdown qualityDropdown;
     public TMP_Text qualityLabel;
-    public Toggle skinToggle;        // on = clássico, off = planetas
-
-    [Header("Panels")]
     public GameObject settingsPanel;
     public GameObject menuPanel;
 
@@ -28,12 +25,7 @@ public class SettingsManager : MonoBehaviour
     public Button confirmYesButton;
     public Button confirmNoButton;
 
-    private const string PREF_VOLUME     = "volume";
-    private const string PREF_QUALITY    = "quality";
-    private const string PREF_WHITE_SKIN = "whiteSkinIndex";
-
-    // 0=Low, 1=Medium, 2=High
-    private const int PRESET_LOW    = 0;
+    private const int PRESET_LOW = 0;
     private const int PRESET_MEDIUM = 1;
     private const int PRESET_HIGH   = 2;
 
@@ -78,27 +70,48 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
-        // callbacks UI
-        volumeSlider.onValueChanged.AddListener(val => AudioListener.volume = val);
-        qualityDropdown.onValueChanged.AddListener(idx =>
-        {
-            if (qualityLabel != null)
-                qualityLabel.text = qualityDropdown.options[idx].text;
-        });
-        // não gravar skin imediatamente — só no Apply
-        skinToggle.onValueChanged.AddListener(_ => { });
+        int savedPreset = PlayerPrefs.GetInt("quality", PRESET_MEDIUM);
 
-        eraseProgressButton.onClick.AddListener(() => confirmPanel.SetActive(true));
-        confirmYesButton.onClick.AddListener(() =>
-        {
-            LevelProgressManager.Instance.ResetProgress();
-            confirmPanel.SetActive(false);
-        });
-        confirmNoButton.onClick.AddListener(() => confirmPanel.SetActive(false));
+        qualityDropdown.ClearOptions();
+        qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Low", "Medium", "High" });
 
+        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        qualityDropdown.onValueChanged.AddListener(OnQualityPresetChanged);
+        eraseProgressButton.onClick.AddListener(ShowConfirmPanel);
         applyButton.onClick.AddListener(OnApplyClicked);
         cancelButton.onClick.AddListener(OnCancelClicked);
 
+        confirmPanel.SetActive(false);
+        confirmYesButton.onClick.AddListener(OnConfirmYesClicked);
+        confirmNoButton.onClick.AddListener(OnConfirmNoClicked);
+
+        volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
+        OnVolumeChanged(volumeSlider.value);
+
+        qualityDropdown.value = Mathf.Clamp(savedPreset, PRESET_LOW, PRESET_HIGH);
+        ApplyQualityPreset(qualityDropdown.value);
+    }
+
+    #region Callbacks
+
+    private void OnVolumeChanged(float value)
+    {
+        AudioListener.volume = value;
+    }
+
+    private void OnQualityPresetChanged(int presetIndex)
+    {
+        ApplyQualityPreset(presetIndex);
+    }
+
+    private void ShowConfirmPanel()
+    {
+        confirmPanel.SetActive(true);
+    }
+
+    private void OnConfirmYesClicked()
+    {
+        LevelProgressManager.Instance.ResetProgress();
         confirmPanel.SetActive(false);
     }
 
@@ -143,10 +156,40 @@ public class SettingsManager : MonoBehaviour
     private void OnCancelClicked()
     {
         // repõe UI aos valores salvos
-        volumeSlider.value       = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
-        qualityDropdown.value    = PlayerPrefs.GetInt(PREF_QUALITY, PRESET_HIGH);
-        skinToggle.isOn          = PlayerPrefs.GetInt(PREF_WHITE_SKIN, 1) == 1;
+        volumeSlider.value = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
+        qualityDropdown.value = PlayerPrefs.GetInt(PREF_QUALITY, PRESET_HIGH);
+        skinToggle.isOn = PlayerPrefs.GetInt(PREF_WHITE_SKIN, 1) == 1;
+    }
 
+    #endregion
+
+    private void ApplyQualityPreset(int presetIndex)
+    {
+        string[] names = QualitySettings.names;
+        int targetLevel;
+        switch (presetIndex)
+        {
+            case PRESET_LOW:
+                targetLevel = 0;
+                break;
+            case PRESET_MEDIUM:
+                int midIndex = Array.IndexOf(names, "PC");
+                targetLevel = midIndex >= 0 ? midIndex : names.Length / 2;
+                break;
+            case PRESET_HIGH:
+            default:
+                targetLevel = names.Length - 1;
+                break;
+        }
+
+        QualitySettings.SetQualityLevel(targetLevel);
+
+        if (qualityLabel != null)
+            qualityLabel.text = qualityDropdown.options[presetIndex].text;
+    }
+
+    private void ShowMenuPanel()
+    {
         settingsPanel.SetActive(false);
         menuPanel.SetActive(true);
     }
