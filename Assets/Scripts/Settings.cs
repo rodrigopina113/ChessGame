@@ -12,6 +12,7 @@ public class SettingsManager : MonoBehaviour
     public Slider volumeSlider;
     public TMP_Dropdown qualityDropdown;
     public TMP_Text qualityLabel;
+    public Toggle skinToggle;        // TOGGLE para Xadrez Clássico ON=1, Planetas OFF=0
     public GameObject settingsPanel;
     public GameObject menuPanel;
 
@@ -25,13 +26,19 @@ public class SettingsManager : MonoBehaviour
     public Button confirmYesButton;
     public Button confirmNoButton;
 
-    private const int PRESET_LOW = 0;
+    // Keys para PlayerPrefs
+    private const string PREF_VOLUME     = "volume";
+    private const string PREF_QUALITY    = "quality";
+    private const string PREF_WHITE_SKIN = "whiteSkinIndex";
+
+    // 0=Low, 1=Medium, 2=High
+    private const int PRESET_LOW    = 0;
     private const int PRESET_MEDIUM = 1;
     private const int PRESET_HIGH   = 2;
 
     private void Awake()
     {
-        // Singleton + manter entre cenas
+        // Singleton + DontDestroyOnLoad
         if (Instance == null)
         {
             Instance = this;
@@ -43,7 +50,7 @@ public class SettingsManager : MonoBehaviour
             return;
         }
 
-        // --- Carregar e aplicar imediatamente as prefs salvas ---
+        // Carrega e aplica imediatamente as prefs:
 
         // Volume
         float savedVol = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
@@ -53,7 +60,6 @@ public class SettingsManager : MonoBehaviour
         // Qualidade
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(new List<string> { "Low", "Medium", "High" });
-        // na primeira vez, grava PRESET_HIGH (2) se não existir
         if (!PlayerPrefs.HasKey(PREF_QUALITY))
         {
             PlayerPrefs.SetInt(PREF_QUALITY, PRESET_HIGH);
@@ -63,56 +69,37 @@ public class SettingsManager : MonoBehaviour
         qualityDropdown.value = Mathf.Clamp(savedQuality, PRESET_LOW, PRESET_HIGH);
         ApplyQualityPreset(qualityDropdown.value);
 
-        // Skin
+        // Skin (Toggle)
         bool savedClassic = PlayerPrefs.GetInt(PREF_WHITE_SKIN, 1) == 1;
         skinToggle.isOn = savedClassic;
     }
 
     private void Start()
     {
-        int savedPreset = PlayerPrefs.GetInt("quality", PRESET_MEDIUM);
+        // Liga os callbacks:
 
-        qualityDropdown.ClearOptions();
-        qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Low", "Medium", "High" });
+        // Volume muda em tempo real
+        volumeSlider.onValueChanged.AddListener(val => AudioListener.volume = val);
 
-        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-        qualityDropdown.onValueChanged.AddListener(OnQualityPresetChanged);
-        eraseProgressButton.onClick.AddListener(ShowConfirmPanel);
-        applyButton.onClick.AddListener(OnApplyClicked);
-        cancelButton.onClick.AddListener(OnCancelClicked);
+        // Atualiza label de qualidade ao mudar dropdown
+        qualityDropdown.onValueChanged.AddListener(idx =>
+        {
+            if (qualityLabel != null)
+                qualityLabel.text = qualityDropdown.options[idx].text;
+        });
 
-        confirmPanel.SetActive(false);
+        // SkinToggle guarda só no Apply, não aqui
+        skinToggle.onValueChanged.RemoveAllListeners();
+
+        // Confirm dialog
+        eraseProgressButton.onClick.AddListener(() => confirmPanel.SetActive(true));
         confirmYesButton.onClick.AddListener(OnConfirmYesClicked);
         confirmNoButton.onClick.AddListener(OnConfirmNoClicked);
-
-        volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
-        OnVolumeChanged(volumeSlider.value);
-
-        qualityDropdown.value = Mathf.Clamp(savedPreset, PRESET_LOW, PRESET_HIGH);
-        ApplyQualityPreset(qualityDropdown.value);
-    }
-
-    #region Callbacks
-
-    private void OnVolumeChanged(float value)
-    {
-        AudioListener.volume = value;
-    }
-
-    private void OnQualityPresetChanged(int presetIndex)
-    {
-        ApplyQualityPreset(presetIndex);
-    }
-
-    private void ShowConfirmPanel()
-    {
-        confirmPanel.SetActive(true);
-    }
-
-    private void OnConfirmYesClicked()
-    {
-        LevelProgressManager.Instance.ResetProgress();
         confirmPanel.SetActive(false);
+
+        // Apply / Cancel
+        applyButton.onClick.AddListener(OnApplyClicked);
+        cancelButton.onClick.AddListener(OnCancelClicked);
     }
 
     private void ApplyQualityPreset(int presetIndex)
@@ -139,38 +126,43 @@ public class SettingsManager : MonoBehaviour
 
     private void OnApplyClicked()
     {
-        // grava prefs
+        // Grava tudo em PlayerPrefs
         PlayerPrefs.SetFloat(PREF_VOLUME, volumeSlider.value);
         PlayerPrefs.SetInt(PREF_QUALITY, qualityDropdown.value);
         PlayerPrefs.SetInt(PREF_WHITE_SKIN, skinToggle.isOn ? 1 : 0);
         PlayerPrefs.Save();
 
-        // aplica a qualidade
+        // (Re)aplica qualidade
         ApplyQualityPreset(qualityDropdown.value);
 
-        // fecha painel
+        // Fecha painel e volta ao menu
         settingsPanel.SetActive(false);
         menuPanel.SetActive(true);
     }
 
     private void OnCancelClicked()
     {
-        // repõe UI aos valores salvos
-        volumeSlider.value = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
+        // Repõe UI aos valores guardados
+        volumeSlider.value    = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
         qualityDropdown.value = PlayerPrefs.GetInt(PREF_QUALITY, PRESET_HIGH);
-        skinToggle.isOn = PlayerPrefs.GetInt(PREF_WHITE_SKIN, 1) == 1;
-    }
+        skinToggle.isOn       = PlayerPrefs.GetInt(PREF_WHITE_SKIN, 1) == 1;
 
-    #endregion
-
-
-
-    private void ShowMenuPanel()
-    {
         settingsPanel.SetActive(false);
         menuPanel.SetActive(true);
     }
+
+    private void OnConfirmYesClicked()
+    {
+        LevelProgressManager.Instance.ResetProgress();
+        confirmPanel.SetActive(false);
+    }
+
+    private void OnConfirmNoClicked()
+    {
+        confirmPanel.SetActive(false);
+    }
 }
+
 
 
 
