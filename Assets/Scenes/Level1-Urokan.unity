@@ -2755,14 +2755,6 @@ MonoBehaviour:
     - {fileID: 6556322214899377179, guid: 3a71d30aa39ba5643aafad4cc2a397a3, type: 3}
     - {fileID: 3339666319903321144, guid: 576a81abdc71b5d46a7caf4d0b6edc23, type: 3}
     - {fileID: 5572191972008680029, guid: 4a5cf246adaec1e4f8c9c114aec454d1, type: 3}
-  - name: normal
-    whitePiecePrefabs:
-    - {fileID: 9186367298364077605, guid: 37e1930895951f44080301de0b90a554, type: 3}
-    - {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
-    - {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
-    - {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
-    - {fileID: 5401506608500310490, guid: ddc9e087fb081d24dacbd756916afb8a, type: 3}
-    - {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
   currentSkinIndex: 0
   chessManager: {fileID: 0}
 --- !u!4 &244177845
