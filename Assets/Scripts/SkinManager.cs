@@ -3,6 +3,8 @@ using System;
 
 public class SkinManager : MonoBehaviour
 {
+    public static SkinManager Instance { get; private set; }
+
     [Serializable]
     public struct SkinOption
     {
@@ -11,18 +13,26 @@ public class SkinManager : MonoBehaviour
         public GameObject[] blackPiecePrefabs;
     }
 
-    [Header("Opções de Skin Branca")]
+    [Header("Opções de Skin Branca e Preta")]
     public SkinOption[] skins;
 
     [HideInInspector] public int currentSkinIndex;
-
     [HideInInspector] public int currentBlackSkinIndex;
     [HideInInspector] public IChessRules currentRules;
     [HideInInspector] public ChessManager chessManager;
 
     void Awake()
     {
+        // Singleton pattern: only one instance may exist
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Load saved black-skin selection
         currentBlackSkinIndex = PlayerPrefs.GetInt("SelectedBlackSkin", 0);
         currentBlackSkinIndex = Mathf.Clamp(currentBlackSkinIndex, 0, skins.Length - 1);
     }
@@ -50,28 +60,28 @@ public class SkinManager : MonoBehaviour
         }
         chessManager.ReplaceWhitePieces();
     }
-    
-    public void ApplyBlackSkin(int skinIndex)
-   {
-       if (skinIndex < 0 || skinIndex >= skins.Length) return;
-       currentBlackSkinIndex = skinIndex;
-       var skin = skins[skinIndex];
 
-       switch (currentRules)
-       {
-           case StandardChessRules std:
-               std.blackPiecePrefabs = skin.blackPiecePrefabs;
-               break;
-           case Chess960Rules c960:
-               c960.blackPiecePrefabs = skin.blackPiecePrefabs;
-               break;
-           case FogOfWarRules fow:
-               fow.baseRules.blackPiecePrefabs = skin.blackPiecePrefabs;
-               break;
-           case RacingKingsRules rk:
-               rk.blackPiecePrefabs = skin.blackPiecePrefabs;
-               break;
-       }
-       chessManager.ReplaceBlackPieces();
-   }
+    public void ApplyBlackSkin(int skinIndex)
+    {
+        if (skinIndex < 0 || skinIndex >= skins.Length) return;
+        currentBlackSkinIndex = skinIndex;
+        var skin = skins[skinIndex];
+
+        switch (currentRules)
+        {
+            case StandardChessRules std:
+                std.blackPiecePrefabs = skin.blackPiecePrefabs;
+                break;
+            case Chess960Rules c960:
+                c960.blackPiecePrefabs = skin.blackPiecePrefabs;
+                break;
+            case FogOfWarRules fow:
+                fow.baseRules.blackPiecePrefabs = skin.blackPiecePrefabs;
+                break;
+            case RacingKingsRules rk:
+                rk.blackPiecePrefabs = skin.blackPiecePrefabs;
+                break;
+        }
+        chessManager.ReplaceBlackPieces();
+    }
 }

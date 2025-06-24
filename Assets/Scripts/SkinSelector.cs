@@ -157,6 +157,11 @@ public class SkinSelector : MonoBehaviour
         PlayerPrefs.SetInt("SelectedBlackSkin", currentIndex);
         PlayerPrefs.Save();
 
+        if (SkinManager.Instance != null)
+       {
+           SkinManager.Instance.currentBlackSkinIndex = currentIndex;
+       }
+
         // 3) Remember and close
         appliedIndex = currentIndex;
         skinPanel.SetActive(false);
