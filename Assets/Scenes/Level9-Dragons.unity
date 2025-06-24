@@ -13170,7 +13170,7 @@ MonoBehaviour:
   qualityLabel: {fileID: 184928842}
   skinToggle: {fileID: 314355841}
   settingsPanel: {fileID: 1219742298}
-  menuPanel: {fileID: 0}
+  menuPanel: {fileID: 1148574454}
   applyButton: {fileID: 1749848324}
   cancelButton: {fileID: 1057815433}
   eraseProgressButton: {fileID: 20159764}

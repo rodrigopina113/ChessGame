@@ -983,6 +983,7 @@ MonoBehaviour:
   skinPanel: {fileID: 0}
   previewImage: {fileID: 0}
   nextSkinButton: {fileID: 0}
+  prevSkinButton: {fileID: 0}
   applySkinButton: {fileID: 0}
   skins:
   - name: normal
@@ -2212,7 +2213,7 @@ MonoBehaviour:
   qualityLabel: {fileID: 725559337}
   skinToggle: {fileID: 1024475310}
   settingsPanel: {fileID: 2104834009}
-  menuPanel: {fileID: 0}
+  menuPanel: {fileID: 1160797774}
   applyButton: {fileID: 441086832}
   cancelButton: {fileID: 1163523932}
   eraseProgressButton: {fileID: 590040767}
