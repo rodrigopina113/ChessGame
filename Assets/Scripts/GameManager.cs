@@ -43,12 +43,15 @@ public class GameManager : MonoBehaviour
         // Cancela coroutines pendentes
         chessManager.StopAllCoroutines();
 
-        // Seleciona variante + skin branca padrão
-        SelectVariant(defaultVariant, defaultWhiteSkinIndex);
+        int skin = PlayerPrefs.GetInt("whiteSkinIndex", defaultWhiteSkinIndex);
+        // aplica variante + skin
+        SelectVariant(defaultVariant, skin);
 
         // Ajusta câmera inicial para as brancas
         SwitchCameraAtStart();
     }
+
+
 
     /// <summary>
     /// Garante que a câmera comece focada nas peças brancas.
