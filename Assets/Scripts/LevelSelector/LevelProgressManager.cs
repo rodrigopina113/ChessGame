@@ -7,6 +7,10 @@ public class LevelProgressManager : MonoBehaviour
     public static LevelProgressManager Instance { get; private set; }
     public event Action<int> OnProgressUnlocked;
 
+    public event Action<int> OnSkinUnlocked;
+    private const string SkinSaveKey = "HighestUnlockedSkin";
+    private int highestUnlockedSkin = 0;
+
     private const string SaveKey = "HighestUnlockedLevel";
     private int highestUnlocked = 0;
 
@@ -17,6 +21,7 @@ public class LevelProgressManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             highestUnlocked = PlayerPrefs.GetInt(SaveKey, 0);
+            highestUnlockedSkin = PlayerPrefs.GetInt(SkinSaveKey, 0);
 
             // Subscribe to scene-loaded so we can unpause when menus load:
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -46,6 +51,7 @@ public class LevelProgressManager : MonoBehaviour
     }
 
     public int GetHighestUnlocked() => highestUnlocked;
+    public int GetHighestUnlockedSkin() => highestUnlockedSkin;
 
     public void UnlockLevel(int index)
     {
@@ -55,6 +61,18 @@ public class LevelProgressManager : MonoBehaviour
             PlayerPrefs.SetInt(SaveKey, highestUnlocked);
             PlayerPrefs.Save();
             OnProgressUnlocked?.Invoke(highestUnlocked);
+            UnlockSkin(index);
+        }
+    }
+
+    public void UnlockSkin(int index)
+    {
+        if (index > highestUnlockedSkin)
+        {
+            highestUnlockedSkin = index;
+            PlayerPrefs.SetInt(SkinSaveKey, highestUnlockedSkin);
+            PlayerPrefs.Save();
+            OnSkinUnlocked?.Invoke(highestUnlockedSkin);
         }
     }
 

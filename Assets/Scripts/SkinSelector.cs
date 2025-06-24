@@ -30,9 +30,12 @@ public class SkinSelector : MonoBehaviour
     private int currentIndex;
     private int appliedIndex;
 
+    int maxUnlockedSkin;
+
     void Awake()
     {
-        // 1) Load previously applied skin (default 0)
+        maxUnlockedSkin = LevelProgressManager.Instance.GetHighestUnlockedSkin();
+
         appliedIndex = PlayerPrefs.GetInt("SelectedBlackSkin", 0);
         appliedIndex = Mathf.Clamp(appliedIndex, 0, skins.Length - 1);
 
@@ -51,9 +54,19 @@ public class SkinSelector : MonoBehaviour
 
     void OnEnable()
     {
-        // Whenever this scene or object “wakes up” again,
-        // schedule a delayed preview so the board is built.
+        maxUnlockedSkin = LevelProgressManager.Instance.GetHighestUnlockedSkin();
+        LevelProgressManager.Instance.OnSkinUnlocked += OnSkinUnlocked;
+
+        // clamp our indices
+        appliedIndex  = Mathf.Min(appliedIndex, maxUnlockedSkin);
+        currentIndex  = appliedIndex;
+        UpdatePreview();
         StartCoroutine(DelayedInitialPreview());
+    }
+
+    void OnDisable()
+    {
+        LevelProgressManager.Instance.OnSkinUnlocked -= OnSkinUnlocked;
     }
 
     private IEnumerator DelayedInitialPreview()
@@ -69,6 +82,13 @@ public class SkinSelector : MonoBehaviour
 
         PreviewBlackPieces(appliedIndex);
         UpdatePreview();   // refresh your UI sprite + apply‐button state
+    }
+
+    private void OnSkinUnlocked(int newMax)
+    {
+        maxUnlockedSkin = newMax;
+        // enable Next button if this unlocks further skins
+        nextSkinButton.interactable = (currentIndex < maxUnlockedSkin);
     }
 
     void Start()
@@ -111,14 +131,14 @@ public class SkinSelector : MonoBehaviour
 
     void CycleNextSkin()
     {
-        currentIndex = (currentIndex + 1) % skins.Length;
+        currentIndex = Mathf.Min(currentIndex + 1, maxUnlockedSkin);
         UpdatePreview();
         PreviewBlackPieces(currentIndex);
     }
 
     void CyclePrevSkin()
     {
-        currentIndex = (currentIndex - 1 + skins.Length) % skins.Length;
+        currentIndex = Mathf.Max(currentIndex - 1, 0);
         UpdatePreview();
         PreviewBlackPieces(currentIndex);
     }
@@ -133,7 +153,13 @@ public class SkinSelector : MonoBehaviour
     {
         previewImage.sprite = skins[currentIndex].previewSprite;
 
-        if (currentIndex == appliedIndex)
+        if (currentIndex > maxUnlockedSkin)
+        {
+            var c = previewImage.color;
+            previewImage.color = new Color(c.r, c.g, c.b, 0.3f);
+            applySkinButton.interactable = false;
+        }
+        else if (currentIndex == appliedIndex)
         {
             var c = previewImage.color;
             previewImage.color = new Color(c.r, c.g, c.b, 0.5f);
@@ -145,6 +171,9 @@ public class SkinSelector : MonoBehaviour
             previewImage.color = new Color(c.r, c.g, c.b, 1f);
             applySkinButton.interactable = true;
         }
+
+        prevSkinButton.interactable = (currentIndex > 0);
+        nextSkinButton.interactable = (currentIndex < maxUnlockedSkin);
     }
 
     void ApplyCurrentSkin()
