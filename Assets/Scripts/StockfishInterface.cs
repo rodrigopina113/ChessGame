@@ -9,14 +9,14 @@ public class StockfishInterface
 {
     private Process engine;
 
-   public void StartEngine()
+    public bool StartEngine()
     {
         string enginePath = Path.Combine(Application.streamingAssetsPath, "Engine/stockfish-windows-x86-64-avx2.exe");
 
         if (!File.Exists(enginePath))
         {
             UnityEngine.Debug.LogError("❌ Stockfish não encontrado: " + enginePath);
-            return;
+            return false;
         }
 
         engine = new Process();
@@ -36,7 +36,7 @@ public class StockfishInterface
                 UnityEngine.Debug.LogError("❌ Stockfish fechou imediatamente após iniciar.");
                 string output = engine.StandardOutput.ReadToEnd();
                 UnityEngine.Debug.LogError("🧾 Output capturado antes de fechar: " + output);
-                return;
+                return false;
             }
 
             SendCommand("uci");
@@ -47,6 +47,7 @@ public class StockfishInterface
         {
             UnityEngine.Debug.LogError("❌ Erro ao iniciar Stockfish: " + ex.Message);
         }
+        return true;
     }
 
 
