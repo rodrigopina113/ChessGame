@@ -20359,7 +20359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalMinutes: 15
   whiteTimerText: {fileID: 265440381}
-  blackTimerText: {fileID: 1484493597}
+  blackTimerText: {fileID: 1171762768}
   currentPlayerText: {fileID: 689408564}
   winPanel: {fileID: 1945799181}
   showWhiteWinsOnTimeout: 1
