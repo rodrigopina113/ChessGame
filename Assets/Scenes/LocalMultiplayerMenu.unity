@@ -1128,8 +1128,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Destino
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2318,8 +2318,8 @@ MonoBehaviour:
   m_text: "Captura o Rei enimigo primeiro que o teu advers\xE1rio para ganhar o jogo.
     Segue as regras do Xadrez cl\xE1ssico inventado no planeta \"Terra\" em 500 d.C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2762,8 +2762,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Xadrez Cl\xE1ssico"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2986,18 +2986,15 @@ MonoBehaviour:
   - sceneName: Level2_1v1
     titulo: Corrida de Reis
 <<<<<<< HEAD
-<<<<<<< HEAD
     descricao: "Leva o teu Rei at\xE9 \xE0 \xFAltima fila do tabuleiro antes do advers\xE1rio.
       Usa as tuas pe\xE7as para abrir caminho e atrasar o Rei inimigo. Vence quem
       chegar primeiro!"
-=======
-    descricao: "Chega Primeiro que o teu advers\xE1rio ao lado oposto."
->>>>>>> parent of 3175a58 (update no menu do multiplayer)
     model3D: {fileID: 1524877852}
   - sceneName: Level3-Samurai_1V1
     titulo: Fichers Chess
-    descricao: "As pe\xE7as come\xE7am em locais incomuns, abre o olho e planeia
-      novas jogadas."
+    descricao: "As pe\xE7as come\xE7am em posi\xE7\xF5es aleat\xF3rias na primeira
+      fileira. Adapta-te, observa bem e cria estrat\xE9gias fora do comum. Surpreende
+      o advers\xE1rio com jogadas inesperadas!"
     model3D: {fileID: 375324787}
 =======
     descricao: asdas
