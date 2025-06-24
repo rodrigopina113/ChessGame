@@ -54,7 +54,7 @@ public class SkinManager : MonoBehaviour
     public void ApplyBlackSkin(int skinIndex)
    {
        if (skinIndex < 0 || skinIndex >= skins.Length) return;
-       currentSkinIndex = skinIndex;
+       currentBlackSkinIndex = skinIndex;
        var skin = skins[skinIndex];
 
        switch (currentRules)
