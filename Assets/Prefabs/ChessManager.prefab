@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7323015236579429196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5339782833958834966}
+  - component: {fileID: 5946301862196391550}
+  m_Layer: 0
+  m_Name: ChessManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5339782833958834966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323015236579429196}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7451582, y: -1.7960186, z: -3.2286954}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5946301862196391550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323015236579429196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f03a4bb1e99e5e439c1b764322f37ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanWhiteCastleKingSide: 0
+  CanWhiteCastleQueenSide: 0
+  CanBlackCastleKingSide: 0
+  CanBlackCastleQueenSide: 0
+  LastDoubleStepTargetCell: 
+  chessboard: {fileID: 0}
+  whitePiecePrefabs:
+  - {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
+  - {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
+  - {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
+  - {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
+  - {fileID: 5401506608500310490, guid: ddc9e087fb081d24dacbd756916afb8a, type: 3}
+  - {fileID: 8747406407414535925, guid: 128958fb6b805734d98c635ccba02b98, type: 3}
+  blackPiecePrefabs:
+  - {fileID: 8127999597432526705, guid: 203203151638cc244856b15235796dd8, type: 3}
+  - {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
+  - {fileID: 7740864934964142458, guid: c9e905e73c46e1942beeec547f86a2d6, type: 3}
+  - {fileID: 5706920227855998425, guid: 12bafe45e919f784b9d5309ac84a6f71, type: 3}
+  - {fileID: 7952810776616345026, guid: 5d77a6798181a1d46927b753759483b4, type: 3}
+  - {fileID: 1077840645981186514, guid: 4a3757019d688794ea27ff6aa84808ce, type: 3}
+  aiPlayer: {fileID: 0}
+  isLocalMultiplayer: 0
+  promotionPanel: {fileID: 0}
+  whiteQueenPrefab: {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
+  whiteRookPrefab: {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
+  whiteBishopPrefab: {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
+  whiteKnightPrefab: {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
+  blackQueenPrefab: {fileID: 5706920227855998425, guid: 12bafe45e919f784b9d5309ac84a6f71, type: 3}
+  blackRookPrefab: {fileID: 8127999597432526705, guid: 203203151638cc244856b15235796dd8, type: 3}
+  blackBishopPrefab: {fileID: 7740864934964142458, guid: c9e905e73c46e1942beeec547f86a2d6, type: 3}
+  blackKnightPrefab: {fileID: 2367922617124235141, guid: 3b25d6f634500dd458c28f51d997bd24, type: 3}
+  winPanel: {fileID: 0}
+  winText: {fileID: 0}
+  statusObject: {fileID: 0}
+  statusText: {fileID: 0}
+  currentIndex: 1
+  chessWatch: {fileID: 0}
+  moveSounds: []
