@@ -5522,7 +5522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f52f376d96bbc64ca0e72721c511a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  panel: {fileID: 779120576}
   buttonsToDisable: []
 --- !u!114 &473042823
 MonoBehaviour:
