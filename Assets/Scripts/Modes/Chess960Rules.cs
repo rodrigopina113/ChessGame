@@ -32,26 +32,32 @@ public class Chess960Rules : ScriptableObject, IChessRules
             manager.PlacePiece(
                 whitePiecePrefabs[backRank[i]],
                 $"{file}1",
-                baseDelay * dropCounter++
+                baseDelay * dropCounter++,
+                true
             );
+
             // Place pawn on rank 2
-            manager.PlacePiece(whitePiecePrefabs[5], $"{file}2", baseDelay * dropCounter++);
+            manager.PlacePiece(whitePiecePrefabs[5], $"{file}2", baseDelay * dropCounter++, true);
         }
 
         // Black back‐rank + pawns
         for (int i = 0; i < 8; i++)
         {
             string file = ((char)('a' + i)).ToString();
+
             manager.PlacePiece(
                 blackPiecePrefabs[backRank[i]],
                 $"{file}8",
-                baseDelay * dropCounter++
+                baseDelay * dropCounter++,
+                false
             );
-            manager.PlacePiece(blackPiecePrefabs[5], $"{file}7", baseDelay * dropCounter++);
+
+            manager.PlacePiece(blackPiecePrefabs[5], $"{file}7", baseDelay * dropCounter++, false);
         }
 
         manager.FinishSetup();
     }
+
 
     public IEnumerable<Vector2Int> GetValidMoves(ChessPiece piece, Chessboard board)
     {

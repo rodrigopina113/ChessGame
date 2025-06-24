@@ -54,7 +54,7 @@ public static class FenUtility
 
         // 4. En passant target square
         sb.Append(' ');
-        sb.Append(manager.LastDoubleStepTargetCell ?? "-");
+        sb.Append(string.IsNullOrEmpty(manager.LastDoubleStepTargetCell) ? "-" : manager.LastDoubleStepTargetCell);
 
         // 5. Halfmove clock (opcional, fixo)
         sb.Append(" 0");

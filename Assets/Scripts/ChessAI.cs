@@ -35,6 +35,7 @@ public class ChessAI : MonoBehaviour
         return;
 
     string fen = FenUtility.GenerateFEN(chessManager);
+    Debug.Log("♟️ FEN gerado: " + fen);
     string move = stockfish.GetBestMove(fen, stockfishDepth);
 
     if (string.IsNullOrEmpty(move))

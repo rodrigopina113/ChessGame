@@ -430,34 +430,30 @@ public class ChessManager : MonoBehaviour
     }
 
 
-    public void PlacePiece(GameObject prefab, string cellName, float dropDelay)
+   public void PlacePiece(GameObject prefab, string cellName, float dropDelay, bool isWhite)
     {
         Vector3 targetPosition = chessboard.GetCellPosition(cellName);
-        Vector3 startPosition = targetPosition + Vector3.up * 5f; // Float above
+        Vector3 startPosition = targetPosition + Vector3.up * 5f;
 
-        // Instantiate the piece at the floating start position
         GameObject pieceObj = Instantiate(prefab, startPosition, Quaternion.identity);
 
         ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
         piece.transform.localScale = Vector3.one * 20f;
         piece.CurrentCell = cellName;
-        piece.isWhite = prefab.name.Contains("white");
+        piece.isWhite = isWhite; // ← AQUI está a diferença
         piece.chessManager = this;
 
         if (piece is not Pawn && rules is RacingKingsRules)
         {
-            // black knights always face “down”
-            // white knights only face “down” in Racing Kings variant
             bool rotateWhite = rules is RacingKingsRules && piece.isWhite;
             if (!piece.isWhite || rotateWhite)
                 pieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+
         piecesToDrop++;
         StartCoroutine(AnimatePieceDrop(pieceObj, startPosition, targetPosition, dropDelay));
-
-        // In 3D, we no longer adjust size based on row
-        // piece.AdjustSizeBasedOnRow();
     }
+
 
     private IEnumerator AnimatePieceDrop(
         GameObject pieceObj,

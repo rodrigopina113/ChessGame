@@ -33,17 +33,20 @@ public class RacingKingsRules : ScriptableObject, IChessRules
             string cell = $"{file}8";
 
             if (i < 4)
-                manager.PlacePiece(
-                    blackPiecePrefabs[blackRank1[i]],
-                    cell,
-                    baseDelay * dropCounter++
-                );
+            manager.PlacePiece(
+                blackPiecePrefabs[blackRank1[i]],
+                cell,
+                baseDelay * dropCounter++,
+                false
+            );
             else
                 manager.PlacePiece(
                     whitePiecePrefabs[whiteRank1[i - 4]],
                     cell,
-                    baseDelay * dropCounter++
+                    baseDelay * dropCounter++,
+                    true
                 );
+
         }
 
         // Place rank 7
@@ -56,14 +59,17 @@ public class RacingKingsRules : ScriptableObject, IChessRules
                 manager.PlacePiece(
                     blackPiecePrefabs[blackRank2[i]],
                     cell,
-                    baseDelay * dropCounter++
+                    baseDelay * dropCounter++,
+                    false
                 );
             else
                 manager.PlacePiece(
                     whitePiecePrefabs[whiteRank2[i - 4]],
                     cell,
-                    baseDelay * dropCounter++
+                    baseDelay * dropCounter++,
+                    true
                 );
+
         }
 
         manager.FinishSetup();
