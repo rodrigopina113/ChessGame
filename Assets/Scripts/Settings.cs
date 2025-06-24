@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI References")]
     public Slider volumeSlider;
     public TMP_Dropdown qualityDropdown;
-    public TMP_Text qualityLabel;    // opcional, para mostrar “Low” ou “High” na UI
+    public TMP_Text qualityLabel;    // opcional, para mostrar “Low”, “Medium” ou "High" na UI
     public GameObject settingsPanel;
     public GameObject menuPanel;
 
@@ -23,16 +24,17 @@ public class SettingsManager : MonoBehaviour
 
     // Índices internos para presets
     private const int PRESET_LOW = 0;
-    private const int PRESET_HIGH = 1;
+    private const int PRESET_MEDIUM = 1;
+    private const int PRESET_HIGH = 2;
 
     private void Start()
     {
-        // Carrega preset salvo (0 = Low, 1 = High)
-        int savedPreset = PlayerPrefs.GetInt("quality", PRESET_HIGH);
+        // Carrega preset salvo (0 = Low, 1 = Medium, 2 = High)
+        int savedPreset = PlayerPrefs.GetInt("quality", PRESET_MEDIUM);
 
         // Configurar opções do dropdown
         qualityDropdown.ClearOptions();
-        qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Low", "High" });
+        qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Low", "Medium", "High" });
 
         // Ligação de callbacks
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
@@ -50,8 +52,8 @@ public class SettingsManager : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("volume", 1f);
         OnVolumeChanged(volumeSlider.value);
 
-        qualityDropdown.value = savedPreset;
-        ApplyQualityPreset(savedPreset);
+        qualityDropdown.value = Mathf.Clamp(savedPreset, PRESET_LOW, PRESET_HIGH);
+        ApplyQualityPreset(qualityDropdown.value);
     }
 
     #region Callbacks
@@ -68,13 +70,11 @@ public class SettingsManager : MonoBehaviour
 
     private void ShowConfirmPanel()
     {
-        // Exibe painel de confirmação antes de apagar progresso
         confirmPanel.SetActive(true);
     }
 
     private void OnConfirmYesClicked()
     {
-        // Usuário confirmou
         LevelProgressManager.Instance.ResetProgress();
         Debug.Log("Progresso zerado!");
         confirmPanel.SetActive(false);
@@ -82,23 +82,19 @@ public class SettingsManager : MonoBehaviour
 
     private void OnConfirmNoClicked()
     {
-        // Usuário cancelou
         confirmPanel.SetActive(false);
     }
 
     private void OnApplyClicked()
     {
-        // Salva volume e preset
         PlayerPrefs.SetFloat("volume", volumeSlider.value);
         PlayerPrefs.SetInt("quality", qualityDropdown.value);
         PlayerPrefs.Save();
-
         ShowMenuPanel();
     }
 
     private void OnCancelClicked()
     {
-        // Sem salvar, volta ao menu
         ShowMenuPanel();
     }
 
@@ -106,20 +102,31 @@ public class SettingsManager : MonoBehaviour
 
     private void ApplyQualityPreset(int presetIndex)
     {
-        int lowest = 0;
-        int highest = QualitySettings.names.Length - 1;
+        // Mapeia o índice do preset ao índice de QualitySettings.names
+        string[] names = QualitySettings.names;
+        int targetLevel;
+        switch (presetIndex)
+        {
+            case PRESET_LOW:
+                targetLevel = 0;
+                break;
+            case PRESET_MEDIUM:
+                // Tenta encontrar "Medium" nos perfis, senão usa meio do array
+                int midIndex = Array.IndexOf(names, "PC");
+                targetLevel = midIndex >= 0 ? midIndex : names.Length / 2;
+                break;
+            case PRESET_HIGH:
+            default:
+                targetLevel = names.Length - 1;
+                break;
+        }
 
-        if (presetIndex == PRESET_LOW)
-            QualitySettings.SetQualityLevel(lowest);
-        else
-            QualitySettings.SetQualityLevel(highest);
+        QualitySettings.SetQualityLevel(targetLevel);
 
-        // Atualiza label opcional
         if (qualityLabel != null)
-            qualityLabel.text = presetIndex == PRESET_LOW ? "Low" : "High";
+            qualityLabel.text = qualityDropdown.options[presetIndex].text;
 
-        Debug.Log($"Quality preset applied: {(presetIndex == PRESET_LOW ? "Low" : "High")} " +
-                  $"(Level {(presetIndex == PRESET_LOW ? lowest : highest)})");
+        Debug.Log($"Quality preset applied: {qualityDropdown.options[presetIndex].text} (Level {targetLevel})");
     }
 
     private void ShowMenuPanel()
@@ -128,5 +135,8 @@ public class SettingsManager : MonoBehaviour
         menuPanel.SetActive(true);
     }
 }
+
+
+
 
 
