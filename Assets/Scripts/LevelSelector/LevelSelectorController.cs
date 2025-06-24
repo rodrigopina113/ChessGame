@@ -13,14 +13,14 @@ public class LevelSelectorController : MonoBehaviour
     public List<LevelData> levels;
 
     [Header("UI Elements")]
-    public Slider progressBar;    // just fill
+    public Slider progressBar;
     public TMP_Text levelNameText;
     [Header("Preview Display")]
     public SpriteRenderer previewRenderer;
 
 
     [Header("Planet Display")]
-    public Transform planetHolder;   // parent for instantiated planets
+    public Transform planetHolder;
     private GameObject currentPlanet;
 
     [Header("Transition Settings")]
@@ -38,25 +38,23 @@ public class LevelSelectorController : MonoBehaviour
 
     void Start()
     {
-        // 1) Load unlocked
+
         maxUnlocked = LevelProgressManager.Instance.GetHighestUnlocked();
 
         maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count);
 
-        // 2) Prevent selection beyond unlocked
+
         currentIndex = Mathf.Clamp(currentIndex, 0, Mathf.Min(maxUnlocked, levels.Count - 1));
 
         tickMarks.RefreshTicks(currentIndex, maxUnlocked);
 
-        // 3) Draw initial UI & listen for unlocks
+
         UpdateProgressUI();
         UpdateUIInstant();
         LevelProgressManager.Instance.OnProgressUnlocked += OnUnlocked;
     }
 
-    /// <summary>
-    /// Called by your Left/Right UI buttons or keyboard arrows.
-    /// </summary>
+
     void OnUnlocked(int newMax)
     {
         maxUnlocked = Mathf.Clamp(newMax, 0, levels.Count);
@@ -66,7 +64,7 @@ public class LevelSelectorController : MonoBehaviour
 
     void UpdateProgressUI()
     {
-        // Fill = unlocked / (count-1)
+
         progressBar.value = (float)maxUnlocked / (levels.Count - 1);
     }
     public void ChangeIndex(int delta)
@@ -80,7 +78,7 @@ public class LevelSelectorController : MonoBehaviour
 
     public void OnLevelComplete()
     {
-        // Call this when a level is beaten:
+
         LevelProgressManager.Instance.UnlockLevel(currentIndex + 1);
     }
 
@@ -88,18 +86,18 @@ public class LevelSelectorController : MonoBehaviour
     {
         isTransitioning = true;
 
-        // 1) Cache old
+
         GameObject oldPlanet = currentPlanet;
 
-        // 2) Prepare new
+
         var newData = levels[newIndex];
         GameObject newPlanet = Instantiate(newData.planetPrefab, planetHolder);
-        // place off to the right (direction=+1) or left (direction=-1)
+
         newPlanet.transform.localPosition = Vector3.right * planetOffset * direction;
         newPlanet.transform.localRotation = Quaternion.identity;
         newPlanet.transform.localScale = newData.planetPrefab.transform.localScale;
 
-        // 3) Immediately update UI text/preview/slider
+
         currentIndex = newIndex;
         progressBar.value = (float)newIndex / (levels.Count - 1);
         levelNameText.text = newData.levelName;
@@ -109,14 +107,13 @@ public class LevelSelectorController : MonoBehaviour
             tickMarks.RefreshTicks(currentIndex, maxUnlocked);
 
 
-        // 4) Animate slide
         float elapsed = 0f;
         while (elapsed < transitionTime)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / transitionTime);
 
-            // old → offscreen
+
             if (oldPlanet != null)
                 oldPlanet.transform.localPosition = Vector3.Lerp(
                     Vector3.zero,
@@ -124,7 +121,7 @@ public class LevelSelectorController : MonoBehaviour
                     t
                 );
 
-            // new → center
+
             newPlanet.transform.localPosition = Vector3.Lerp(
                 Vector3.right * planetOffset * direction,
                 Vector3.zero,
@@ -134,7 +131,7 @@ public class LevelSelectorController : MonoBehaviour
             yield return null;
         }
 
-        // 5) Cleanup
+
         if (oldPlanet != null) Destroy(oldPlanet);
         newPlanet.transform.localPosition = Vector3.zero;
         currentPlanet = newPlanet;
@@ -142,37 +139,33 @@ public class LevelSelectorController : MonoBehaviour
         isTransitioning = false;
     }
 
-    /// <summary>
-    /// For first-time setup (no animation).
-    /// </summary>
+
     private void UpdateUIInstant()
     {
         var data = levels[currentIndex];
 
-        // UI
+
         progressBar.value = (float)currentIndex / (levels.Count - 1);
         levelNameText.text = data.levelName;
         previewRenderer.sprite = data.previewSprite;
 
-        // Planet
+
         if (currentPlanet != null)
             Destroy(currentPlanet);
         currentPlanet = Instantiate(data.planetPrefab, planetHolder);
         currentPlanet.transform.localPosition = Vector3.zero;
     }
 
-    /// <summary>
-    /// Called by PlanetRotator.OnPointerClick and Return key.
-    /// </summary>
+   
     public void ConfirmSelection()
     {
         var data = levels[currentIndex];
 
-        // 1) Guarda qual cena de jogo vamos carregar depois da cutscene
+ 
         NextLevelLoader.sceneName = data.sceneName;
-        // 2) Guarda o VideoClip que vamos tocar
+
         NextLevelLoader.cutsceneClip = data.cutsceneClip;
-        // 3) Carrega a única cena de cutscene
+
         SceneManager.LoadScene("CutScene");
     }
 
@@ -185,12 +178,12 @@ public class LevelSelectorController : MonoBehaviour
 
     private IEnumerator FlipAndChangePreview(Sprite newSprite)
     {
-        // 1) Grab the sprite’s current rotation (X = –6.22, Y = –16.28 in your case)
+
         Vector3 originalEuler = previewRenderer.transform.localEulerAngles;
 
         float elapsed = 0f;
         bool hasSwapped = false;
-        float duration = transitionTime; // e.g. 0.5f
+        float duration = transitionTime;
 
         while (elapsed < duration)
         {
@@ -198,14 +191,14 @@ public class LevelSelectorController : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / duration);
             float spinAngle = Mathf.Lerp(0f, 360f, t);
 
-            // 2) Swap the Sprite at halfway
+
             if (!hasSwapped && spinAngle >= 180f)
             {
                 previewRenderer.sprite = newSprite;
                 hasSwapped = true;
             }
 
-            // 3) Apply spin + original X/Y
+
             float y = originalEuler.y + spinAngle;
             previewRenderer.transform.localEulerAngles = new Vector3(
                 originalEuler.x,
@@ -216,7 +209,7 @@ public class LevelSelectorController : MonoBehaviour
             yield return null;
         }
 
-        // 4) Snap exactly to original.X and original.Y + 360
+
         previewRenderer.transform.localEulerAngles = new Vector3(
             originalEuler.x,
             originalEuler.y + 360f,

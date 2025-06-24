@@ -31,7 +31,6 @@ public class StockfishInterface
             engine.Start();
             UnityEngine.Debug.Log("✅ Stockfish iniciado.");
 
-            // Testa se morreu logo após iniciar
             if (engine.HasExited)
             {
                 UnityEngine.Debug.LogError("❌ Stockfish fechou imediatamente após iniciar.");
@@ -93,7 +92,7 @@ public class StockfishInterface
         SendCommand("go depth " + depth);
 
         DateTime start = DateTime.Now;
-        TimeSpan timeout = TimeSpan.FromSeconds(5); // limite de 5 segundos
+        TimeSpan timeout = TimeSpan.FromSeconds(5);
         string fullLog = "";
 
         string line;

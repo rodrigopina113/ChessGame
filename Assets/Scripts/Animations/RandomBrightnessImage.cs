@@ -4,9 +4,9 @@ using System.Collections;
 
 public class RandomBrightnessImage : MonoBehaviour
 {
-    public float minBrightness = 0.8f;   // Dim level
-    public float maxBrightness = 1.5f;   // Bright level
-    public float pulseSpeed = 10f;        // Pulses per second
+    public float minBrightness = 0.8f;
+    public float maxBrightness = 1.5f;
+    public float pulseSpeed = 10f;
 
     private Image image;
     private Color originalColor;
@@ -24,13 +24,9 @@ public class RandomBrightnessImage : MonoBehaviour
     {
         if (image == null) return;
 
-        // Ping-pong value between 0 and 1 over time
         float t = (Mathf.Sin(Time.time * pulseSpeed * Mathf.PI * 2f) + 1f) / 2f;
 
-        // Convert to brightness range
         float brightness = Mathf.Lerp(minBrightness, maxBrightness, t);
-
-        // Apply brightness while preserving alpha
         Color brightened = originalColor * brightness;
         brightened.a = originalColor.a;
         image.color = brightened;

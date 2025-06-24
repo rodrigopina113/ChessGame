@@ -13,42 +13,42 @@ public class Pawn : ChessPiece
         if (isWhite)
         {
             if (colDifference == 0 && targetRow == currentRow + 1 && targetPiece == null)
-                return true; // Move forward
+                return true;
             if (
                 colDifference == 0
                 && currentRow == 2
                 && targetRow == currentRow + 2
                 && targetPiece == null
             )
-                return true; // Move forward 2
+                return true;
             if (
                 Mathf.Abs(colDifference) == 1
                 && targetRow == currentRow + 1
                 && targetPiece != null
                 && !targetPiece.isWhite
             )
-                return true; // Diagonal capture
+                return true;
         }
         else
         {
             if (colDifference == 0 && targetRow == currentRow - 1 && targetPiece == null)
-                return true; // Move forward
+                return true;
             if (
                 colDifference == 0
                 && currentRow == 7
                 && targetRow == currentRow - 2
                 && targetPiece == null
             )
-                return true; // Move forward 2
+                return true;
             if (
                 Mathf.Abs(colDifference) == 1
                 && targetRow == currentRow - 1
                 && targetPiece != null
                 && targetPiece.isWhite
             )
-                return true; // Diagonal capture
+                return true;
         }
 
-        return false; // Invalid move
+        return false;
     }
 }

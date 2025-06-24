@@ -6,12 +6,10 @@ using TMPro; // Se você usar TextMeshPro para o texto do painel de vitória
 
 public class ChessManager : MonoBehaviour
 {
-    // ── New: holds currently active variant rules
+
     private IChessRules rules;
 
-    /// <summary>
-    /// Called by GameManager to inject the chosen rules before starting.
-    /// </summary>
+
     public void SetRules(IChessRules rules)
     {
         this.rules = rules;
@@ -22,50 +20,49 @@ public class ChessManager : MonoBehaviour
     public bool CanBlackCastleKingSide;
     public bool CanBlackCastleQueenSide;
 
-    public string LastDoubleStepTargetCell; // Ex: "e6" ou null
+    public string LastDoubleStepTargetCell;
     public bool IsWhiteTurn => isWhiteTurn;
 
 
 
-    public Chessboard chessboard; // Reference to the Chessboard script
-    public GameObject[] whitePiecePrefabs; // Array of white piece prefabs
-    public GameObject[] blackPiecePrefabs; // Array of black piece prefabs
-    private ChessPiece selectedPiece; // Currently selected piece
-    private bool isWhiteTurn = true; // Tracks whose turn it is
+    public Chessboard chessboard;
+    public GameObject[] whitePiecePrefabs;
+    public GameObject[] blackPiecePrefabs;
+    private ChessPiece selectedPiece;
+    private bool isWhiteTurn = true;
     public ChessAI aiPlayer;
     public bool isLocalMultiplayer = false;
 
 
 
-    // Promotion UI and Prefabs (assign these in the Inspector)
-    public GameObject promotionPanel; // A UI panel with 4 buttons (initially inactive)
-    private Pawn pawnToPromote; // The pawn that reached the promotion rank
 
-    // Promotion prefabs for white
+    public GameObject promotionPanel;
+    private Pawn pawnToPromote;
+
+
     public GameObject whiteQueenPrefab;
     public GameObject whiteRookPrefab;
     public GameObject whiteBishopPrefab;
     public GameObject whiteKnightPrefab;
 
-    // Promotion prefabs for black
+
     public GameObject blackQueenPrefab;
     public GameObject blackRookPrefab;
     public GameObject blackBishopPrefab;
     public GameObject blackKnightPrefab;
-    
 
-    // ───────────────────────────────────────────────────────────────
-    // NOVO: referências ao painel de vitória (WinPanel)
+
+
     [Header("UI de Vitória")]
-    public GameObject winPanel;          // Arraste aqui o seu GameObject WinPanel (deve estar inicialmente inativo)
-    public TextMeshProUGUI winText;      // Opcional: para alterar o texto de vitória (por exemplo, "Brancas venceram!")
+    public GameObject winPanel;
+    public TextMeshProUGUI winText;
     public GameObject statusObject;
     public TMPro.TextMeshProUGUI statusText;
-    private bool gameEnded = false;      // Impede cliques após o fim de jogo
-                                         // ───────────────────────────────────────────────────────────────
+    private bool gameEnded = false;
+
     private bool isInCheck = false;
 
-    private int piecesToDrop = 0;  // Total de peças em animação
+    private int piecesToDrop = 0;
     private bool boardReady = false;
 
     public int currentIndex = 0;
@@ -84,7 +81,7 @@ public class ChessManager : MonoBehaviour
 
         Debug.Log("👁️ isLocalMultiplayer: " + isLocalMultiplayer);
         nextIndex = currentIndex + 1;
-        // First ensure chessboard exists
+
         if (chessboard == null)
         {
             chessboard = Object.FindFirstObjectByType<Chessboard>();
@@ -95,7 +92,7 @@ public class ChessManager : MonoBehaviour
             }
         }
 
-        // Then initialize AI if needed
+
         if (!isLocalMultiplayer)
         {
             if (aiPlayer == null)
@@ -110,17 +107,17 @@ public class ChessManager : MonoBehaviour
             aiPlayer.Initialize();
         }
 
-        // Then handle UI
+
         if (winPanel != null)
             winPanel.SetActive(false);
 
-        // Finally start the game if rules exist
+
         if (rules != null)
         {
             StartGame();
         }
 
-        // Initialize camera
+
         if (CameraSwitcher.Instance != null)
         {
             CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
@@ -134,24 +131,24 @@ public class ChessManager : MonoBehaviour
     }
 
 
-    // Chamar no fim da jogada
+
     public void EndTurn()
     {
         bool currentIsWhite = isWhiteTurn;
         CheckOpponentStatusFor(currentIsWhite);
 
-        // Agora sim troca o turno
+
         isWhiteTurn = !isWhiteTurn;
 
-        // Atualiza câmera
+
         if (CameraSwitcher.Instance != null)
             CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
 
-        // Atualiza relógio
+
         if (chessWatch != null)
             chessWatch.SwitchTurn();
 
-        // PvE: ativa IA se necessário
+
         if (!isLocalMultiplayer && isWhiteTurn && aiPlayer != null)
         {
             StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
@@ -188,7 +185,7 @@ public class ChessManager : MonoBehaviour
     }
 
 
-    
+
 
 
     private void ShowCheckStatus()
@@ -221,7 +218,7 @@ public class ChessManager : MonoBehaviour
 
 
 
-    
+
     private bool aiScheduled = false;
 
     private IEnumerator TriggerAIMoveAfterDelay(float delay)
@@ -238,7 +235,7 @@ public class ChessManager : MonoBehaviour
             {
                 EndTurn();
             });
-            
+
         }
 
         aiScheduled = false;
@@ -247,9 +244,7 @@ public class ChessManager : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Called by GameManager after SetRules(rules).
-    /// </summary>
+
     public void StartGame()
     {
         if (rules == null)
@@ -263,7 +258,7 @@ public class ChessManager : MonoBehaviour
 
     public void PlayerMove(string targetCell)
     {
-        HandleTileClick(targetCell); // Execute the player's move
+        HandleTileClick(targetCell);
     }
 
     private IEnumerator AutoPlayAITurn(float delay)
@@ -271,7 +266,7 @@ public class ChessManager : MonoBehaviour
         if (isLocalMultiplayer || aiPlayer == null)
             yield break;
 
-        // Wait for promotion panel to be inactive AND AI to be initialized
+
         yield return new WaitUntil(() => boardReady && (promotionPanel == null || !promotionPanel.activeSelf) && aiPlayer != null && aiPlayer.isInitialized);
 
         yield return new WaitForSeconds(delay);
@@ -285,7 +280,7 @@ public class ChessManager : MonoBehaviour
 
     public void CheckOpponentStatus()
     {
-        bool enemyIsWhite = isWhiteTurn; // ← oponente é quem acabou de jogar
+        bool enemyIsWhite = isWhiteTurn;
         bool isCheck = rules.IsKingInCheck(enemyIsWhite);
         bool isMate = rules.IsCheckmate(enemyIsWhite);
 
@@ -314,7 +309,7 @@ public class ChessManager : MonoBehaviour
     {
         if (rules == null) return;
 
-        // Verifica o estado do jogador que vai jogar agora (adversário de quem jogou)
+
         bool isCheck = rules.IsKingInCheck(!isWhiteTurn);
         bool isMate = rules.IsCheckmate(!isWhiteTurn);
 
@@ -344,42 +339,42 @@ public class ChessManager : MonoBehaviour
         if (gameEnded)
             return;
 
-        // ⏳ IA joga sozinha com delay após o turno mudar
+
         if (!aiScheduled && !isLocalMultiplayer && isWhiteTurn && aiPlayer != null && boardReady)
         {
-            aiScheduled = true; // 🔐 bloqueia IMEDIATAMENTE
+            aiScheduled = true;
             Debug.Log("⏳ AI programada para jogar em 2.5s");
             StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
         }
 
 
-        //CÓDIGO PARA A DEMONSTRAÇÃO, QUANDO CLICA P MOSTRA O WINPANEL
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             LevelProgressManager.Instance.UnlockLevel(nextIndex);
             if (winPanel != null)
-                winPanel.SetActive(true); // Mostra o painel ao apertar P
+                winPanel.SetActive(true);
         }
 
-        // If the player right-clicks, deselect any currently selected piece.
+
         if (Input.GetMouseButtonDown(1))
         {
             if (selectedPiece != null)
             {
                 selectedPiece = null;
-                HighlightValidMoves(null); // Clear any highlighted moves.
+                HighlightValidMoves(null);
             }
-            return; // Skip further processing this frame.
+            return;
         }
 
-        // Process left-clicks only.
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                // Use the hit point to determine the nearest cell.
+
                 string clickedCell = FindNearestCell(hit.point);
                 if (!string.IsNullOrEmpty(clickedCell))
                 {
@@ -391,7 +386,7 @@ public class ChessManager : MonoBehaviour
 
     public void ReplaceWhitePieces()
     {
-        // Encontra todas as peças brancas na cena
+
         var whitePieces = Object
             .FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
             .Where(p => p.isWhite)
@@ -402,7 +397,7 @@ public class ChessManager : MonoBehaviour
             string cell = oldPiece.CurrentCell;
             int prefabIndex = -1;
 
-            // Determina índice por tipo de peça
+
             if (oldPiece is Rook) prefabIndex = 0;
             else if (oldPiece is Knight) prefabIndex = 1;
             else if (oldPiece is Bishop) prefabIndex = 2;
@@ -411,16 +406,16 @@ public class ChessManager : MonoBehaviour
             else if (oldPiece is Pawn) prefabIndex = 5;
             else continue;
 
-            // Mantém escala antiga
+
             Vector3 oldScale = oldPiece.transform.localScale;
             Destroy(oldPiece.gameObject);
 
-            // Instancia novo prefab na mesma célula
+
             Vector3 worldPos = chessboard.GetCellPosition(cell);
             GameObject prefab = whitePiecePrefabs[prefabIndex];
             GameObject newObj = Instantiate(prefab, worldPos, Quaternion.identity);
 
-            // Configura o componente ChessPiece
+
             var newPiece = newObj.GetComponent<ChessPiece>();
             newPiece.CurrentCell = cell;
             newPiece.isWhite = true;
@@ -430,7 +425,7 @@ public class ChessManager : MonoBehaviour
     }
 
 
-   public void PlacePiece(GameObject prefab, string cellName, float dropDelay, bool isWhite)
+    public void PlacePiece(GameObject prefab, string cellName, float dropDelay, bool isWhite)
     {
         Vector3 targetPosition = chessboard.GetCellPosition(cellName);
         Vector3 startPosition = targetPosition + Vector3.up * 5f;
@@ -440,7 +435,7 @@ public class ChessManager : MonoBehaviour
         ChessPiece piece = pieceObj.GetComponent<ChessPiece>();
         piece.transform.localScale = Vector3.one * 20f;
         piece.CurrentCell = cellName;
-        piece.isWhite = isWhite; // ← AQUI está a diferença
+        piece.isWhite = isWhite;
         piece.chessManager = this;
 
         if (piece is not Pawn && rules is RacingKingsRules)
@@ -462,7 +457,7 @@ public class ChessManager : MonoBehaviour
         float delay
     )
     {
-        float initialGlobalDelay = 1.5f; // tempo de espera antes de qualquer peça cair
+        float initialGlobalDelay = 1.5f;
         yield return new WaitForSeconds(initialGlobalDelay + delay);
 
         float duration = 0.5f;
@@ -472,22 +467,22 @@ public class ChessManager : MonoBehaviour
         {
             if (pieceObj == null)
                 yield break;
-            //pieceObj.transform.position = Vector3.Lerp(start, end, elapsed / duration);
+
             float t = elapsed / duration;
-            t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t)); // Makes the motion more natural
+            t = Mathf.SmoothStep(0, 1, Mathf.SmoothStep(0, 1, t));
             pieceObj.transform.position = Vector3.Lerp(start, end, t);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         if (pieceObj != null)
-            pieceObj.transform.position = end; // Snap to final position
+            pieceObj.transform.position = end;
 
         if (pieceObj != null)
             pieceObj.transform.position = end;
 
         piecesToDrop--;
-        //Debug.Log("🧩 Piece caiu! Falta: " + piecesToDrop);
+
 
         if (piecesToDrop <= 32)
         {
@@ -500,21 +495,21 @@ public class ChessManager : MonoBehaviour
 
     private void HandleTileClick(string cellName)
     {
-        
-        // Se o jogo já acabou, ignore
+
+
         if (gameEnded)
             return;
 
         if (!isLocalMultiplayer && isWhiteTurn && aiPlayer != null)
             return;
 
-        // If we already have a selection, try to move it
+
         if (selectedPiece != null)
         {
-            // convert "e4" → (4,3)
+
             Vector2Int target = new Vector2Int(cellName[0] - 'a', cellName[1] - '1');
 
-            // use rules.IsMoveValid instead of piece.IsValidMove
+
             if (
                 rules.IsMoveValid(selectedPiece, target, chessboard)
                 && !WouldMoveCauseSelfCheck(selectedPiece, cellName)
@@ -527,14 +522,14 @@ public class ChessManager : MonoBehaviour
             {
                 ChessPiece targetPiece = FindPieceAtCell(cellName);
 
-                // capture logic
+
                 if (targetPiece != null)
                 {
                     if (targetPiece.isWhite != selectedPiece.isWhite)
                     {
                         if (targetPiece is King)
                         {
-                            // ───> Em vez de ResetGame(), exiba o painel de vitória
+
                             if (gameEnded) return;
                             gameEnded = true;
                             if (chessWatch != null)
@@ -559,7 +554,7 @@ public class ChessManager : MonoBehaviour
                     }
                 }
 
-                // castling vs normal move
+
                 if (selectedPiece is King king && Mathf.Abs(cellName[0] - king.CurrentCell[0]) == 2)
                     king.MoveTo(cellName);
                 else
@@ -567,17 +562,16 @@ public class ChessManager : MonoBehaviour
 
                 EndTurn();
 
-                // post-move endgame checks
-                 
+
+
                 if (CheckForCheckmate())
                 {
-                    // ───> Em vez de ResetGame(), exiba o painel de vitória
+
                     if (gameEnded) return;
                     gameEnded = true;
                     if (chessWatch != null)
                         chessWatch.PauseTimers();
 
-                    // Quem deu o xeque-mate? Se isWhiteTurn == true, então as brancas deram mate agora.
                     string vencedor = isWhiteTurn ? "Brancas" : "Pretas";
                     if (winText != null)
                         winText.text = $"{vencedor} venceram por xeque-mate!";
@@ -587,7 +581,7 @@ public class ChessManager : MonoBehaviour
                 }
                 if (CheckForStalemate())
                 {
-                    // ───> Em vez de ResetGame(), exiba o painel de empate (ou vitória genérica)
+
                     if (gameEnded) return;
                     gameEnded = true;
                     if (chessWatch != null)
@@ -600,9 +594,9 @@ public class ChessManager : MonoBehaviour
                     return;
                 }
                 CheckOpponentStatus();
-                // finish turn isWhiteTurn = !isWhiteTurn;
-                
-            
+
+
+
                 Debug.Log($"Moved piece to {cellName}");
             }
             else
@@ -614,7 +608,7 @@ public class ChessManager : MonoBehaviour
         }
         else
         {
-            // No selection yet: try to pick up a piece
+
             ChessPiece piece = FindPieceAtCell(cellName);
 
             if (piece != null)
@@ -625,7 +619,7 @@ public class ChessManager : MonoBehaviour
                     return;
                 }
 
-                // If in check, limit selection to King or moves that block/capture
+
                 if (CheckIfKingInCheck())
                 {
                     King kingInCheck = FindObjectsByType<King>(FindObjectsSortMode.None)
@@ -635,7 +629,7 @@ public class ChessManager : MonoBehaviour
                         var threats = GetThreatsToKing(kingInCheck);
                         if (threats.Count == 1)
                         {
-                            // allow King or piece that can block/capture
+
                             if (piece is King || IsMoveSafeForKing(piece, threats[0].CurrentCell))
                             {
                                 selectedPiece = piece;
@@ -657,11 +651,11 @@ public class ChessManager : MonoBehaviour
                 }
                 else
                 {
-                    // normal selection: highlight via rules
+
                     selectedPiece = piece;
                     if (piece is King)
                     {
-                        // for King – only show moves that also remove check if needed
+
                         foreach (var tile in chessboard.tiles)
                         {
                             Vector2Int coord = new Vector2Int(
@@ -677,7 +671,7 @@ public class ChessManager : MonoBehaviour
                     }
                     else
                     {
-                        // for others – delegate to HighlightValidMoves (also uses rules)
+
                         HighlightValidMoves(piece);
                     }
                 }
@@ -692,7 +686,7 @@ public class ChessManager : MonoBehaviour
 
     public void ReplaceBlackPieces()
     {
-        // 1) Find all existing black ChessPiece instances in the scene.
+
         var blackPieces = Object
             .FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
             .Where(p => !p.isWhite)
@@ -702,7 +696,7 @@ public class ChessManager : MonoBehaviour
         {
             string cell = oldPiece.CurrentCell;
 
-            // 2) Determine which prefab index to use based on type
+
             int prefabIndex = -1;
             if (oldPiece is Rook) prefabIndex = 0;
             else if (oldPiece is Knight) prefabIndex = 1;
@@ -710,29 +704,29 @@ public class ChessManager : MonoBehaviour
             else if (oldPiece is Queen) prefabIndex = 3;
             else if (oldPiece is King) prefabIndex = 4;
             else if (oldPiece is Pawn) prefabIndex = 5;
-            else continue; // skip unknown piece types
+            else continue;
 
-            // 3) Capture the existing piece's runtime scale
+
             Vector3 oldScale = oldPiece.transform.localScale;
 
-            // 4) Destroy the old piece GameObject
+
             Destroy(oldPiece.gameObject);
 
-            // 5) Instantiate the new prefab at the same board cell position
+
             Vector3 worldPos = chessboard.GetCellPosition(cell);
             GameObject prefab = blackPiecePrefabs[prefabIndex];
             GameObject newObj = Instantiate(prefab, worldPos, Quaternion.identity);
 
-            // 6) Re-initialize the new ChessPiece component
+
             var newPiece = newObj.GetComponent<ChessPiece>();
             newPiece.CurrentCell = cell;
             newPiece.isWhite = false;
             newPiece.chessManager = this;
 
-            // 7) **Apply the old piece's scale** (instead of a fixed Vector3.one * 20f)
+
             newObj.transform.localScale = oldScale;
 
-            // 8) Rotate knights so they face “downward” for black side
+
             if (newPiece is Knight)
             {
                 newObj.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -774,51 +768,51 @@ public class ChessManager : MonoBehaviour
 
         List<ChessPiece> threats = GetThreatsToKing(king);
 
-        if (threats.Count == 1) // Single-check scenarios
+        if (threats.Count == 1)
         {
             ChessPiece checker = threats[0];
 
-            // If the King is trying to move along the checking line, invalidate it
+
             if (piece is King && GetBlockingCells(king, checker).Contains(targetCell))
             {
-                return false; // The King cannot block the line of check
+                return false;
             }
 
-            // Allow capturing the checker
+
             if (checker.CurrentCell == targetCell)
             {
                 return true;
             }
 
-            // Allow blocking the check (non-King pieces)
+
             if (!(piece is King) && GetBlockingCells(king, checker).Contains(targetCell))
             {
                 return true;
             }
         }
 
-        return false; // Not a valid move
+        return false;
     }
 
     public bool IsPathClear(string startCell, string endCell, ChessPiece piece)
     {
-        // Knights don't require path checks
+
         if (piece is Knight)
             return true;
 
-        // Get all cells between start and end
+
         var cellsBetween = GetCellsBetween(startCell, endCell);
 
         foreach (var cell in cellsBetween)
         {
             ChessPiece blockingPiece = FindPieceAtCell(cell);
-            if (blockingPiece != null) // If any piece is blocking the path
+            if (blockingPiece != null)
             {
                 return false;
             }
         }
 
-        return true; // Path is clear
+        return true;
     }
 
     public List<string> GetCellsBetween(string startCell, string endCell)
@@ -857,7 +851,7 @@ public class ChessManager : MonoBehaviour
 
             if (piece != null)
             {
-                // Always highlight the cell where the piece is located.
+
                 if (tile.name == piece.CurrentCell)
                 {
                     highlight = true;
@@ -880,23 +874,21 @@ public class ChessManager : MonoBehaviour
             tile.Highlight(highlight);
         }
     }
-    
+
 
     private bool WouldMoveCauseSelfCheck(ChessPiece piece, string targetCell)
     {
-        // Guarda o estado atual
+
         string originalCell = piece.CurrentCell;
         ChessPiece capturedPiece = FindPieceAtCell(targetCell);
 
-        // Simula a jogada
+
         piece.CurrentCell = targetCell;
         if (capturedPiece != null)
-            capturedPiece.gameObject.SetActive(false); // Oculta temporariamente
+            capturedPiece.gameObject.SetActive(false);
 
-        // Verifica se o rei está em xeque
         bool kingInCheck = CheckIfKingInCheck();
 
-        // Reverte o estado
         piece.CurrentCell = originalCell;
         if (capturedPiece != null)
             capturedPiece.gameObject.SetActive(true);
@@ -917,16 +909,14 @@ public class ChessManager : MonoBehaviour
         ChessPiece targetPiece = FindPieceAtCell(targetCell);
 
 
-        // Sempre termina o jogo se um Rei for capturado.
         if (targetPiece != null && targetPiece is King)
         {
-            // ───> Em vez de ResetGame(), exiba o painel de vitória
+
             if (gameEnded) return;
             gameEnded = true;
             if (chessWatch != null)
                 chessWatch.PauseTimers();
 
-            // Determina vencedor: se o rei capturado era branco, as pretas vencem
             string vencedor = targetPiece.isWhite ? "Pretas" : "Brancas";
             if (winText != null)
                 winText.text = $"{vencedor} venceram!";
@@ -942,12 +932,12 @@ public class ChessManager : MonoBehaviour
                 Debug.Log("Cannot capture your own piece!");
                 return;
             }
-            // Normal capture.
+
             Destroy(targetPiece.gameObject);
             Debug.Log($"Captured piece at {targetCell}");
         }
 
-        // Animate the move.
+
         StartCoroutine(MovePieceRoutine(piece, targetCell));
 
 
@@ -960,7 +950,7 @@ public class ChessManager : MonoBehaviour
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
 
-        // Desativar castling quando Rei se move
+
         if (piece is King)
         {
             if (piece.isWhite)
@@ -975,7 +965,7 @@ public class ChessManager : MonoBehaviour
             }
         }
 
-        // Desativar castling se uma Torre se move
+
         if (piece is Rook)
         {
             if (piece.isWhite && piece.CurrentCell == "h1") CanWhiteCastleKingSide = false;
@@ -984,7 +974,7 @@ public class ChessManager : MonoBehaviour
             if (!piece.isWhite && piece.CurrentCell == "a8") CanBlackCastleQueenSide = false;
         }
 
-        // TOCA O SOM
+
         if (moveSounds != null && moveSounds.Length > 0 && audioSource != null)
         {
             int randomIndex = Random.Range(0, moveSounds.Length);
@@ -1016,11 +1006,11 @@ public class ChessManager : MonoBehaviour
         piece.CurrentCell = targetCell;
         boardReady = true;
 
-        // ── Fog of War: rebuild now que piece.CurrentCell está correto
+
         if (rules is FogOfWarRules fow)
             fow.UpdateFog(this, chessboard);
 
-        // Pawn promotion
+
         if (piece is Pawn)
         {
             if ((piece.isWhite && targetCell[1] == '8') || (!piece.isWhite && targetCell[1] == '1'))
@@ -1029,10 +1019,10 @@ public class ChessManager : MonoBehaviour
             }
         }
 
-        // Racing Kings: win by getting your King to rank 1
+
         if (rules is RacingKingsRules && piece is King king && targetCell[1] == '1')
         {
-            // ───> Em vez de ResetGame(), exiba o painel de vitória
+
             if (gameEnded) yield break;
             gameEnded = true;
             if (chessWatch != null)
@@ -1047,7 +1037,7 @@ public class ChessManager : MonoBehaviour
         }
 
         selectedPiece = null;
-        
+
 
 
 
@@ -1058,15 +1048,15 @@ public class ChessManager : MonoBehaviour
         yield break;
     }
 
-    // Called to show the promotion UI panel and store the pawn to promote.
+
     public void ShowPromotionPanel(Pawn pawn)
     {
         pawnToPromote = pawn;
         promotionPanel.SetActive(true);
-        // Optionally disable further input until promotion is complete.
+
     }
 
-    // Called by your UI buttons (OnClick events) com uma string parameter: "Queen", "Rook", "Bishop" ou "Knight".
+
     public void PromotePawn(string pieceType)
     {
         if (pawnToPromote == null)
@@ -1105,10 +1095,10 @@ public class ChessManager : MonoBehaviour
             newPiece.isWhite = pawnToPromote.isWhite;
             newPiece.chessManager = this;
 
-            // Set the scale to match your original pieces.
+
             newPieceObj.transform.localScale = Vector3.one * 20f;
 
-            // For black knights, rotate them by 180° on the Y axis.
+
             if (!pawnToPromote.isWhite && pieceType == "Knight")
             {
                 newPieceObj.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -1124,19 +1114,18 @@ public class ChessManager : MonoBehaviour
 
     private bool DoesMoveRemoveCheck(King king, string targetCell)
     {
-        // Simulate the move
+
         string originalCell = king.CurrentCell;
         ChessPiece targetPiece = FindPieceAtCell(targetCell);
 
-        // Temporarily move the King para o targetCell
         king.CurrentCell = targetCell;
         if (targetPiece != null)
-            Destroy(targetPiece.gameObject); // Temporarily remove captured piece
+            Destroy(targetPiece.gameObject);
 
-        // Check se o King ainda está em check
+
         bool isStillInCheck = king.IsKingInCheck();
 
-        // Restore o estado original
+
         king.CurrentCell = originalCell;
         if (targetPiece != null)
         {
@@ -1149,7 +1138,7 @@ public class ChessManager : MonoBehaviour
                 .CurrentCell = targetCell;
         }
 
-        // Return se o movimento removeu o check
+ 
         return !isStillInCheck;
     }
 
@@ -1208,7 +1197,7 @@ public class ChessManager : MonoBehaviour
 
     public void ResetGame()
     {
-        // Se o painel de vitória estiver ativo, esconda antes de resetar
+  
         if (winPanel != null && winPanel.activeSelf)
             winPanel.SetActive(false);
 
@@ -1221,9 +1210,7 @@ public class ChessManager : MonoBehaviour
         isWhiteTurn = true;
     }
 
-    /// <summary>
-    /// Destroys every ChessPiece on the board e limpa destaques.
-    /// </summary>
+
     public void ClearAllPieces()
     {
         foreach (var piece in Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None))
@@ -1231,17 +1218,15 @@ public class ChessManager : MonoBehaviour
         HighlightValidMoves(null);
     }
 
-    /// <summary>
-    /// Called by a rules cartridge after setup to reset turn/promotion state.
-    /// </summary>
+ 
     public void FinishSetup()
     {
         if (promotionPanel != null)
             promotionPanel.SetActive(false);
 
-        // Ajustar a câmara para as brancas no início
+
         if (CameraSwitcher.Instance != null)
-            CameraSwitcher.Instance.SwitchCamera(true); // Começa com as brancas
+            CameraSwitcher.Instance.SwitchCamera(true);
 
         if (chessWatch != null)
             chessWatch.StartTimers();

@@ -9,7 +9,7 @@ public class LevelDataPVP
     public string sceneName;
     public string titulo;
     public string descricao;
-    public GameObject model3D; // Modelo associado a este nível
+    public GameObject model3D;
 }
 
 public class LevelSelectorPVP : MonoBehaviour
@@ -38,7 +38,7 @@ public class LevelSelectorPVP : MonoBehaviour
 
     void TrocarNivel(int direcao)
     {
-        // Desativa modelo anterior
+
         niveis[nivelAtual].model3D.SetActive(false);
 
         nivelAtual += direcao;
@@ -53,7 +53,7 @@ public class LevelSelectorPVP : MonoBehaviour
         tituloText.text = niveis[nivelAtual].titulo;
         descricaoText.text = niveis[nivelAtual].descricao;
 
-        // Ativa apenas o modelo do nível atual
+
         for (int i = 0; i < niveis.Length; i++)
             niveis[i].model3D.SetActive(i == nivelAtual);
     }
