@@ -38,7 +38,7 @@ public class SettingsManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton + DontDestroyOnLoad
+// Singleton + DontDestroyOnLoad
         if (Instance == null)
         {
             Instance = this;
@@ -50,12 +50,21 @@ public class SettingsManager : MonoBehaviour
             return;
         }
 
-        // Carrega e aplica imediatamente as prefs:
+        // --- Volume: garantir default = 1 na primeira vez ---
+        if (!PlayerPrefs.HasKey(PREF_VOLUME))
+        {
+            PlayerPrefs.SetFloat(PREF_VOLUME, 1f);
+            PlayerPrefs.Save();
+        }
 
-        // Volume
-        float savedVol = PlayerPrefs.GetFloat(PREF_VOLUME, 1f);
-        volumeSlider.value = savedVol;
-        AudioListener.volume = savedVol;
+        // Agora lemos e aplicamos sempre o valor guardado (ou 1 se for a 1ª vez)
+        float savedVol = PlayerPrefs.GetFloat(PREF_VOLUME);
+        // Garante que o slider vai de 0 a 1
+        volumeSlider.minValue = 0f;
+        volumeSlider.maxValue = 1f;
+        volumeSlider.value    = savedVol;
+        AudioListener.volume  = savedVol;
+
 
         // Qualidade
         qualityDropdown.ClearOptions();
