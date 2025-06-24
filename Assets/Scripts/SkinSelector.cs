@@ -5,19 +5,19 @@ using UnityEngine.UI;
 [Serializable]
 public struct SkinOption
 {
-    public string name;
-    public Sprite previewSprite;
+    public string   name;
+    public Sprite   previewSprite;
     public GameObject[] blackPiecePrefabs;
 }
 
 public class SkinSelector : MonoBehaviour
 {
     [Header("UI References")]
-    public Button skinButton;
+    public Button    skinButton;
     public GameObject skinPanel;
-    public Image previewImage;
-    public Button nextSkinButton;
-    public Button applySkinButton;
+    public Image     previewImage;
+    public Button    nextSkinButton;
+    public Button    applySkinButton;
 
     [Header("Skins")]
     public SkinOption[] skins;
@@ -25,15 +25,18 @@ public class SkinSelector : MonoBehaviour
     [Header("Game Manager")]
     public ChessManager chessManager;
 
-    private int currentIndex = 0;
-    private int appliedIndex = 0;
+    private int currentIndex;
+    private int appliedIndex;
 
     void Awake()
     {
-        skinPanel.SetActive(false);
+        // 1) Load previously applied skin (default 0)
+        appliedIndex = PlayerPrefs.GetInt("SelectedBlackSkin", 0);
+        appliedIndex = Mathf.Clamp(appliedIndex, 0, skins.Length - 1);
 
-        appliedIndex = 0;
         currentIndex = appliedIndex;
+
+        skinPanel.SetActive(false);
 
         skinButton.onClick.AddListener(OpenSkinPanel);
         nextSkinButton.onClick.AddListener(CycleNextSkin);
@@ -64,27 +67,28 @@ public class SkinSelector : MonoBehaviour
         {
             var c = previewImage.color;
             previewImage.color = new Color(c.r, c.g, c.b, 0.5f);
-
             applySkinButton.interactable = false;
         }
         else
         {
             var c = previewImage.color;
             previewImage.color = new Color(c.r, c.g, c.b, 1f);
-
             applySkinButton.interactable = true;
         }
     }
 
     void ApplyCurrentSkin()
     {
-
+        // 1) Apply immediately in this scene
         chessManager.blackPiecePrefabs = skins[currentIndex].blackPiecePrefabs;
-
         chessManager.ReplaceBlackPieces();
 
-        appliedIndex = currentIndex;
+        // 2) Persist choice for other scenes
+        PlayerPrefs.SetInt("SelectedBlackSkin", currentIndex);
+        PlayerPrefs.Save();
 
+        // 3) Remember and close
+        appliedIndex = currentIndex;
         skinPanel.SetActive(false);
     }
 }

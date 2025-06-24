@@ -72,9 +72,12 @@ public class GameManager : MonoBehaviour
         chessManager.SetRules(activeRules);
         chessManager.isLocalMultiplayer = isLocalMultiplayer;
 
-        skinManager.currentRules     = activeRules;
-        skinManager.chessManager     = chessManager;
+        skinManager.currentRules = activeRules;
+        skinManager.chessManager = chessManager;
         skinManager.ApplyWhiteSkin(skinIndex);
+
+        // ← NOW add this:
+        skinManager.ApplyBlackSkin(skinManager.currentBlackSkinIndex);
 
         chessManager.StartGame();
     }

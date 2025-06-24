@@ -438,7 +438,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
   defaultVariant: 1
-  defaultWhiteSkinIndex: 0
+  defaultWhiteSkinIndex: 6
   isLocalMultiplayer: 0
 --- !u!4 &27457178
 Transform:
@@ -18637,69 +18637,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656268982}
   m_CullTransparentMesh: 1
---- !u!1 &1663915877
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1663915879}
-  - component: {fileID: 1663915878}
-  m_Layer: 0
-  m_Name: SkinManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1663915878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663915877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41989f9bd57b72e488e60a28a68c89cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skins:
-  - name: Zarn
-    whitePiecePrefabs:
-    - {fileID: 8024738592023431856, guid: 6f7abb34e580f84428142faf02dede5d, type: 3}
-    - {fileID: 8900708345595355703, guid: 30264a1e4bfa69348acf8a4326ec0050, type: 3}
-    - {fileID: 46299692195779553, guid: 4e35cdfd994256b42abdded1d33b3ba5, type: 3}
-    - {fileID: 6559451000599951989, guid: aa4a7b45d36e7d946b77a8aca2d035af, type: 3}
-    - {fileID: 5870353341859306352, guid: 484f0591575f0624ab4d203bb8add511, type: 3}
-    - {fileID: 1633816061134371313, guid: d47a3659ceec0234f9c7210d10de863c, type: 3}
-  - name: Normal
-    whitePiecePrefabs:
-    - {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
-    - {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
-    - {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
-    - {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
-    - {fileID: 5401506608500310490, guid: ddc9e087fb081d24dacbd756916afb8a, type: 3}
-    - {fileID: 8747406407414535925, guid: 128958fb6b805734d98c635ccba02b98, type: 3}
-  currentSkinIndex: 0
-  chessManager: {fileID: 0}
---- !u!4 &1663915879
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663915877}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.565212, y: -33.14074, z: 30.730095}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1668297310
 GameObject:
   m_ObjectHideFlags: 0
@@ -23504,4 +23441,3 @@ SceneRoots:
   - {fileID: 27457178}
   - {fileID: 603167051}
   - {fileID: 1453862841}
-  - {fileID: 1663915879}

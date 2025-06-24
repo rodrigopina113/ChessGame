@@ -593,7 +593,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e700c8b8f8e3cb49a21bb9ffa209ef6, type: 2}
   - {fileID: 11400000, guid: 2959b53ea1c72794a944c6d9e5006816, type: 2}
   defaultVariant: 2
-  defaultWhiteSkinIndex: 0
+  defaultWhiteSkinIndex: 9
   isLocalMultiplayer: 0
 --- !u!4 &27457178
 Transform:
@@ -21439,69 +21439,6 @@ RectTransform:
   m_AnchoredPosition: {x: -825.7285, y: -421.72528}
   m_SizeDelta: {x: 200, y: 188.54947}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2040005681
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2040005683}
-  - component: {fileID: 2040005682}
-  m_Layer: 0
-  m_Name: SkinManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2040005682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040005681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41989f9bd57b72e488e60a28a68c89cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skins:
-  - name: Dragons
-    whitePiecePrefabs:
-    - {fileID: 4983884007888730132, guid: 4012ca3ae1e57b94aa37b2ea77c8aeb3, type: 3}
-    - {fileID: 805728966092800601, guid: 8a99127566f29ab4e9e1fa146c769e97, type: 3}
-    - {fileID: 1787816833270862814, guid: c9506cc75253ca24f895a9604023207a, type: 3}
-    - {fileID: 453717009983301320, guid: feea1af19aba0234290939c945d7cb79, type: 3}
-    - {fileID: 4949772240441893030, guid: 98047536331c0444f8dade57413bc175, type: 3}
-    - {fileID: 5289418619664255527, guid: 520d996bc1fcffa488f23d8a0d87ddbd, type: 3}
-  - name: Normal
-    whitePiecePrefabs:
-    - {fileID: 2803339410984760472, guid: e4e01d63b185fa544b8b0d438c073794, type: 3}
-    - {fileID: 1642526426932754161, guid: 92361d34b808b3442b22608eb78dada4, type: 3}
-    - {fileID: 8932213718171496421, guid: 9bcf81a340139574daa6a30fe19c3b2f, type: 3}
-    - {fileID: 716208200353808350, guid: b7901f30e7f9d9f4ea439cf92295c22c, type: 3}
-    - {fileID: 5401506608500310490, guid: ddc9e087fb081d24dacbd756916afb8a, type: 3}
-    - {fileID: 8747406407414535925, guid: 128958fb6b805734d98c635ccba02b98, type: 3}
-  currentSkinIndex: 0
-  chessManager: {fileID: 0}
---- !u!4 &2040005683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040005681}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.565212, y: -33.14074, z: 30.730095}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2042458806
 GameObject:
   m_ObjectHideFlags: 0
@@ -23203,4 +23140,3 @@ SceneRoots:
   - {fileID: 27457178}
   - {fileID: 997243389}
   - {fileID: 1453862841}
-  - {fileID: 2040005683}
