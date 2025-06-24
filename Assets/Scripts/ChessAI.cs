@@ -53,7 +53,7 @@ public class ChessAI : MonoBehaviour
             chessManager.MovePiece(piece, to);
             Debug.Log($"🤖 Stockfish moveu {piece.name} de {from} para {to}");
 
-            // Aguarda até o movimento terminar visualmente
+
             chessManager.StartCoroutine(MakeMoveAndWait(piece, to, onMoveCompleted));
         }
         else
@@ -65,16 +65,16 @@ public class ChessAI : MonoBehaviour
     {
         chessManager.MovePiece(piece, to);
 
-        // Espera até que o movimento gráfico tenha tempo de se completar
+
         yield return new WaitForSeconds(0.5f);
 
-        // Só então chama o callback (que por sua vez invoca CheckOpponentStatus + EndTurn)
+
         callback?.Invoke();
     }
 
     private IEnumerator WaitAndInvoke(Action callback)
     {
-        yield return new WaitForSeconds(0.4f); // espera o MovePieceRoutine (300ms)
+        yield return new WaitForSeconds(0.4f);
         callback?.Invoke();
     }
 

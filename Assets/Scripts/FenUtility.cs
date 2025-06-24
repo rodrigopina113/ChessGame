@@ -7,7 +7,6 @@ public static class FenUtility
     {
         StringBuilder sb = new StringBuilder();
 
-        // 1. Posicionamento das peças
         for (int row = 7; row >= 0; row--)
         {
             int empty = 0;
@@ -39,11 +38,9 @@ public static class FenUtility
                 sb.Append('/');
         }
 
-        // 2. Cor do jogador atual
         sb.Append(' ');
         sb.Append(manager.IsWhiteTurn ? 'w' : 'b');
 
-        // 3. Castling rights
         sb.Append(' ');
         string castling = "";
         if (manager.CanWhiteCastleKingSide) castling += "K";
@@ -52,14 +49,11 @@ public static class FenUtility
         if (manager.CanBlackCastleQueenSide) castling += "q";
         sb.Append(string.IsNullOrEmpty(castling) ? "-" : castling);
 
-        // 4. En passant target square
         sb.Append(' ');
         sb.Append(string.IsNullOrEmpty(manager.LastDoubleStepTargetCell) ? "-" : manager.LastDoubleStepTargetCell);
 
-        // 5. Halfmove clock (opcional, fixo)
         sb.Append(" 0");
 
-        // 6. Fullmove number (opcional, fixo por agora)
         sb.Append(" 1");
 
         return sb.ToString();

@@ -27,13 +27,13 @@ public class PlanetRotator : MonoBehaviour,
 
     void Start()
     {
-        // Find your controller in the scene
+
         selector = FindFirstObjectByType<LevelSelectorController>();
     }
 
     void Update()
     {
-        // Continuous Y-axis rotation
+
         transform.Rotate(Vector3.up, currentSpeed * Time.deltaTime);
     }
 

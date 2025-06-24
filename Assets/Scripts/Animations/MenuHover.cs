@@ -18,7 +18,7 @@ public class UIHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Color highlightColor = new Color(1f, 0.9f, 0.2f);
 
     RectTransform _rect;
-    Graphic     _graphic;       // funciona com Image, Text, TextMeshProUGUI (ambos derivam de Graphic)
+    Graphic     _graphic;
     Vector3     _initialScale;
     Coroutine   _currentAnim;
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class CutsceneController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-        public Renderer    quadRenderer;       // ← arraste aqui o seu Quad
+        public Renderer    quadRenderer;
     public string      materialProperty = "_BaseMap";
     public float skipCooldown = 1f;
     bool hasStarted = false;
@@ -22,7 +22,7 @@ public class CutsceneController : MonoBehaviour
         videoPlayer.source                 = VideoSource.VideoClip;
         videoPlayer.clip                   = NextLevelLoader.cutsceneClip;
         videoPlayer.renderMode             = VideoRenderMode.MaterialOverride;
-        videoPlayer.targetMaterialRenderer = quadRenderer;              // ← use este
+        videoPlayer.targetMaterialRenderer = quadRenderer;
         videoPlayer.targetMaterialProperty = materialProperty;
 
         videoPlayer.loopPointReached += _ => LoadLevel();

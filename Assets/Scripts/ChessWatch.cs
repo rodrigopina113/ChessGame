@@ -42,7 +42,7 @@ public class ChessWatch : MonoBehaviour
             if (whiteTimeRemaining <= 0)
             {
                 whiteTimeRemaining = 0;
-                EndGame(false); // preto venceu
+                EndGame(false);
             }
         }
         else
@@ -51,7 +51,7 @@ public class ChessWatch : MonoBehaviour
             if (blackTimeRemaining <= 0)
             {
                 blackTimeRemaining = 0;
-                EndGame(true); // branco venceu
+                EndGame(true);
             }
         }
 
@@ -74,18 +74,14 @@ public class ChessWatch : MonoBehaviour
         return $"{minutes:00}:{seconds:00}";
     }
 
-    /// <summary>
-    /// Deve ser chamado no início do jogo.
-    /// </summary>
+
     public void StartTimers()
     {
         isCounting = true;
         Debug.Log("✔️ StartTimers chamado: isCounting = " + isCounting);
     }
 
-    /// <summary>
-    /// Deve ser chamado no fim do turno, após mover a peça.
-    /// </summary>
+ 
     public void SwitchTurn()
     {
         isWhiteTurn = !isWhiteTurn;
@@ -98,17 +94,13 @@ public class ChessWatch : MonoBehaviour
             currentPlayerText.text = isWhiteTurn ? "Brancas a jogar" : "Pretas a jogar";
     }
 
-    /// <summary>
-    /// Para temporariamente a contagem de tempo (ex: pausa).
-    /// </summary>
+ 
     public void PauseTimers()
     {
         isCounting = false;
     }
 
-    /// <summary>
-    /// Retoma a contagem de tempo após pausa.
-    /// </summary>
+  
     public void ResumeTimers()
     {
         isCounting = true;

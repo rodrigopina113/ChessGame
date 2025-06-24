@@ -7,7 +7,7 @@ public class ShowPanelOnClick : MonoBehaviour
     private GameObject panel;
 
     [SerializeField]
-    private Button[] buttonsToDisable; // outros botões a desativar quando este painel abrir
+    private Button[] buttonsToDisable;
 
     private bool isPausedByThisPanel = false;
 

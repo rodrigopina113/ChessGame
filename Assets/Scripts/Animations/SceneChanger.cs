@@ -20,10 +20,8 @@ public class SceneChanger : MonoBehaviour
 
         public void PlayNextLevelCutscene()
     {
-        // 1) Passa dados para o loader estático
         NextLevelLoader.sceneName    = nextLevelSceneName;
         NextLevelLoader.cutsceneClip = nextCutsceneClip;
-        // 2) Carrega a cena de cutscene
         SceneManager.LoadScene("CutScene");
     }
 }

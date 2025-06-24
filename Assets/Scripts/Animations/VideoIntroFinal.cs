@@ -19,7 +19,7 @@ public class IntroSkip : MonoBehaviour
     void Start()
     {
         timer = 0f;
-        // Se você estiver usando um VideoPlayer, garante transição automática no fim do vídeo
+
         if (videoPlayer != null)
             videoPlayer.loopPointReached += _ => SkipToNextScene();
     }
@@ -29,29 +29,29 @@ public class IntroSkip : MonoBehaviour
         if (hasSkipped) 
             return;
 
-        // Atualiza o contador
+
         timer += Time.deltaTime;
 
-        // Se ainda não passou do cooldown, sai
+
         if (timer < skipCooldown)
             return;
 
-        // Mouse / botão principal do mouse
+
         if (Input.GetMouseButtonDown(0))
             SkipToNextScene();
 
-        // Toque na tela (mobile)
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             SkipToNextScene();
 
-        // Qualquer tecla (opcional)
+
         if (Input.anyKeyDown)
             SkipToNextScene();
     }
 
     void SkipToNextScene()
     {
-        hasSkipped = true;  // evita chamadas múltiplas
+        hasSkipped = true;
         SceneManager.LoadScene(nextSceneName);
     }
 }

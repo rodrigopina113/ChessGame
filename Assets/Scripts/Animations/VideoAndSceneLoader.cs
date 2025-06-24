@@ -14,14 +14,11 @@ public class VideoAndSceneLoader : MonoBehaviour
 
     void Start()
     {
-        // Começa com a tela preta (alpha = 1)
         SetFadeAlpha(1f);
 
-        // Inicia o vídeo
         videoPlayer.loopPointReached += OnVideoFinished;
         videoPlayer.Play();
 
-        // Inicia o fade-in
         StartCoroutine(FadeIn());
     }
 

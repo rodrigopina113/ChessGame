@@ -11,18 +11,18 @@ public class Queen : ChessPiece
             rowDifference == colDifference
             || targetCell[0] == CurrentCell[0]
             || targetCell[1] == CurrentCell[1]
-        ) // Diagonal or straight-line
+        )
         {
             if (IsPathBlocked(CurrentCell, targetCell))
-                return false; // Path is blocked
+                return false;
 
             ChessPiece targetPiece = chessManager.FindPieceAtCell(targetCell);
             if (targetPiece != null && targetPiece.isWhite == this.isWhite)
-                return false; // Same color piece at target
+                return false;
 
-            return true; // Valid move
+            return true;
         }
 
-        return false; // Not a valid move for a Queen
+        return false;
     }
 }

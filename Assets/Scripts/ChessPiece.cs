@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class ChessPiece : MonoBehaviour
 {
-    public bool isWhite; // Set in Inspector
-    private string currentCell; // Managed by ChessManager
-    public ChessManager chessManager; // Reference to the ChessManager
+    public bool isWhite;
+    private string currentCell;
+    public ChessManager chessManager;
 
     public string CurrentCell
     {
@@ -21,13 +21,13 @@ public abstract class ChessPiece : MonoBehaviour
         foreach (var cell in cellsBetween)
         {
             ChessPiece piece = chessManager.FindPieceAtCell(cell);
-            if (piece != null) // If a piece is found in the path
+            if (piece != null)
             {
-                return true; // Path is blocked
+                return true;
             }
         }
 
-        return false; // Path is clear
+        return false;
     }
 
     public void AdjustSizeBasedOnRow()
