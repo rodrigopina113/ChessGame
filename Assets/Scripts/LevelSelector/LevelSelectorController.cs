@@ -1,3 +1,4 @@
+// LevelSelectorController.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,7 @@ public class LevelSelectorController : MonoBehaviour
     private GameObject currentPlanet;
 
     [Header("Transition Settings")]
-    [Tooltip("World-units to offset planets on entry/exit")]
     public float planetOffset = 10f;
-    [Tooltip("Seconds for the slide animation")]
     public float transitionTime = 0.5f;
 
     private int currentIndex = 0;
@@ -67,7 +66,6 @@ public class LevelSelectorController : MonoBehaviour
             StartCoroutine(AnimatePlanetTransition(target, delta));
     }
 
-    // ✅ NOVO MÉTODO: ir diretamente para índice
     public void JumpToIndex(int index)
     {
         if (isTransitioning) return;
@@ -85,23 +83,19 @@ public class LevelSelectorController : MonoBehaviour
     private IEnumerator AnimatePlanetTransition(int newIndex, int direction)
     {
         isTransitioning = true;
-
         GameObject oldPlanet = currentPlanet;
-
         var newData = levels[newIndex];
         GameObject newPlanet = Instantiate(newData.planetPrefab, planetHolder);
 
         newPlanet.transform.localPosition = Vector3.right * planetOffset * direction;
         newPlanet.transform.localRotation = Quaternion.identity;
-        newPlanet.transform.localScale = newData.planetPrefab.transform.localScale;
+        newPlanet.transform.localScale    = newData.planetPrefab.transform.localScale;
 
-        currentIndex = newIndex;
+        currentIndex   = newIndex;
         progressBar.value = (float)newIndex / (levels.Count - 1);
         levelNameText.text = newData.levelName;
         StartCoroutine(FlipAndChangePreview(newData.previewSprite));
-
-        if (tickMarks != null)
-            tickMarks.RefreshTicks(currentIndex, maxUnlocked);
+        tickMarks?.RefreshTicks(currentIndex, maxUnlocked);
 
         float elapsed = 0f;
         while (elapsed < transitionTime)
@@ -128,7 +122,6 @@ public class LevelSelectorController : MonoBehaviour
         if (oldPlanet != null) Destroy(oldPlanet);
         newPlanet.transform.localPosition = Vector3.zero;
         currentPlanet = newPlanet;
-
         isTransitioning = false;
     }
 
@@ -139,8 +132,7 @@ public class LevelSelectorController : MonoBehaviour
         levelNameText.text = data.levelName;
         previewRenderer.sprite = data.previewSprite;
 
-        if (currentPlanet != null)
-            Destroy(currentPlanet);
+        if (currentPlanet != null) Destroy(currentPlanet);
         currentPlanet = Instantiate(data.planetPrefab, planetHolder);
         currentPlanet.transform.localPosition = Vector3.zero;
     }
@@ -148,30 +140,28 @@ public class LevelSelectorController : MonoBehaviour
     public void ConfirmSelection()
     {
         var data = levels[currentIndex];
-        NextLevelLoader.sceneName = data.sceneName;
-        NextLevelLoader.cutsceneClip = data.cutsceneClip;
+        NextLevelLoader.sceneName         = data.sceneName;
+        NextLevelLoader.cutsceneFileName = data.cutsceneFileName;
         SceneManager.LoadScene("CutScene");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) ChangeIndex(-1);
+        if (Input.GetKeyDown(KeyCode.LeftArrow))  ChangeIndex(-1);
         if (Input.GetKeyDown(KeyCode.RightArrow)) ChangeIndex(+1);
-        if (Input.GetKeyDown(KeyCode.Return)) ConfirmSelection();
+        if (Input.GetKeyDown(KeyCode.Return))     ConfirmSelection();
     }
 
     private IEnumerator FlipAndChangePreview(Sprite newSprite)
     {
         Vector3 originalEuler = previewRenderer.transform.localEulerAngles;
-
         float elapsed = 0f;
         bool hasSwapped = false;
-        float duration = transitionTime;
 
-        while (elapsed < duration)
+        while (elapsed < transitionTime)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
+            float t = Mathf.Clamp01(elapsed / transitionTime);
             float spinAngle = Mathf.Lerp(0f, 360f, t);
 
             if (!hasSwapped && spinAngle >= 180f)
@@ -180,10 +170,9 @@ public class LevelSelectorController : MonoBehaviour
                 hasSwapped = true;
             }
 
-            float y = originalEuler.y + spinAngle;
             previewRenderer.transform.localEulerAngles = new Vector3(
                 originalEuler.x,
-                y,
+                originalEuler.y + spinAngle,
                 originalEuler.z
             );
 

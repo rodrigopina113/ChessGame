@@ -1,41 +1,55 @@
+// CutsceneController.cs
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class CutsceneController : MonoBehaviour
 {
+    [Header("Video Player Settings")]
     public VideoPlayer videoPlayer;
-        public Renderer    quadRenderer;
+    public Renderer    quadRenderer;
     public string      materialProperty = "_BaseMap";
-    public float skipCooldown = 1f;
+    public float       skipCooldown     = 1f;
+
     bool hasStarted = false;
     bool canSkip => Time.timeSinceLevelLoad >= skipCooldown;
 
     void Start()
     {
-        if (NextLevelLoader.cutsceneClip == null)
+        if (string.IsNullOrEmpty(NextLevelLoader.cutsceneFileName))
         {
-            Debug.LogError("[Cutscene] clip é NULL!");
+            Debug.LogError("[CutsceneController] cutsceneFileName está vazio!");
             return;
         }
 
-        videoPlayer.source                 = VideoSource.VideoClip;
-        videoPlayer.clip                   = NextLevelLoader.cutsceneClip;
+        // Configura para URL
+        videoPlayer.source = VideoSource.Url;
+        // Monta o caminho para StreamingAssets/WebGLVideos
+        string url = Application.streamingAssetsPath
+                   + "/WebGLVideos/"
+                   + NextLevelLoader.cutsceneFileName;
+        videoPlayer.url = url;
+
+        // Renderiza sobre o material do quad
         videoPlayer.renderMode             = VideoRenderMode.MaterialOverride;
         videoPlayer.targetMaterialRenderer = quadRenderer;
         videoPlayer.targetMaterialProperty = materialProperty;
 
         videoPlayer.loopPointReached += _ => LoadLevel();
         videoPlayer.Prepare();
-        videoPlayer.prepareCompleted  += vp => vp.Play();
-        hasStarted = true;
+        videoPlayer.prepareCompleted += vp => {
+            vp.Play();
+            hasStarted = true;
+        };
     }
 
     void Update()
     {
         if (hasStarted && canSkip &&
             (Input.GetMouseButtonDown(0) || Input.anyKeyDown))
+        {
             LoadLevel();
+        }
     }
 
     void LoadLevel()
@@ -43,4 +57,3 @@ public class CutsceneController : MonoBehaviour
         SceneManager.LoadScene(NextLevelLoader.sceneName);
     }
 }
-

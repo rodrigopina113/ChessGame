@@ -6080,12 +6080,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1145356185}
   - {fileID: 1786577731}
   - {fileID: 1114499423}
   - {fileID: 1338498091}
   - {fileID: 1764494708}
   - {fileID: 738751734}
+  - {fileID: 1145356185}
   m_Father: {fileID: 1162970549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6774,13 +6774,13 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 3
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: 
+  m_Url: file://C:/Users/tomas/OneDrive/Ambiente de Trabalho/2semestre/projetochess/ChessGame/Assets/StreamingAssets/WebGLVideos/creditsfinalfinal.mp4
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
@@ -8493,7 +8493,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 3
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -13172,7 +13172,7 @@ VideoPlayer:
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: "file://C:/Users/pddaa/OneDrive/\xC1rea de Trabalho/CI/f6/ChessGame/Assets/StreamingAssets/WebGLVideos/spacetravel.webm"
+  m_Url: file://C:/Users/tomas/OneDrive/Ambiente de Trabalho/2semestre/projetochess/ChessGame/Assets/StreamingAssets/WebGLVideos/spacetravelfinalfinal.mp4
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0

@@ -1,38 +1,45 @@
+// SceneChanger.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
-using System.IO;
 
+/// <summary>
+/// Controla a transição entre níveis incluindo a reprodução
+/// da cutscene numa cena dedicada ("CutScene").
+/// </summary>
 public class SceneChanger : MonoBehaviour
 {
-    [Tooltip("Filename of your cutscene WebM, e.g. 'level1.webm'")]
+    [Tooltip("Filename da cutscene em StreamingAssets/WebGLVideos, ex: 'level1.webm'")]
     public string nextCutsceneFileName;
-    [Tooltip("Defina no Inspector o nome da cena do próximo nível")]
+    
+    [Tooltip("Nome da cena do próximo nível, ex: 'Level2-Stonedge'")]
     public string nextLevelSceneName;
+
+    /// <summary>
+    /// Prepara os dados da cutscene e carrega a cena "CutScene".
+    /// Esta cena deverá conter um CutsceneController que
+    /// irá reproduzir o vídeo e depois chamar SceneManager.LoadScene(nextLevelSceneName).
+    /// </summary>
+    public void PlayNextLevelCutscene()
+    {
+        // Guarda no loader estático
+        NextLevelLoader.cutsceneFileName = nextCutsceneFileName;
+        NextLevelLoader.sceneName        = nextLevelSceneName;
+
+        // Carrega a cena dedicada a reprodução de cutscenes
+        SceneManager.LoadScene("CutScene");
+    }
+
+    /// <summary>
+    /// Carrega diretamente uma cena (sem cutscene).
+    /// Útil para botões de menu que não tenham cutscene.
+    /// </summary>
     public void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName))
         {
-            Debug.LogError($"SceneChanger: no sceneName provided on GameObject '{gameObject.name}'");
+            Debug.LogError($"SceneChanger: sceneName não foi definido no GameObject '{gameObject.name}'");
             return;
         }
         SceneManager.LoadScene(sceneName);
-    }
-
-        public void PlayNextLevelCutscene()
-    {
-        // Build the URL to StreamingAssets/WebGLVideos/<your file>
-        string basePath = Application.streamingAssetsPath;
-        string url      = Path.Combine(basePath, "WebGLVideos", nextCutsceneFileName);
-
-        // Find and configure the VideoPlayer in the CutScene scene
-        var vp = FindFirstObjectByType<VideoPlayer>();
-        vp.source = VideoSource.Url;
-        vp.url    = url;
-        vp.Play();
-
-        // After it finishes, load the next level
-        vp.loopPointReached += _ => 
-            SceneManager.LoadScene(nextLevelSceneName);
     }
 }
