@@ -10246,7 +10246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae51a75228dd5ff4e9665c5448cb5a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 330585546}
   rotationSpeed: 5
   zoomSpeed: 10
   minZoom: -2
