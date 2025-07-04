@@ -13587,6 +13587,14 @@ PrefabInstance:
       value: -225
       objectReference: {fileID: 0}
     - target: {fileID: 1665722870555377031, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665722870555377031, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayNextLevelCutscene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665722870555377031, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level9-Dragons
       objectReference: {fileID: 0}
@@ -13701,6 +13709,14 @@ PrefabInstance:
     - target: {fileID: 6790870437421429180, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -225
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259276401441477657, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
+      propertyPath: nextLevelSceneName
+      value: Level9-Dragons
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259276401441477657, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
+      propertyPath: nextCutsceneFileName
+      value: Draundefined2.mp4
       objectReference: {fileID: 0}
     - target: {fileID: 8922694788119855720, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -14760,7 +14776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneFileName: aiundefined.webm
+  nextCutsceneFileName: 
   nextLevelSceneName: Level9-Dragons
 --- !u!4 &1453862841
 Transform:

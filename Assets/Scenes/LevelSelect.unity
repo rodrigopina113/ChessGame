@@ -789,6 +789,7 @@ MonoBehaviour:
     previewSprite: {fileID: 21300000, guid: bb761b62139f2c14c9c3f3a90e19cbf1, type: 3}
     planetPrefab: {fileID: 269116146448697141, guid: 402493c18b4ab064a90104d47e1cd918, type: 3}
     cutsceneFileName: Celundefined2.mp4
+  sceneChanger: {fileID: 177319991}
   progressBar: {fileID: 32892839}
   levelNameText: {fileID: 2106338680}
   previewRenderer: {fileID: 406095497}

@@ -1,4 +1,3 @@
-// LevelSelectorController.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,9 @@ public class LevelSelectorController : MonoBehaviour
 {
     [Header("Data")]
     public List<LevelData> levels;
+
+    [Header("Scene Changer")]
+    public SceneChanger sceneChanger;
 
     [Header("UI Elements")]
     public Slider progressBar;
@@ -26,53 +28,55 @@ public class LevelSelectorController : MonoBehaviour
     public float planetOffset = 10f;
     public float transitionTime = 0.5f;
 
+    [Header("Tick Marks (optional)")]
+    public SliderTickMarks tickMarks;
+
     private int currentIndex = 0;
     private int maxUnlocked;
     private bool isTransitioning = false;
 
-    public SliderTickMarks tickMarks;
-
-    void Start()
+    private void Start()
     {
         maxUnlocked = LevelProgressManager.Instance.GetHighestUnlocked();
         maxUnlocked = Mathf.Clamp(maxUnlocked, 0, levels.Count);
         currentIndex = Mathf.Clamp(currentIndex, 0, Mathf.Min(maxUnlocked, levels.Count - 1));
 
-        tickMarks.RefreshTicks(currentIndex, maxUnlocked);
-
+        tickMarks?.RefreshTicks(currentIndex, maxUnlocked);
         UpdateProgressUI();
         UpdateUIInstant();
         LevelProgressManager.Instance.OnProgressUnlocked += OnUnlocked;
     }
 
-    void OnUnlocked(int newMax)
+    private void OnUnlocked(int newMax)
     {
         maxUnlocked = Mathf.Clamp(newMax, 0, levels.Count);
         UpdateProgressUI();
-        tickMarks.RefreshTicks(currentIndex, maxUnlocked);
+        tickMarks?.RefreshTicks(currentIndex, maxUnlocked);
     }
 
-    void UpdateProgressUI()
+    private void UpdateProgressUI()
     {
-        progressBar.value = (float)maxUnlocked / (levels.Count - 1);
+        progressBar.value = (levels.Count > 1)
+            ? (float)maxUnlocked / (levels.Count - 1)
+            : 1f;
     }
 
     public void ChangeIndex(int delta)
     {
         if (isTransitioning) return;
-        int maxSelectable = Mathf.Min(maxUnlocked, levels.Count - 1);
-        int target = Mathf.Clamp(currentIndex + delta, 0, maxSelectable);
+        int maxSel = Mathf.Min(maxUnlocked, levels.Count - 1);
+        int target = Mathf.Clamp(currentIndex + delta, 0, maxSel);
         if (target != currentIndex)
-            StartCoroutine(AnimatePlanetTransition(target, delta));
+            StartCoroutine(AnimatePlanetTransition(target, target > currentIndex ? 1 : -1));
     }
 
     public void JumpToIndex(int index)
     {
         if (isTransitioning) return;
-        int maxSelectable = Mathf.Min(maxUnlocked, levels.Count - 1);
-        int target = Mathf.Clamp(index, 0, maxSelectable);
+        int maxSel = Mathf.Min(maxUnlocked, levels.Count - 1);
+        int target = Mathf.Clamp(index, 0, maxSel);
         if (target != currentIndex)
-            StartCoroutine(AnimatePlanetTransition(target, target > currentIndex ? +1 : -1));
+            StartCoroutine(AnimatePlanetTransition(target, target > currentIndex ? 1 : -1));
     }
 
     public void OnLevelComplete()
@@ -84,18 +88,18 @@ public class LevelSelectorController : MonoBehaviour
     {
         isTransitioning = true;
         GameObject oldPlanet = currentPlanet;
-        var newData = levels[newIndex];
-        GameObject newPlanet = Instantiate(newData.planetPrefab, planetHolder);
+        LevelData data = levels[newIndex];
+        GameObject newPlanet = Instantiate(data.planetPrefab, planetHolder);
 
         newPlanet.transform.localPosition = Vector3.right * planetOffset * direction;
         newPlanet.transform.localRotation = Quaternion.identity;
-        newPlanet.transform.localScale    = newData.planetPrefab.transform.localScale;
+        newPlanet.transform.localScale    = data.planetPrefab.transform.localScale;
 
-        currentIndex   = newIndex;
-        progressBar.value = (float)newIndex / (levels.Count - 1);
-        levelNameText.text = newData.levelName;
-        StartCoroutine(FlipAndChangePreview(newData.previewSprite));
+        currentIndex       = newIndex;
+        UpdateProgressUI();
+        levelNameText.text = data.levelName;
         tickMarks?.RefreshTicks(currentIndex, maxUnlocked);
+        StartCoroutine(FlipAndChangePreview(data.previewSprite));
 
         float elapsed = 0f;
         while (elapsed < transitionTime)
@@ -127,25 +131,36 @@ public class LevelSelectorController : MonoBehaviour
 
     private void UpdateUIInstant()
     {
-        var data = levels[currentIndex];
-        progressBar.value = (float)currentIndex / (levels.Count - 1);
-        levelNameText.text = data.levelName;
+        LevelData data = levels[currentIndex];
+        progressBar.value     = (levels.Count > 1)
+            ? (float)currentIndex / (levels.Count - 1)
+            : 1f;
+        levelNameText.text    = data.levelName;
         previewRenderer.sprite = data.previewSprite;
 
-        if (currentPlanet != null) Destroy(currentPlanet);
+        if (currentPlanet != null)
+            Destroy(currentPlanet);
+
         currentPlanet = Instantiate(data.planetPrefab, planetHolder);
         currentPlanet.transform.localPosition = Vector3.zero;
     }
 
     public void ConfirmSelection()
     {
-        var data = levels[currentIndex];
-        NextLevelLoader.sceneName         = data.sceneName;
-        NextLevelLoader.cutsceneFileName = data.cutsceneFileName;
-        SceneManager.LoadScene("CutScene");
+        LevelData data = levels[currentIndex];
+        if (sceneChanger != null)
+        {
+            sceneChanger.nextLevelSceneName   = data.sceneName;
+            sceneChanger.nextCutsceneFileName = data.cutsceneFileName;
+            sceneChanger.PlayNextLevelCutscene();
+        }
+        else
+        {
+            Debug.LogError("LevelSelectorController: referência a SceneChanger não atribuída!");
+        }
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))  ChangeIndex(-1);
         if (Input.GetKeyDown(KeyCode.RightArrow)) ChangeIndex(+1);
@@ -154,35 +169,31 @@ public class LevelSelectorController : MonoBehaviour
 
     private IEnumerator FlipAndChangePreview(Sprite newSprite)
     {
-        Vector3 originalEuler = previewRenderer.transform.localEulerAngles;
-        float elapsed = 0f;
-        bool hasSwapped = false;
+        Vector3 original = previewRenderer.transform.localEulerAngles;
+        float elapsed    = 0f;
+        bool swapped     = false;
 
         while (elapsed < transitionTime)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / transitionTime);
-            float spinAngle = Mathf.Lerp(0f, 360f, t);
+            float t     = Mathf.Clamp01(elapsed / transitionTime);
+            float angle = Mathf.Lerp(0f, 360f, t);
 
-            if (!hasSwapped && spinAngle >= 180f)
+            if (!swapped && angle >= 180f)
             {
                 previewRenderer.sprite = newSprite;
-                hasSwapped = true;
+                swapped = true;
             }
 
             previewRenderer.transform.localEulerAngles = new Vector3(
-                originalEuler.x,
-                originalEuler.y + spinAngle,
-                originalEuler.z
+                original.x,
+                original.y + angle,
+                original.z
             );
 
             yield return null;
         }
 
-        previewRenderer.transform.localEulerAngles = new Vector3(
-            originalEuler.x,
-            originalEuler.y + 360f,
-            originalEuler.z
-        );
+        previewRenderer.transform.localEulerAngles = original + new Vector3(0f, 360f, 0f);
     }
 }

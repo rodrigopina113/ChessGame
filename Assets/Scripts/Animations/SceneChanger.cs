@@ -1,4 +1,3 @@
-// SceneChanger.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,17 +20,13 @@ public class SceneChanger : MonoBehaviour
     /// </summary>
     public void PlayNextLevelCutscene()
     {
-        // Guarda no loader estático
         NextLevelLoader.cutsceneFileName = nextCutsceneFileName;
         NextLevelLoader.sceneName        = nextLevelSceneName;
-
-        // Carrega a cena dedicada a reprodução de cutscenes
         SceneManager.LoadScene("CutScene");
     }
 
     /// <summary>
     /// Carrega diretamente uma cena (sem cutscene).
-    /// Útil para botões de menu que não tenham cutscene.
     /// </summary>
     public void LoadScene(string sceneName)
     {
