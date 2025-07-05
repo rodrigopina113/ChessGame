@@ -152,7 +152,7 @@ RectTransform:
   m_Children:
   - {fileID: 1218410865}
   - {fileID: 1328623782}
-  m_Father: {fileID: 1162970549}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -258,7 +258,7 @@ Camera:
   m_GameObject: {fileID: 1162970546}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -280,8 +280,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 6
+  far clip plane: 174.8
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -312,8 +312,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 886019404}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1162970550
@@ -426,7 +425,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: file://C:/Users/tomas/OneDrive/Ambiente de Trabalho/2semestre/projetochess/ChessGame/Assets/StreamingAssets/WebGLVideos/finalfinalfinal.mp4
+  m_Url: Assets/StreamingAssets/WebGLVideos/finalfinalfinal.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -649,3 +648,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1162970549}
   - {fileID: 1594253816}
+  - {fileID: 886019404}
