@@ -1,17 +1,22 @@
 using UnityEngine;
 using UnityEngine.Video;
+using TMPro;
 using System.Collections;
-using System;
 
 [RequireComponent(typeof(VideoPlayer))]
-public class VideoFaderGUI : MonoBehaviour
+public class VideoLoadingManager : MonoBehaviour
 {
-    [Header("Configurações de Fade")]
-    public float fadeDuration = 1f;
+    [Header("Referências")]
+    public GameObject loadingScreenGO;
+    public TextMeshProUGUI loadingText;
+
+    [Header("Configuração")]
+    public float dotInterval = 0.5f;
+    public float loadingDuration = 1.5f;  // Duração fixa em segundos
 
     private VideoPlayer vp;
-    private float alpha = 1f;
-    private bool isFading = false;
+    private float timer = 0f;
+    private int dotCount = 1;
 
     void Awake()
     {
@@ -20,48 +25,42 @@ public class VideoFaderGUI : MonoBehaviour
 
     void Start()
     {
-        vp.Stop();
-        alpha = 1f;
-
         vp.loopPointReached += OnVideoEnd;
+        StartCoroutine(ShowLoadingAndPlayVideo());
+    }
 
-        StartCoroutine(Fade(1f, 0f, fadeDuration, () => vp.Play()));
+    IEnumerator ShowLoadingAndPlayVideo()
+    {
+        // 1) Mostra o loading
+        loadingScreenGO.SetActive(true);
+        timer = 0f;
+        dotCount = 1;
+        loadingText.text = "Loading.";
+
+        // 2) Anima os pontos durante 1.5s
+        float elapsed = 0f;
+        while (elapsed < loadingDuration)
+        {
+            elapsed += Time.deltaTime;
+            timer += Time.deltaTime;
+
+            if (timer >= dotInterval)
+            {
+                timer = 0f;
+                dotCount = (dotCount % 3) + 1;
+                loadingText.text = "Loading" + new string('.', dotCount);
+            }
+
+            yield return null;
+        }
+
+        // 3) Esconde o loading e começa o vídeo
+        loadingScreenGO.SetActive(false);
+        vp.Play();
     }
 
     private void OnVideoEnd(VideoPlayer source)
     {
-
-        StartCoroutine(Fade(0f, 1f, fadeDuration, () => vp.Stop()));
-    }
-
-    IEnumerator Fade(float from, float to, float duration, Action onComplete)
-    {
-        if (isFading) yield break;
-        isFading = true;
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            alpha = Mathf.Lerp(from, to, elapsed / duration);
-            yield return null;
-        }
-        alpha = to;
-        onComplete?.Invoke();
-        isFading = false;
-    }
-
-    void OnGUI()
-    {
-        if (alpha <= 0f) return;
-
-        var old = GUI.color;
-
-        GUI.color = new Color(0f, 0f, 0f, alpha);
-
-        GUI.DrawTexture(
-            new Rect(0, 0, Screen.width, Screen.height),
-            Texture2D.whiteTexture);
-
-        GUI.color = old;
+        // Aqui podes voltar a mostrar loading, etc.
     }
 }

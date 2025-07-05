@@ -24,7 +24,7 @@ public class WebGLIntroVideo : MonoBehaviour
 
         // 3) Don’t auto-play until we call Play()
         vp.playOnAwake = false;
-        vp.isLooping = false;
+        vp.isLooping = true;
 
         // 4) Mute it so browser will autoplay
         #if UNITY_WEBGL
