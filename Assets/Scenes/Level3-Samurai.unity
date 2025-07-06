@@ -18838,7 +18838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInitialized: 0
-  stockfishDepth: 3
+  stockfishDepth: 2
 --- !u!4 &1650383494
 Transform:
   m_ObjectHideFlags: 0

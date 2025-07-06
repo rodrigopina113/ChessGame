@@ -79,43 +79,49 @@ public class StockfishInterface
         }
     }
 
-
-    public string GetBestMove(string fen, int depth = 2)
+public string GetBestMove(string fen, int depth = 2)
+{
+    if (engine == null || engine.HasExited)
     {
-        if (engine == null || engine.HasExited)
+        UnityEngine.Debug.LogError("❌ Stockfish não está ativo. Abortando GetBestMove.");
+        return null;
+    }
+
+    UnityEngine.Debug.Log("Enviando FEN para Stockfish: " + fen);
+    SendCommand("position fen " + fen);
+    SendCommand("go depth " + depth);
+
+    DateTime start = DateTime.Now;
+    TimeSpan timeout = TimeSpan.FromSeconds(10);
+    string fullLog = "";
+
+    string line;
+    while ((line = engine.StandardOutput.ReadLine()) != null)
+    {
+        fullLog += line + "\n";
+
+        if (line.StartsWith("bestmove"))
         {
-            UnityEngine.Debug.LogError("❌ Stockfish não está ativo. Abortando GetBestMove.");
-            return null;
-        }
-
-        SendCommand("position fen " + fen);
-        SendCommand("go depth " + depth);
-
-        DateTime start = DateTime.Now;
-        TimeSpan timeout = TimeSpan.FromSeconds(5);
-        string fullLog = "";
-
-        string line;
-        while ((line = engine.StandardOutput.ReadLine()) != null)
-        {
-            fullLog += line + "\n";
-
-            if (line.StartsWith("bestmove"))
+            string[] parts = line.Split(' ');
+            if (parts.Length > 1 && parts[1] != "(none)")
+                return parts[1];
+            else
             {
-                string move = line.Split(' ')[1];
-                return move;
-            }
-
-            if ((DateTime.Now - start) > timeout)
-            {
-                UnityEngine.Debug.LogError("⏱ Timeout à espera de resposta do Stockfish.\nLog parcial:\n" + fullLog);
+                UnityEngine.Debug.LogError("❌ Stockfish retornou 'bestmove (none)'.\nLog:\n" + fullLog);
                 return null;
             }
         }
 
-        UnityEngine.Debug.LogError("❌ Stockfish terminou sem enviar bestmove.\nÚltimo log:\n" + fullLog);
-        return null;
+        if ((DateTime.Now - start) > timeout)
+        {
+            UnityEngine.Debug.LogError("⏱ Timeout à espera de resposta do Stockfish.\nLog parcial:\n" + fullLog);
+            return null;
+        }
     }
+
+    UnityEngine.Debug.LogError("❌ Stockfish terminou sem enviar bestmove.\nÚltimo log:\n" + fullLog);
+    return null;
+}
 
 
 

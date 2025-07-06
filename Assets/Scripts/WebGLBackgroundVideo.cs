@@ -4,8 +4,8 @@ using UnityEngine.Video;
 [RequireComponent(typeof(VideoPlayer))]
 public class WebGLIntroVideo : MonoBehaviour
 {
-    [Tooltip("Name of your video file in StreamingAssets")]
-    public string videoFileName = "intro.mp4";
+    [Tooltip("Arraste aqui o VideoClip desejado (importado no Unity)")]
+    public VideoClip videoClip;
 
     private VideoPlayer vp;
 
@@ -13,37 +13,30 @@ public class WebGLIntroVideo : MonoBehaviour
     {
         vp = GetComponent<VideoPlayer>();
 
-        // 1) URL source
-        vp.source = VideoSource.Url;
-        vp.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
+        // 1) Fonte: VideoClip
+        vp.source = VideoSource.VideoClip;
 
-        // 2) Render to camera background
+        // 2) Atribuir o clip diretamente
+        if (videoClip == null)
+        {
+            Debug.LogError("VideoClip não atribuído no Inspector!");
+            return;
+        }
+        vp.clip = videoClip;
+
+        // 3) Renderizar no fundo da câmera (opcional)
         vp.renderMode = VideoRenderMode.CameraFarPlane;
         vp.targetCamera = Camera.main;
-        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        if (Camera.main != null)
+            Camera.main.clearFlags = CameraClearFlags.SolidColor;
 
-        // 3) Don’t auto-play until we call Play()
-        vp.playOnAwake = false;
+        // 4) Configurações
+        vp.playOnAwake = true;    // toca automaticamente ao iniciar
         vp.isLooping = true;
 
-        // 4) Mute it so browser will autoplay
+        // 5) Mute para WebGL autoplay
         #if UNITY_WEBGL
         vp.audioOutputMode = VideoAudioOutputMode.None;
         #endif
-
-        // 5) Wait for first frame before playing
-        vp.waitForFirstFrame = true;
-        vp.prepareCompleted += OnVideoPrepared;
-    }
-
-    void Start()
-    {
-        // Kicks off the async load
-        vp.Prepare();
-    }
-
-    void OnVideoPrepared(VideoPlayer source)
-    {
-        source.Play();
     }
 }
