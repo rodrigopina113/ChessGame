@@ -1,134 +1,75 @@
-using System.Diagnostics;
-using System.IO;
 using UnityEngine;
-
+using UnityEngine.Networking;
+using System.Text;
+using System.Threading.Tasks;
 using System;
-
 
 public class StockfishInterface
 {
-    private Process engine;
-
-   public void StartEngine()
+    public string GetBestMove(string fen, int depth = 4)
     {
-        string enginePath = Path.Combine(Application.streamingAssetsPath, "Engine/stockfish-windows-x86-64-avx2.exe");
+        string move = null;
 
-        if (!File.Exists(enginePath))
+        Task task = Task.Run(async () =>
         {
-            UnityEngine.Debug.LogError("❌ Stockfish não encontrado: " + enginePath);
-            return;
-        }
+            move = await GetBestMoveOnline(fen, depth);
+        });
+        task.Wait();
 
-        engine = new Process();
-        engine.StartInfo.FileName = enginePath;
-        engine.StartInfo.RedirectStandardInput = true;
-        engine.StartInfo.RedirectStandardOutput = true;
-        engine.StartInfo.UseShellExecute = false;
-        engine.StartInfo.CreateNoWindow = true;
+        return move;
+    }
 
-        try
+    private async Task<string> GetBestMoveOnline(string fen, int depth)
+    {
+        string url = "https://stockfish.online/api/s/v2.php";
+        string jsonBody = $"{{\"fen\": \"{fen}\", \"depth\": {depth}}}";
+
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
-            engine.Start();
-            UnityEngine.Debug.Log("✅ Stockfish iniciado.");
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
 
-            if (engine.HasExited)
+            var operation = request.SendWebRequest();
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (request.result != UnityWebRequest.Result.Success)
             {
-                UnityEngine.Debug.LogError("❌ Stockfish fechou imediatamente após iniciar.");
-                string output = engine.StandardOutput.ReadToEnd();
-                UnityEngine.Debug.LogError("🧾 Output capturado antes de fechar: " + output);
-                return;
+                Debug.LogError("❌ Falha de rede: " + request.error);
+                return null;
             }
 
-            SendCommand("uci");
-            SendCommand("isready");
-            WaitForReady();
-        }
-        catch (Exception ex)
-        {
-            UnityEngine.Debug.LogError("❌ Erro ao iniciar Stockfish: " + ex.Message);
-        }
-    }
+            string response = request.downloadHandler.text;
+            Debug.Log("📨 Resposta: " + response);
 
-
-    private void WaitForReady()
-    {
-        string line;
-        while ((line = engine.StandardOutput.ReadLine()) != null)
-        {
-            if (line == "readyok")
-                break;
-        }
-    }
-
-    public void SendCommand(string command)
-    {
-        if (engine == null || engine.HasExited)
-        {
-            UnityEngine.Debug.LogError("❌ Tentativa de enviar comando, mas Stockfish já terminou.");
-            return;
-        }
-
-        try
-        {
-            engine.StandardInput.WriteLine(command);
-            engine.StandardInput.Flush();
-        }
-        catch (Exception ex)
-        {
-            UnityEngine.Debug.LogError($"❌ Falha ao enviar comando para Stockfish: {command}\n{ex.Message}");
-        }
-    }
-
-public string GetBestMove(string fen, int depth = 2)
-{
-    if (engine == null || engine.HasExited)
-    {
-        UnityEngine.Debug.LogError("❌ Stockfish não está ativo. Abortando GetBestMove.");
-        return null;
-    }
-
-    UnityEngine.Debug.Log("Enviando FEN para Stockfish: " + fen);
-    SendCommand("position fen " + fen);
-    SendCommand("go depth " + depth);
-
-    DateTime start = DateTime.Now;
-    TimeSpan timeout = TimeSpan.FromSeconds(10);
-    string fullLog = "";
-
-    string line;
-    while ((line = engine.StandardOutput.ReadLine()) != null)
-    {
-        fullLog += line + "\n";
-
-        if (line.StartsWith("bestmove"))
-        {
-            string[] parts = line.Split(' ');
-            if (parts.Length > 1 && parts[1] != "(none)")
-                return parts[1];
-            else
+            try
             {
-                UnityEngine.Debug.LogError("❌ Stockfish retornou 'bestmove (none)'.\nLog:\n" + fullLog);
+                var parsed = JsonUtility.FromJson<StockfishResponse>(response);
+                if (string.IsNullOrEmpty(parsed.bestmove) || parsed.bestmove == "(none)")
+                {
+                    Debug.LogError("❌ bestmove inválido: " + parsed.bestmove);
+                    return null;
+                }
+
+                return parsed.bestmove;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("❌ Falha ao analisar resposta JSON: " + e.Message);
                 return null;
             }
         }
-
-        if ((DateTime.Now - start) > timeout)
-        {
-            UnityEngine.Debug.LogError("⏱ Timeout à espera de resposta do Stockfish.\nLog parcial:\n" + fullLog);
-            return null;
-        }
     }
 
-    UnityEngine.Debug.LogError("❌ Stockfish terminou sem enviar bestmove.\nÚltimo log:\n" + fullLog);
-    return null;
-}
-
-
-
-    public void Stop()
+    [Serializable]
+    private class StockfishResponse
     {
-        SendCommand("quit");
-        if (!engine.HasExited)
-            engine.Kill();
+        public string bestmove;
     }
+
+    public void StartEngine() => Debug.Log("✅ Modo Online — engine local ignorada.");
+    public void Stop() { }
+    public void SendCommand(string _) { }
 }

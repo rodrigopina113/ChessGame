@@ -1,24 +1,19 @@
 using UnityEngine;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Object = UnityEngine.Object;
-
+using System;
+using UnityEngine.Networking;
+using System.Text;
 
 public class ChessAI : MonoBehaviour
 {
-    private StockfishInterface stockfish;
     private ChessManager chessManager;
 
     public bool isInitialized = false;
-    [SerializeField] private int stockfishDepth = 3;
+    [SerializeField] private int depth = 10;
 
     public void Initialize()
     {
-        stockfish = new StockfishInterface();
-        stockfish.StartEngine();
-
-        chessManager = Object.FindFirstObjectByType<ChessManager>();
+        chessManager = UnityEngine.Object.FindFirstObjectByType<ChessManager>();
         if (chessManager == null)
         {
             Debug.LogError("ChessManager não encontrado na cena!");
@@ -26,56 +21,80 @@ public class ChessAI : MonoBehaviour
         }
 
         isInitialized = true;
-        Debug.Log("IA Stockfish pronta.");
+        Debug.Log("IA ChessAPI Online pronta.");
     }
 
     public void MakeMove(Action onMoveCompleted = null)
     {
-    if (!isInitialized || chessManager == null)
-        return;
+        if (!isInitialized || chessManager == null)
+            return;
 
-    string fen = FenUtility.GenerateFEN(chessManager);
-    Debug.Log("♟️ FEN gerado: " + fen);
-    string move = stockfish.GetBestMove(fen, stockfishDepth);
-
-    if (string.IsNullOrEmpty(move))
-    {
-        Debug.Log("❌ Stockfish não retornou movimento.");
-        return;
+        string fen = FenUtility.GenerateFEN(chessManager).Trim().Replace("  ", " ");
+        Debug.Log("♟️ FEN gerado: " + fen);
+        StartCoroutine(RequestBestMoveFromChessAPI(fen, depth, onMoveCompleted));
     }
 
-    string from = move.Substring(0, 2);
-    string to = move.Substring(2, 2);
-
-    ChessPiece piece = chessManager.FindPieceAtCell(from);
-        if (piece != null)
-        {
-            chessManager.MovePiece(piece, to);
-            Debug.Log($"🤖 Stockfish moveu {piece.name} de {from} para {to}");
-
-
-            chessManager.StartCoroutine(MakeMoveAndWait(piece, to, onMoveCompleted));
-        }
-        else
-        {
-            Debug.LogError("Peça não encontrada para o movimento sugerido.");
-        }
-    }
-    private IEnumerator MakeMoveAndWait(ChessPiece piece, string to, Action callback)
+    private IEnumerator RequestBestMoveFromChessAPI(string fen, int depth, Action callback)
     {
+        string fenEscaped = fen.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        string jsonBody = "{\"fen\":\"" + fenEscaped + "\",\"depth\":" + depth + ",\"variants\":1}";
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonBody);
+
+        UnityWebRequest request = new UnityWebRequest("https://chess-api.com/v1", "POST");
+        request.uploadHandler = new UploadHandlerRaw(jsonBytes);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("❌ Falha na ligação: " + request.error);
+            yield break;
+        }
+
+        string response = request.downloadHandler.text;
+        Debug.Log("📨 Resposta recebida: " + response);
+
+        ChessApiResponse result;
+        try
+        {
+            result = JsonUtility.FromJson<ChessApiResponse>(response);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("❌ Erro ao interpretar resposta JSON: " + e.Message);
+            yield break;
+        }
+
+        if (string.IsNullOrEmpty(result.move) || result.move.Length < 4)
+        {
+            Debug.LogError("❌ Movimento inválido: " + result.move);
+            yield break;
+        }
+
+        string from = result.move.Substring(0, 2);
+        string to = result.move.Substring(2, 2);
+
+        if (!chessManager.IsValidAIMove(from, to))
+        {
+            Debug.LogError($"❌ Movimento inválido: Peça em {from} não existe ou pertence ao jogador errado.");
+            yield break;
+        }
+
+        ChessPiece piece = chessManager.FindPieceAtCell(from);
         chessManager.MovePiece(piece, to);
+        Debug.Log($"🤖 ChessAPI moveu {piece.name} de {from} para {to}");
 
-
-        yield return new WaitForSeconds(0.5f);
-
-
-        callback?.Invoke();
-    }
-
-    private IEnumerator WaitAndInvoke(Action callback)
-    {
         yield return new WaitForSeconds(0.4f);
         callback?.Invoke();
     }
 
+    [Serializable]
+    private class ChessApiResponse
+    {
+        public string move;
+        public string status;
+        public float eval;
+    }
 }

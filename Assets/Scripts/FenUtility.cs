@@ -50,11 +50,14 @@ public static class FenUtility
         sb.Append(string.IsNullOrEmpty(castling) ? "-" : castling);
 
         sb.Append(' ');
-        sb.Append(string.IsNullOrEmpty(manager.LastDoubleStepTargetCell) ? "-" : manager.LastDoubleStepTargetCell);
+        sb.Append("-");
 
-        sb.Append(" 0");
 
-        sb.Append(" 1");
+        sb.Append(" 0 "); // Halfmove clock — manter 0
+
+        int fullMoveNumber = manager.FullMoveNumber;
+        sb.Append(Mathf.Max(1, fullMoveNumber));
+
 
         return sb.ToString();
     }

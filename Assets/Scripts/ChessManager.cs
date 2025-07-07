@@ -15,6 +15,11 @@ public class ChessManager : MonoBehaviour
         this.rules = rules;
     }
 
+    //CHESS AI
+    public int FullMoveNumber => fullMoveCounter;
+    private int fullMoveCounter = 1;
+
+
     public bool CanWhiteCastleKingSide;
     public bool CanWhiteCastleQueenSide;
     public bool CanBlackCastleKingSide;
@@ -139,6 +144,8 @@ public class ChessManager : MonoBehaviour
 
 
         isWhiteTurn = !isWhiteTurn;
+        if (isWhiteTurn)
+        fullMoveCounter++;
 
 
         if (CameraSwitcher.Instance != null)
@@ -887,6 +894,19 @@ public class ChessManager : MonoBehaviour
         }
     }
 
+    
+    public bool IsValidAIMove(string from, string to)
+    {
+        ChessPiece piece = FindPieceAtCell(from);
+        if (piece == null)
+            return false;
+
+        // Corrigido: usa isWhite, não IsWhite
+        if (piece.isWhite != IsWhiteTurn)
+            return false;
+
+        return true;
+    }
 
     private bool WouldMoveCauseSelfCheck(ChessPiece piece, string targetCell)
     {
@@ -908,7 +928,7 @@ public class ChessManager : MonoBehaviour
         return kingInCheck;
     }
 
-
+    
     public void MovePiece(ChessPiece piece, string targetCell)
     {
 
@@ -962,6 +982,8 @@ public class ChessManager : MonoBehaviour
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
 
+        string fromCell = piece.CurrentCell;
+
 
         if (piece is King)
         {
@@ -996,7 +1018,7 @@ public class ChessManager : MonoBehaviour
         float duration = 0.3f;
         float elapsed = 0f;
 
-        if (piece is Pawn && Mathf.Abs(targetCell[1] - piece.CurrentCell[1]) == 2)
+        if (piece is Pawn && Mathf.Abs(targetCell[1] - fromCell[1]) == 2)
         {
             char col = targetCell[0];
             char midRow = (char)((piece.CurrentCell[1] + targetCell[1]) / 2);
