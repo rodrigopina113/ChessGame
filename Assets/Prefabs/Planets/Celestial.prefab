@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 00fb6f26d1eea04418d18f3078e55809, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e007c57cad0a3704a82f1028a642b71c, type: 2}
     - target: {fileID: 919132149155446097, guid: 00fb6f26d1eea04418d18f3078e55809, type: 3}
       propertyPath: m_Name
       value: Celestial

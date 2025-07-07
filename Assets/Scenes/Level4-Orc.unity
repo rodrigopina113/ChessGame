@@ -5359,6 +5359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cheeringorc (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8524945007763331710, guid: 76d35d69dd257a84ab09b69dc5b08b37, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 91a929a54fc31574aadc52be6f654df1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7055,6 +7059,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8745483395862645012, guid: 43d1da51032dd0c4dbfeef1447b521bf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a912a83edad0e04899fe5587ed2a1d5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7519,6 +7527,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708549766}
   m_CullTransparentMesh: 1
+--- !u!1 &714674574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714674576}
+  - component: {fileID: 714674575}
+  m_Layer: 0
+  m_Name: camaraFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &714674575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714674574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb44d73267d3848b238b69ddfb06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &714674576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714674574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0858974, y: -0.17167175, z: -2.5691495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722074929
 GameObject:
   m_ObjectHideFlags: 0
@@ -9967,6 +10019,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e15b8e07ed220544384d4806dc2274cd, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
     - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -14712,6 +14772,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d890f4713b8029f47aef00c85960b392, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 176410eafb007bb478ce1c93df7d7e6c, type: 2}
     - target: {fileID: 919132149155446097, guid: d890f4713b8029f47aef00c85960b392, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -15660,6 +15724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -6.766912
       objectReference: {fileID: 0}
+    - target: {fileID: 3441589541754391911, guid: 356c80e8f50cc2240894b3b91cc04d0d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 91a929a54fc31574aadc52be6f654df1, type: 2}
     - target: {fileID: 4591858381957543105, guid: 356c80e8f50cc2240894b3b91cc04d0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 75.08856
@@ -17849,6 +17917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cheeringorc (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8524945007763331710, guid: 76d35d69dd257a84ab09b69dc5b08b37, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 91a929a54fc31574aadc52be6f654df1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18523,6 +18595,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8895898026141321990, guid: 7fb364251aca36a40856c61e4a7da1c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d82622d570178aa4682001fc49f1e2c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22558,3 +22634,4 @@ SceneRoots:
   - {fileID: 1067430250}
   - {fileID: 1453862841}
   - {fileID: 1325447504}
+  - {fileID: 714674576}

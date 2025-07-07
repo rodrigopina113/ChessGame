@@ -1728,6 +1728,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 3489e528088d07a42b07212dd7627cef, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bcae719c65bcf54ab83e27adb714f8b, type: 2}
     - target: {fileID: 919132149155446097, guid: 3489e528088d07a42b07212dd7627cef, type: 3}
       propertyPath: m_Name
       value: Stone_Circle_Arena_0611122118_texture
@@ -4739,6 +4743,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e15b8e07ed220544384d4806dc2274cd, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
+    - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
     - target: {fileID: 919132149155446097, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: m_Name
       value: Chess Scene
@@ -7279,7 +7295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a54a9418d9e04a44bc01d925c2b5cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCutsceneClip: {fileID: 0}
+  nextCutsceneFileName: 
   nextLevelSceneName: 
 --- !u!4 &1453862841
 Transform:

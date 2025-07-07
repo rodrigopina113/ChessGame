@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6723783733538562687, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df500dff02168a849a86c20a8f2c2a94, type: 2}
     m_RemovedComponents:
     - {fileID: 2841816582182180752, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
     m_RemovedGameObjects: []
@@ -4287,7 +4291,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (7)
@@ -4595,6 +4599,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 77acac24c9a56bf42b3f249a7e5bf7c3, type: 2}
+    - target: {fileID: 7328854589329445729, guid: cf330023d25d712499ed0a5f15932954, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a3f845d7d1e441143b19f9c01b761172, type: 2}
     - target: {fileID: 8502372474915579918, guid: cf330023d25d712499ed0a5f15932954, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.36
@@ -5325,6 +5333,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 85213369899060f4ba05027e2cb45140, type: 2}
+    - target: {fileID: 7328854589329445729, guid: cf330023d25d712499ed0a5f15932954, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a3f845d7d1e441143b19f9c01b761172, type: 2}
     - target: {fileID: 8502372474915579918, guid: cf330023d25d712499ed0a5f15932954, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.61
@@ -5762,7 +5774,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (2)
@@ -6458,6 +6470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 3803269052599828467, guid: ee746c60c284d554dbaf340bde082c98, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b8d8de5e6a4a77546a545fad0a27ea5f, type: 2}
     - target: {fileID: 5914203175503308568, guid: ee746c60c284d554dbaf340bde082c98, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.70000005
@@ -8013,6 +8029,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 328317982}
     m_Modifications:
+    - target: {fileID: 7328854589329445729, guid: cf330023d25d712499ed0a5f15932954, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a3f845d7d1e441143b19f9c01b761172, type: 2}
     - target: {fileID: 8502372474915579918, guid: cf330023d25d712499ed0a5f15932954, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.064
@@ -10126,6 +10146,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e15b8e07ed220544384d4806dc2274cd, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
     - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11369,6 +11397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 7.06106
       objectReference: {fileID: 0}
+    - target: {fileID: 5616728233145908538, guid: b070e48b30930c54aac4bfa6e6aac44e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b8d8de5e6a4a77546a545fad0a27ea5f, type: 2}
     - target: {fileID: 5661060242038963111, guid: b070e48b30930c54aac4bfa6e6aac44e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 70.3756
@@ -14108,7 +14140,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (3)
@@ -14190,7 +14222,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano
@@ -15948,6 +15980,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6723783733538562687, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df500dff02168a849a86c20a8f2c2a94, type: 2}
     m_RemovedComponents:
     - {fileID: 2841816582182180752, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
     m_RemovedGameObjects: []
@@ -16742,6 +16778,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 3803269052599828467, guid: ee746c60c284d554dbaf340bde082c98, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b8d8de5e6a4a77546a545fad0a27ea5f, type: 2}
     - target: {fileID: 5914203175503308568, guid: ee746c60c284d554dbaf340bde082c98, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.70000005
@@ -18979,7 +19019,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (4)
@@ -19394,6 +19434,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6723783733538562687, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df500dff02168a849a86c20a8f2c2a94, type: 2}
     m_RemovedComponents:
     - {fileID: 2841816582182180752, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
     m_RemovedGameObjects: []
@@ -19910,6 +19954,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b3faeea7f91a41443bffcf85163da475, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0df3d8957556d4144af90f645a01fc29, type: 2}
     - target: {fileID: 919132149155446097, guid: b3faeea7f91a41443bffcf85163da475, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -19992,6 +20040,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6723783733538562687, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df500dff02168a849a86c20a8f2c2a94, type: 2}
     m_RemovedComponents:
     - {fileID: 2841816582182180752, guid: 79357928d03797d42b88e9344d9c031e, type: 3}
     m_RemovedGameObjects: []
@@ -20043,6 +20095,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8acdf23bb65eb38459de55a7c17be8e4, type: 2}
+    - target: {fileID: 7328854589329445729, guid: cf330023d25d712499ed0a5f15932954, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a3f845d7d1e441143b19f9c01b761172, type: 2}
     - target: {fileID: 8502372474915579918, guid: cf330023d25d712499ed0a5f15932954, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.48000002
@@ -21103,7 +21159,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (6)
@@ -22935,6 +22991,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9181610982088107335, guid: 61932f57f1fe0a84b81baa39a407747a, type: 3}
   m_PrefabInstance: {fileID: 2088323045}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105924833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105924835}
+  - component: {fileID: 2105924834}
+  m_Layer: 0
+  m_Name: camaraFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2105924834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105924833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb44d73267d3848b238b69ddfb06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2105924835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105924833}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0858974, y: -0.17167175, z: -2.5691495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2112747625
 GameObject:
   m_ObjectHideFlags: 0
@@ -23220,7 +23320,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (5)
@@ -23302,7 +23402,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 34b2979236c750e4d804f4ec8e208b99, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bae2c9da4151a646b95233a6e2f9ec2, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b4fcebba518222419df4ef09ec5461b, type: 3}
       propertyPath: m_Name
       value: Volcano (1)
@@ -23337,3 +23437,4 @@ SceneRoots:
   - {fileID: 1817208553}
   - {fileID: 1453862841}
   - {fileID: 468916952}
+  - {fileID: 2105924835}

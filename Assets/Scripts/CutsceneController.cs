@@ -54,6 +54,16 @@ public class CutsceneController : MonoBehaviour
 
     void LoadLevel()
     {
+        #if UNITY_WEBGL && !UNITY_EDITOR
+        // Reset camera properties before scene transition
+        if (Camera.main != null)
+        {
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            Camera.main.backgroundColor = Color.black;
+            Debug.Log("[CutsceneController] Reset camera for WebGL before scene transition");
+        }
+        #endif
+        
         SceneManager.LoadScene(NextLevelLoader.sceneName);
     }
 }

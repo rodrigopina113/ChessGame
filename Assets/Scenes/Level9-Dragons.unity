@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -2261,6 +2265,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277921043}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &277989957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 277989959}
+  - component: {fileID: 277989958}
+  m_Layer: 0
+  m_Name: camaraFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &277989958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277989957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb44d73267d3848b238b69ddfb06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &277989959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277989957}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0858974, y: -0.17167175, z: -2.5691495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &292110111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,6 +2765,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 2331743288540511584, guid: ddcc2d786e75e504baacbb3a5ce9fae1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 5082471966111557003, guid: ddcc2d786e75e504baacbb3a5ce9fae1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.05
@@ -5367,6 +5419,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b620dcd1b40c996468d0454fa7ac6a6c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c21330169224e1e4caee06411088b91e, type: 2}
     - target: {fileID: 919132149155446097, guid: b620dcd1b40c996468d0454fa7ac6a6c, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -7209,6 +7265,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 7302022314126582610, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_Name
       value: Sitting Clap
@@ -7326,6 +7386,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -7631,6 +7695,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -8378,6 +8446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 7302022314126582610, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_Name
       value: Sitting Clap
@@ -8854,6 +8926,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e15b8e07ed220544384d4806dc2274cd, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
     - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11711,6 +11791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -13057,6 +13141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -14192,6 +14280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -14754,6 +14846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -16451,6 +16547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -16768,6 +16868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 7302022314126582610, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_Name
       value: Sitting Clap (2)
@@ -17512,6 +17616,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 7302022314126582610, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_Name
       value: Sitting Clap
@@ -18471,6 +18579,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 6160258755373779957, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.018
@@ -18793,6 +18905,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -18911,6 +19027,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 2331743288540511584, guid: ddcc2d786e75e504baacbb3a5ce9fae1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 5082471966111557003, guid: ddcc2d786e75e504baacbb3a5ce9fae1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.42
@@ -19479,6 +19599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -19689,6 +19813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -21434,6 +21562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3593326084756836393, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8784af9e1d93a4ba806ad63c8a7ece, type: 2}
     m_RemovedComponents:
     - {fileID: 7497538952646208487, guid: a5f699e27a2e9f84b97cff26435ca930, type: 3}
     m_RemovedGameObjects: []
@@ -22519,6 +22651,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 633524642520473859, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4310dc2208d031c4ca82cd64d1880f27, type: 2}
     - target: {fileID: 7302022314126582610, guid: c49c44a9f3a4d1348b5d191b4fb48dab, type: 3}
       propertyPath: m_Name
       value: Sitting Clap
@@ -22588,3 +22724,4 @@ SceneRoots:
   - {fileID: 997243389}
   - {fileID: 1453862841}
   - {fileID: 583637094}
+  - {fileID: 277989959}

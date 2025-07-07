@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: be8cf445e03f4ae4cb061f0777154800, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a6de17b7edb3264692d24601caefeac, type: 2}
     - target: {fileID: 919132149155446097, guid: be8cf445e03f4ae4cb061f0777154800, type: 3}
       propertyPath: m_Name
       value: Samurai

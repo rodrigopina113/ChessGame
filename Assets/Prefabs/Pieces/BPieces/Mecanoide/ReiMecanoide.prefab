@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -4302338516447615217}
   - component: {fileID: 3009921720921702525}
   m_Layer: 0
-  m_Name: Reimecanoide
+  m_Name: ReiMecanoide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a7181137f12f4e44baf2819d3178bd7a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e1d3f94b52c2c1e49aa891f91a4e24d8, type: 2}
     - target: {fileID: 919132149155446097, guid: a7181137f12f4e44baf2819d3178bd7a, type: 3}
       propertyPath: m_Name
       value: untitled (3)

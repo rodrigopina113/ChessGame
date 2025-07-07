@@ -926,7 +926,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -1346,7 +1346,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -2493,7 +2493,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fb5e7a5af2c0b2642a3b7ebaceeed783, type: 2}
+      objectReference: {fileID: 2100000, guid: 639e248c76b00ec4d83afb76c1d9a7f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -2671,6 +2671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 3448636192543581504, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ece9c7e725063c8498c7be37a2a9695d, type: 2}
     - target: {fileID: 4774732105508955921, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
       propertyPath: m_Name
       value: Victory Idle
@@ -4180,6 +4184,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8032089830020419765, guid: b3c7eb04785e97b44b96ad4877f51c2a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ece9c7e725063c8498c7be37a2a9695d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5700,7 +5708,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -6518,6 +6526,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712536675}
   m_CullTransparentMesh: 1
+--- !u!1 &718820794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 718820796}
+  - component: {fileID: 718820795}
+  m_Layer: 0
+  m_Name: camaraFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &718820795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718820794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb44d73267d3848b238b69ddfb06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &718820796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718820794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0858974, y: -0.17167175, z: -2.5691495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722074929
 GameObject:
   m_ObjectHideFlags: 0
@@ -8367,6 +8419,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 5554a411b588b49429d7d1398841370d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32f75532d118ee84d8b035f9f05b7c38, type: 2}
     - target: {fileID: 919132149155446097, guid: 5554a411b588b49429d7d1398841370d, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -9154,6 +9210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 3448636192543581504, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ece9c7e725063c8498c7be37a2a9695d, type: 2}
     - target: {fileID: 4774732105508955921, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
       propertyPath: m_Name
       value: Victory Idle
@@ -9279,6 +9339,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e15b8e07ed220544384d4806dc2274cd, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b2bffcc591adc34abec161ae8729286, type: 2}
     - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9636,7 +9704,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -10153,7 +10221,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fb5e7a5af2c0b2642a3b7ebaceeed783, type: 2}
+      objectReference: {fileID: 2100000, guid: 639e248c76b00ec4d83afb76c1d9a7f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -10796,7 +10864,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -11910,6 +11978,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8032089830020419765, guid: b3c7eb04785e97b44b96ad4877f51c2a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ece9c7e725063c8498c7be37a2a9695d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17198,6 +17270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 3448636192543581504, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ece9c7e725063c8498c7be37a2a9695d, type: 2}
     - target: {fileID: 4774732105508955921, guid: 9f4363b59c7121d42b6a550482febad4, type: 3}
       propertyPath: m_Name
       value: Victory Idle
@@ -17439,7 +17515,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -17800,7 +17876,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -21625,7 +21701,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9566959bc49dd424a87b4cf368f30ef4, type: 2}
+      objectReference: {fileID: 2100000, guid: bddc7379e0c5c344a8abf1ed4260a288, type: 2}
     - target: {fileID: 919132149155446097, guid: ce4526025da7d014d86b3fc830158bb0, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -22516,7 +22592,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fb5e7a5af2c0b2642a3b7ebaceeed783, type: 2}
+      objectReference: {fileID: 2100000, guid: 639e248c76b00ec4d83afb76c1d9a7f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 8f51371e40dd9514cb995c15bc6ca246, type: 3}
       propertyPath: m_Name
       value: Colmeia
@@ -22761,6 +22837,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4329062456508637241, guid: 426fcc32257fa2c4d885763abc48d21a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fd43d0abbce26474b8c9bdb78016e4ec, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22786,3 +22866,4 @@ SceneRoots:
   - {fileID: 603167051}
   - {fileID: 1453862841}
   - {fileID: 964687075}
+  - {fileID: 718820796}

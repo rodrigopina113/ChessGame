@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 88f40639b9eb04e4b869ee720f000129, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eddfe1a22c9dc534ab98d421150a60be, type: 2}
     - target: {fileID: 919132149155446097, guid: 88f40639b9eb04e4b869ee720f000129, type: 3}
       propertyPath: m_Name
       value: blackKing
@@ -62,9 +66,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88f40639b9eb04e4b869ee720f000129, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1958391727262341537}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88f40639b9eb04e4b869ee720f000129, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3023782850180147021}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88f40639b9eb04e4b869ee720f000129, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4158548206910094272}
@@ -110,27 +111,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.0072244443, z: 0.02000001}
   m_Center: {x: -0.00008100085, y: 0.0040529575, z: -0.000000001862645}
---- !u!65 &3023782850180147021
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7952810776616345026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.008273193, y: 0.010700833, z: 0.00198229}
-  m_Center: {x: 0.000036448706, y: 0.04770989, z: 0.00006342959}
 --- !u!65 &4158548206910094272
 BoxCollider:
   m_ObjectHideFlags: 0

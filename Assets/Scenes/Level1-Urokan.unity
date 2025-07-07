@@ -1430,6 +1430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado3
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -1565,6 +1569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -3440,6 +3448,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -150.48787
       objectReference: {fileID: 0}
+    - target: {fileID: 8089109861972843969, guid: a495e98837af50546aa241e9a336dc5a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ddfb2c6af189b5c438fc933d7fc928cd, type: 2}
     - target: {fileID: 8224351434927473692, guid: a495e98837af50546aa241e9a336dc5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -40.916813
@@ -3926,6 +3938,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 3489e528088d07a42b07212dd7627cef, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bcae719c65bcf54ab83e27adb714f8b, type: 2}
     - target: {fileID: 919132149155446097, guid: 3489e528088d07a42b07212dd7627cef, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -4007,7 +4023,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4133,28 +4148,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!95 &330585549
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03de29a80e58586478036fc8017509a8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &336218228
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,6 +6521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -6838,6 +6835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -7035,6 +7036,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 168735317}
     m_Modifications:
+    - target: {fileID: 7406695452235177817, guid: a21aed1c5375e104b83246e60482b669, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: df5615a2fb84f144597b76f10cdd5be0, type: 2}
     - target: {fileID: 8539654585913271350, guid: a21aed1c5375e104b83246e60482b669, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.96
@@ -8866,6 +8871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clapping (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8468001534400742169, guid: e6a114b709a9e9a41aea18b9d23f3f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ddfb2c6af189b5c438fc933d7fc928cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9037,6 +9046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -9973,6 +9986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -10036,6 +10053,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -10872,6 +10893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -11040,6 +11065,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 609fef786e6b77d4488c30722ba70ad5, type: 2}
+    - target: {fileID: -5474334982038877456, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 651ee338dde8d3b4bb25e549c645c2bf, type: 2}
     - target: {fileID: -4777473632124462767, guid: 4c2debd9bc956674789da6b9c13ccd78, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -12804,6 +12837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -14997,6 +15034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -15483,6 +15524,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457645567}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1458208332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1458208334}
+  - component: {fileID: 1458208333}
+  m_Layer: 0
+  m_Name: camaraFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1458208333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458208332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb44d73267d3848b238b69ddfb06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1458208334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458208332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0858974, y: -0.17167175, z: -2.5691495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1469328909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15535,6 +15620,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado2
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -16500,7 +16589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.43103027, y: -1.6052246}
+  m_AnchoredPosition: {x: 0.43115234, y: -1.6052246}
   m_SizeDelta: {x: 13.985596, y: 18.230225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1548039546
@@ -17314,7 +17403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.43103027, y: -1.6052246}
+  m_AnchoredPosition: {x: 0.43115234, y: -1.6052246}
   m_SizeDelta: {x: 13.985596, y: 18.230225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1603203420
@@ -19387,7 +19476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.43103027, y: -1.6052246}
+  m_AnchoredPosition: {x: 0.43115234, y: -1.6052246}
   m_SizeDelta: {x: 13.985596, y: 18.230225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1708173419
@@ -20768,6 +20857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clapping
       objectReference: {fileID: 0}
+    - target: {fileID: 8468001534400742169, guid: e6a114b709a9e9a41aea18b9d23f3f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ddfb2c6af189b5c438fc933d7fc928cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20901,6 +20994,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machado1
       objectReference: {fileID: 0}
+    - target: {fileID: 6130974452689659534, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81e4cb45a1ee7a240b821af6fdecc017, type: 2}
     m_RemovedComponents:
     - {fileID: 2928027172513450668, guid: cdb7a1f8f3ba108488445f6de2a45bed, type: 3}
     m_RemovedGameObjects: []
@@ -23477,3 +23574,4 @@ SceneRoots:
   - {fileID: 1453862841}
   - {fileID: 404001184}
   - {fileID: 4685764104890268987}
+  - {fileID: 1458208334}
