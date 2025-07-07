@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7153551065589147987}
   - component: {fileID: -8287059768693298414}
   - component: {fileID: 2235777409056415218}
+  - component: {fileID: 405393947260895609}
   m_Layer: 0
   m_Name: Bispo_Igneo
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &405393947260895609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2644854604195610335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &4971729174853952340
 PrefabInstance:
   m_ObjectHideFlags: 0

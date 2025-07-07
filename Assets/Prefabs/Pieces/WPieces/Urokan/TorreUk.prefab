@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8226163756627499987}
   - component: {fileID: 7415769322365019294}
   - component: {fileID: -1339607698363130305}
+  - component: {fileID: 8509215394118363184}
   m_Layer: 0
   m_Name: TorreUk
   m_TagString: Untagged
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 1
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &8509215394118363184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9186367298364077605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &4835925586374968004
 PrefabInstance:
   m_ObjectHideFlags: 0

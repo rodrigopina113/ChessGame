@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7990993937650665123}
   - component: {fileID: -3975713710284838260}
   - component: {fileID: 3470173123456831522}
+  - component: {fileID: 8540704987638637822}
   m_Layer: 0
-  m_Name: Reidraconiano
+  m_Name: ReiDraconiano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 0
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &8540704987638637822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466519359010067899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &1553946198163357806
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2600495313414821251}
   - component: {fileID: 1308409094182190216}
   - component: {fileID: 7947225028025085739}
+  - component: {fileID: 7104237398299094965}
   m_Layer: 0
   m_Name: TorreCl
   m_TagString: Untagged
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 1
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &7104237398299094965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831477924760813676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &505720352972007371
 PrefabInstance:
   m_ObjectHideFlags: 0

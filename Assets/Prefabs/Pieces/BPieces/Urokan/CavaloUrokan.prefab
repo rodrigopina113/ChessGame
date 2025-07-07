@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5566085413627676576}
   - component: {fileID: 5077070915986843678}
   - component: {fileID: 9187302836168946228}
+  - component: {fileID: 3755070771221935135}
   m_Layer: 0
   m_Name: CavaloUrokan
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &3755070771221935135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048969236497632240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &7080073950301547519
 PrefabInstance:
   m_ObjectHideFlags: 0

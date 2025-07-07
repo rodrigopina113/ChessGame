@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5586078543744860475}
   - component: {fileID: 3696364171697468155}
   - component: {fileID: 1699562482850465547}
+  - component: {fileID: 8107555977069072709}
   m_Layer: 0
   m_Name: RainhaCelestial
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &8107555977069072709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11614252246972091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &1433274168586737794
 PrefabInstance:
   m_ObjectHideFlags: 0

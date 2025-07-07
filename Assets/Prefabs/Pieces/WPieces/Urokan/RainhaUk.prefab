@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5369960093549984714}
   - component: {fileID: -6766011032088177174}
   - component: {fileID: 945689167428556789}
+  - component: {fileID: 8080588294739004159}
   m_Layer: 0
   m_Name: RainhaUk
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 1
   chessManager: {fileID: 0}
+--- !u!114 &8080588294739004159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556322214899377179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &7500596636847524136
 PrefabInstance:
   m_ObjectHideFlags: 0

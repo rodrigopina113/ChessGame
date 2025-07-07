@@ -86,6 +86,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ac84c71874d2704693d21b3234c9f3e, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1820618003165288309}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ac84c71874d2704693d21b3234c9f3e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1364450541525648519}
   m_SourcePrefab: {fileID: 100100000, guid: 7ac84c71874d2704693d21b3234c9f3e, type: 3}
 --- !u!1 &6315600269931351230 stripped
 GameObject:
@@ -128,3 +131,16 @@ MonoBehaviour:
   isWhite: 0
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &1364450541525648519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6315600269931351230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5

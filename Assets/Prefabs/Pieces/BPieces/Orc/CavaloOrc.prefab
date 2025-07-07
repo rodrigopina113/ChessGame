@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4469912371003505114}
   - component: {fileID: -7106261470368141257}
   - component: {fileID: 3472709915793059856}
+  - component: {fileID: 2325085594213377259}
   m_Layer: 0
   m_Name: CavaloOrc
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &2325085594213377259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742569684875147487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &8904559225374249367
 PrefabInstance:
   m_ObjectHideFlags: 0

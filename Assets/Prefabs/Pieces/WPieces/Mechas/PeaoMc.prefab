@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7310003827200316752}
   - component: {fileID: -2171383808759190508}
   - component: {fileID: -2431931322136018505}
+  - component: {fileID: 6787887352277538176}
   m_Layer: 0
   m_Name: PeaoMc
   m_TagString: Untagged
@@ -53,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.010390554, y: 0.04034559, z: 0.012670765}
-  m_Center: {x: -0.00016786461, y: 0.020140631, z: -0.00036898535}
+  m_Size: {x: 0.010390554, y: 0.025078975, z: 0.012670765}
+  m_Center: {x: -0.00016786437, y: 0.012507323, z: -0.00036898535}
 --- !u!114 &-2431931322136018505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 1
   chessManager: {fileID: 0}
+--- !u!114 &6787887352277538176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436984187592227226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &5622464626115803283
 PrefabInstance:
   m_ObjectHideFlags: 0

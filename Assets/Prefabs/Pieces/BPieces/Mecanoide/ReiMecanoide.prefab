@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 214121925305494778}
   - component: {fileID: -4302338516447615217}
   - component: {fileID: 3009921720921702525}
+  - component: {fileID: 6679178239445912170}
   m_Layer: 0
-  m_Name: Reimecanoide
+  m_Name: ReiMecanoide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 0
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &6679178239445912170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159836807508751538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &5385601212003042216
 PrefabInstance:
   m_ObjectHideFlags: 0

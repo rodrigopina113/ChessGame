@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1390763968929030970}
   - component: {fileID: 147249469606822023}
   - component: {fileID: 1885387593467434275}
+  - component: {fileID: 5913541148300859793}
   m_Layer: 0
   m_Name: CavaloZarn
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &5913541148300859793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434277444590978345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &1215498052473545789
 PrefabInstance:
   m_ObjectHideFlags: 0

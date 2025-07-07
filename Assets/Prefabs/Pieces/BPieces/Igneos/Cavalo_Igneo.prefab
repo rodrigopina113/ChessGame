@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3716660271808489218}
   - component: {fileID: 1110477380754493557}
   - component: {fileID: -6949759079373251797}
+  - component: {fileID: 4446235545704411870}
   m_Layer: 0
   m_Name: Cavalo_Igneo
   m_TagString: Untagged
@@ -53,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.015465113, y: 0.04168751, z: 0.019775132}
-  m_Center: {x: 0.00029654382, y: 0.020811591, z: -0.0012481986}
+  m_Size: {x: 0.015465113, y: 0.03594078, z: 0.019775132}
+  m_Center: {x: 0.00029654382, y: 0.017938226, z: -0.0012481986}
 --- !u!114 &-6949759079373251797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &4446235545704411870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049843454791464800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &5855879717605644400
 PrefabInstance:
   m_ObjectHideFlags: 0

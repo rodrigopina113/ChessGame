@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2213431491836923211}
   - component: {fileID: -4033186890243707334}
   - component: {fileID: 4086204028816463204}
+  - component: {fileID: 8306241988535322548}
   m_Layer: 0
   m_Name: ReiSa
   m_TagString: Untagged
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 1
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &8306241988535322548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565664035654048863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &3106996363928486492
 PrefabInstance:
   m_ObjectHideFlags: 0

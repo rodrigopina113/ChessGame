@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1659454862759854780}
   - component: {fileID: -2628605930818838418}
   - component: {fileID: 9173968625444275238}
+  - component: {fileID: 3352634194139411745}
   m_Layer: 0
   m_Name: PeaoCl
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 1
   chessManager: {fileID: 0}
+--- !u!114 &3352634194139411745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475807075683316933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &1277213613794938774
 PrefabInstance:
   m_ObjectHideFlags: 0

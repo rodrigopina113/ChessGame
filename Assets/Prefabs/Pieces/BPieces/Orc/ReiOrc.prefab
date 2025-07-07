@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3215781719864552077}
   - component: {fileID: 2925436664649470749}
   - component: {fileID: 8387480363338099410}
+  - component: {fileID: 8736589872773639265}
   m_Layer: 0
   m_Name: ReiOrc
   m_TagString: Untagged
@@ -70,6 +71,19 @@ MonoBehaviour:
   isWhite: 0
   chessManager: {fileID: 0}
   hasMoved: 0
+--- !u!114 &8736589872773639265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324678412807593698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &4797905882167938358
 PrefabInstance:
   m_ObjectHideFlags: 0

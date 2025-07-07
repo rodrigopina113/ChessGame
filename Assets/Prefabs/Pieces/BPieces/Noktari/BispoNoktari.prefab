@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8146405390087591156}
   - component: {fileID: -9181601354125036093}
   - component: {fileID: -2197658916349955296}
+  - component: {fileID: 4865290731253129538}
   m_Layer: 0
   m_Name: BispoNoktari
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &4865290731253129538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552287712677944812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &298512166613974601
 PrefabInstance:
   m_ObjectHideFlags: 0

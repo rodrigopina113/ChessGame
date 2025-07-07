@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8987215035127598180}
   - component: {fileID: 1748217240129821649}
   - component: {fileID: 8921223190904163815}
+  - component: {fileID: 6593044540115896770}
   m_Layer: 0
   m_Name: RainhaNoktari
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   chessManager: {fileID: 0}
+--- !u!114 &6593044540115896770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193358700611134053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &1476459696281064151
 PrefabInstance:
   m_ObjectHideFlags: 0

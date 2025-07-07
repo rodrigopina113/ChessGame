@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7271411791815748482}
   - component: {fileID: 8978203723310072764}
   - component: {fileID: -8616766047534564188}
+  - component: {fileID: 4466418286827634942}
   m_Layer: 0
   m_Name: BispoOrc
   m_TagString: Untagged
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 1
   chessManager: {fileID: 0}
+--- !u!114 &4466418286827634942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326677017621189632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &2079067438168966388
 PrefabInstance:
   m_ObjectHideFlags: 0

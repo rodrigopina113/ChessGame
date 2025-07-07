@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7707664933607469979}
   - component: {fileID: -1133861795360894617}
   - component: {fileID: 3844206111919289701}
+  - component: {fileID: 5105026498577068898}
   m_Layer: 0
   m_Name: PeaoNk
   m_TagString: Untagged
@@ -53,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.015575264, y: 0.033433538, z: 0.014691488}
-  m_Center: {x: -0.0010512862, y: 0.016684605, z: 0.0010500229}
+  m_Size: {x: 0.011428502, y: 0.02600988, z: 0.0124087725}
+  m_Center: {x: -0.00036119716, y: 0.012972776, z: -0.000091334805}
 --- !u!114 &3844206111919289701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 1
   chessManager: {fileID: 0}
+--- !u!114 &5105026498577068898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5047559958500744306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd504c5e2107e30409efc95d4404bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
 --- !u!1001 &8105752617691831437
 PrefabInstance:
   m_ObjectHideFlags: 0
