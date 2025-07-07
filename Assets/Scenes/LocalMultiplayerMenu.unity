@@ -700,7 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4958485db30ca734bb4ef846a120f58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoClip: {fileID: 32900000, guid: ddd6cbd893c37bd4c8d6765f4abdd2ec, type: 3}
+  videoClip: {fileID: 32900000, guid: 585537fe68293db4aa2949c1626d049a, type: 3}
 --- !u!1001 &498754877
 PrefabInstance:
   m_ObjectHideFlags: 0
