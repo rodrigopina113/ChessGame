@@ -15,6 +15,11 @@ public class ChessManager : MonoBehaviour
         this.rules = rules;
     }
 
+    //CHESS AI
+    public int FullMoveNumber => fullMoveCounter;
+    private int fullMoveCounter = 1;
+
+
     public bool CanWhiteCastleKingSide;
     public bool CanWhiteCastleQueenSide;
     public bool CanBlackCastleKingSide;
@@ -51,6 +56,10 @@ public class ChessManager : MonoBehaviour
     public GameObject blackBishopPrefab;
     public GameObject blackKnightPrefab;
 
+
+   [Header("UI de Derrota")]
+    public GameObject defeatPanel;
+    public TMPro.TextMeshProUGUI defeatText;
 
 
     [Header("UI de Vitória")]
@@ -135,32 +144,71 @@ public class ChessManager : MonoBehaviour
     public void EndTurn()
     {
         bool currentIsWhite = isWhiteTurn;
-        CheckOpponentStatusFor(currentIsWhite);
-
-
         isWhiteTurn = !isWhiteTurn;
 
+        if (isWhiteTurn)
+            fullMoveCounter++;
 
         if (CameraSwitcher.Instance != null)
             CameraSwitcher.Instance.SwitchCamera(isWhiteTurn);
 
-
         if (chessWatch != null)
             chessWatch.SwitchTurn();
 
+        // ⚠️ Verifica checkmate logo após mudar de turno
+        if (rules.IsCheckmate(isWhiteTurn))
+        {
+            gameEnded = true;
+            if (chessWatch != null)
+                chessWatch.PauseTimers();
 
+            bool brancasVenceram = isWhiteTurn == false; // Se ia jogar o branco, foi o preto que deu mate
+            string vencedor = brancasVenceram ? "Brancas" : "Pretas";
+            string mensagemFinal = $"{vencedor} venceram por xeque-mate!";
+
+            if (isLocalMultiplayer)
+            {
+                if (defeatText != null) defeatText.text = mensagemFinal;
+                if (defeatPanel != null) defeatPanel.SetActive(true);
+            }
+            else
+            {
+                if (brancasVenceram)
+                {
+                    if (defeatText != null) defeatText.text = mensagemFinal;
+                    if (defeatPanel != null) defeatPanel.SetActive(true);
+                }
+                else
+                {
+                    if (winText != null) winText.text = mensagemFinal;
+                    if (winPanel != null) winPanel.SetActive(true);
+                }
+            }
+
+            LevelProgressManager.Instance.UnlockLevel(nextIndex);
+            return;
+        }
+
+         // ⚠️ Verifica se o próximo jogador está em xeque
+        CheckStatusForCurrentTurn();
+
+        // IA joga no turno das brancas (após o jogador, se não for local)
         if (!isLocalMultiplayer && isWhiteTurn && aiPlayer != null)
         {
             StartCoroutine(TriggerAIMoveAfterDelay(2.5f));
         }
     }
 
-    public void CheckOpponentStatusFor(bool isWhite)
-    {
-        bool isCheck = rules.IsKingInCheck(!isWhite);
-        bool isMate = rules.IsCheckmate(!isWhite);
 
-        string color = !isWhite ? "Rei Branco" : "Rei Preto";
+   public void CheckStatusForCurrentTurn()
+    {
+        Debug.Log($"🕵️‍♂️ CHECK STATUS for {(isWhiteTurn ? "White" : "Black")}");
+
+        bool isCheck = rules.IsKingInCheck(isWhiteTurn);
+        bool isMate = rules.IsCheckmate(isWhiteTurn);
+        string color = isWhiteTurn ? "Rei Branco" : "Rei Preto";
+
+        Debug.Log($"✅ isCheck = {isCheck}, isMate = {isMate}");
 
         if (isMate)
         {
@@ -183,6 +231,7 @@ public class ChessManager : MonoBehaviour
             statusObject.SetActive(false);
         }
     }
+
 
 
 
@@ -363,6 +412,7 @@ public class ChessManager : MonoBehaviour
             {
                 selectedPiece = null;
                 HighlightValidMoves(null);
+                CheckStatusForCurrentTurn();
             }
             return;
         }
@@ -572,25 +622,46 @@ public class ChessManager : MonoBehaviour
                 else
                     MovePiece(selectedPiece, cellName);
 
+                CheckStatusForCurrentTurn();
                 EndTurn();
-
 
 
                 if (CheckForCheckmate())
                 {
-
                     if (gameEnded) return;
                     gameEnded = true;
                     if (chessWatch != null)
                         chessWatch.PauseTimers();
 
-                    string vencedor = isWhiteTurn ? "Brancas" : "Pretas";
-                    if (winText != null)
-                        winText.text = $"{vencedor} venceram por xeque-mate!";
-                    winPanel.SetActive(true);
+                    bool brancasVenceram = isWhiteTurn; // quem fez o checkmate
+                    string vencedor = brancasVenceram ? "Brancas" : "Pretas";
+                    string mensagemFinal = $"{vencedor} venceram por xeque-mate!";
+
+                    if (isLocalMultiplayer)
+                    {
+                        if (defeatText != null) defeatText.text = mensagemFinal;
+                        if (defeatPanel != null) defeatPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        if (brancasVenceram)
+                        {
+                            // Brancas (IA) venceram → Pretas perderam
+                            if (defeatText != null) defeatText.text = mensagemFinal;
+                            if (defeatPanel != null) defeatPanel.SetActive(true);
+                        }
+                        else
+                        {
+                            // Pretas venceram a IA
+                            if (winText != null) winText.text = mensagemFinal;
+                            if (winPanel != null) winPanel.SetActive(true);
+                        }
+                    }
+
                     LevelProgressManager.Instance.UnlockLevel(nextIndex);
                     return;
                 }
+
                 if (CheckForStalemate())
                 {
 
@@ -887,6 +958,19 @@ public class ChessManager : MonoBehaviour
         }
     }
 
+    
+    public bool IsValidAIMove(string from, string to)
+    {
+        ChessPiece piece = FindPieceAtCell(from);
+        if (piece == null)
+            return false;
+
+        // Corrigido: usa isWhite, não IsWhite
+        if (piece.isWhite != IsWhiteTurn)
+            return false;
+
+        return true;
+    }
 
     private bool WouldMoveCauseSelfCheck(ChessPiece piece, string targetCell)
     {
@@ -908,7 +992,7 @@ public class ChessManager : MonoBehaviour
         return kingInCheck;
     }
 
-
+    
     public void MovePiece(ChessPiece piece, string targetCell)
     {
 
@@ -962,6 +1046,8 @@ public class ChessManager : MonoBehaviour
         Vector3 startPos = piece.transform.position;
         Vector3 endPos = chessboard.GetCellPosition(targetCell);
 
+        string fromCell = piece.CurrentCell;
+
 
         if (piece is King)
         {
@@ -996,7 +1082,7 @@ public class ChessManager : MonoBehaviour
         float duration = 0.3f;
         float elapsed = 0f;
 
-        if (piece is Pawn && Mathf.Abs(targetCell[1] - piece.CurrentCell[1]) == 2)
+        if (piece is Pawn && Mathf.Abs(targetCell[1] - fromCell[1]) == 2)
         {
             char col = targetCell[0];
             char midRow = (char)((piece.CurrentCell[1] + targetCell[1]) / 2);
@@ -1132,7 +1218,7 @@ public class ChessManager : MonoBehaviour
 
         king.CurrentCell = targetCell;
         if (targetPiece != null)
-            Destroy(targetPiece.gameObject);
+            targetPiece.gameObject.SetActive(false);
 
 
         bool isStillInCheck = king.IsKingInCheck();
@@ -1140,18 +1226,10 @@ public class ChessManager : MonoBehaviour
 
         king.CurrentCell = originalCell;
         if (targetPiece != null)
-        {
-            Instantiate(
-                    targetPiece.gameObject,
-                    chessboard.GetCellPosition(targetCell),
-                    Quaternion.identity
-                )
-                .GetComponent<ChessPiece>()
-                .CurrentCell = targetCell;
-        }
+            targetPiece.gameObject.SetActive(true);
 
 
-        return !isStillInCheck;
+         return !isStillInCheck;
     }
 
     public ChessPiece FindPieceAtCell(string cellName)
