@@ -82,41 +82,48 @@ public class King : ChessPiece
 
         if (rowDifference <= 1 && colDifference <= 1)
         {
-            ChessPiece targetPiece = chessManager.FindPieceAtCell(targetCell);
-            if (targetPiece != null && targetPiece.isWhite == this.isWhite)
-            {
-                return false;
-            }
+                ChessPiece targetPiece = chessManager.FindPieceAtCell(targetCell);
 
-            string originalCell = CurrentCell;
-            Vector3 originalPosition = transform.position;
-            bool captured = false;
-            GameObject capturedObj = null;
+                if (targetPiece != null && targetPiece.isWhite == this.isWhite)
+                    return false;
 
-            if (targetPiece != null)
-            {
-                captured = true;
-                capturedObj = targetPiece.gameObject;
-                capturedObj.SetActive(false);
-            }
+                string originalCell = CurrentCell;
+                List<ChessPiece> allPieces = new List<ChessPiece>(
+                    Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None)
+                );
 
-            CurrentCell = targetCell;
-            transform.position = chessManager.chessboard.GetCellPosition(targetCell);
-            bool safe = !IsKingInCheck();
+                // Simular remoção da peça capturada
+                if (targetPiece != null)
+                    allPieces.Remove(targetPiece);
 
-            CurrentCell = originalCell;
-            transform.position = originalPosition;
-            if (captured)
-            {
-                capturedObj.SetActive(true);
-            }
+                // Simular movimento
+                CurrentCell = targetCell;
 
-            if (!safe)
-            {
-                return false;
-            }
-            return true;
+                // Avaliar se rei está em perigo, com base em peças simuladas
+                bool inCheck = false;
+                foreach (var enemy in allPieces)
+                {
+                    if (enemy.isWhite == this.isWhite)
+                        continue;
+
+                    if (enemy.IsValidMove(CurrentCell))
+                    {
+                        if (enemy is Knight || chessManager.IsPathClear(enemy.CurrentCell, CurrentCell, enemy))
+                        {
+                            inCheck = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Reverter estado
+                CurrentCell = originalCell;
+
+                return !inCheck;
         }
+
+
+
 
         return false;
     }

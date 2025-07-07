@@ -109,9 +109,13 @@ public class ChessWatch : MonoBehaviour
     private void EndGame(bool whiteWins)
     {
         isCounting = false;
+
         if (winPanel != null)
             winPanel.SetActive(true);
 
+        Time.timeScale = 0f; // ⏸️ Pausar o jogo completamente
+
         Debug.Log(whiteWins ? "White wins on time!" : "Black wins on time!");
     }
+
 }
