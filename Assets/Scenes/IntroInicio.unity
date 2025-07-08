@@ -629,7 +629,7 @@ MonoBehaviour:
   loadingScreenGO: {fileID: 1038053080}
   loadingText: {fileID: 1887895704}
   dotInterval: 0.5
-  loadingDuration: 1
+  loadingDuration: 5
 --- !u!114 &1218410871
 MonoBehaviour:
   m_ObjectHideFlags: 0
